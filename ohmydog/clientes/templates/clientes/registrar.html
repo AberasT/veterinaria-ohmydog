@@ -1,0 +1,14 @@
+{% extends "main/layout.html" %}
+{% block body %}
+<p>Estoy en registrar</p>
+<div class="text-center">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="Registrar cliente" value="">
+    </form>
+
+</div>
+
+
+{% endblock %}
