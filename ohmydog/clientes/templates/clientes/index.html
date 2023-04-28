@@ -1,0 +1,10 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    <a href="{% url 'clientes:listar'  %}" class="btn btn-success">Ver clientes</a>
+    <a href="{% url 'clientes:registrar'  %}" class="btn btn-success">Registrar cliente</a>
+</div>
+
+
+{% endblock %}

@@ -4,6 +4,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 
 # Create your models here.
 class Cliente(AbstractBaseUser):
+
     dni = models.IntegerField(unique=True)
     email = models.EmailField()
     nombre = models.CharField(max_length=20)
@@ -12,10 +13,9 @@ class Cliente(AbstractBaseUser):
 
     USERNAME_FIELD = "dni"
     EMAIL_FIELD = "email"
-    REQUIRED_FIELDS = ["dni", "nobmre", "apellido", "email", "clave"]
+    REQUIRED_FIELDS = ["nombre", "apellido", "email"]
+
+
 
 class Perro(models.Model):
-    
-
-
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="cliente_perros")
