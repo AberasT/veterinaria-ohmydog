@@ -9,4 +9,5 @@ class RegistrarClienteForm(Form):
     nombre = CharField(label="Nombre", max_length=30, required=True, error_messages=error_messages)
     apellido = CharField(label="Apellido", max_length=30, required=True, error_messages=error_messages)
     email = CharField(widget=forms.EmailInput, label="Email", required=True, error_messages=error_messages)
+    telefono = forms.CharField(required=True, error_messages=error_messages)
     clave = forms.CharField(widget=forms.PasswordInput, required=True, error_messages=error_messages)
