@@ -25,12 +25,21 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Perros</a>
               </li>
+              {% if not request.user.is_authenticated %}
               <a class="btn btn-outline-success" href="{% url 'main:login' %}">Iniciar sesión</a>
+              {% else %}
+              <a class="btn btn-outline-danger" href="{% url 'main:logout' %}">Cerrar sesión</a>
+              {% endif %}
             </ul>
           </div>
         </div>
       </nav>
       <hr>
+    <div class="text-center">
+      {% if request.user.is_authenticated %}
+      <p>Sesión iniciada</p>
+      {% endif %}
+    </div>
     {% block body %}
     
     {% endblock %}

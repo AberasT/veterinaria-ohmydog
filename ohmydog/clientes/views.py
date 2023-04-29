@@ -26,7 +26,6 @@ def registrar(request):
             telefono = form.cleaned_data["telefono"]
             clave = form.cleaned_data["clave"]
             nuevoCliente = Cliente(dni=dni, nombre=nombre, apellido=apellido, email=email, telefono=telefono, clave=clave)
-            nuevoCliente.set_password(clave)
             try:
                 nuevoCliente.save()
                 return render(request, "clientes/exito.html", contexto)

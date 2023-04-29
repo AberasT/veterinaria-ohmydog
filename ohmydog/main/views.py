@@ -8,7 +8,7 @@ def index(request):
     return render(request, "main/index.html", {
     })
 
-def login(request):
+def loginView(request):
     contexto = {
         "form": IniciarSesionForm()
         }
@@ -18,7 +18,6 @@ def login(request):
         clave = request.POST["clave"]
         usuario = authenticate(request, username=dni, password=clave)
         if usuario is not None:
-            print("Is not None")
             login(request, usuario)
             return redirect("main:index")
         else:
@@ -26,5 +25,6 @@ def login(request):
 
     return render(request, "main/login.html", contexto)
 
-def logout(request):
-    pass
+def logoutView(request):
+    logout(request)
+    return redirect("main:index")
