@@ -26,6 +26,7 @@ def registrar(request):
             telefono = form.cleaned_data["telefono"]
             clave = form.cleaned_data["clave"]
             nuevoCliente = Cliente(dni=dni, nombre=nombre, apellido=apellido, email=email, telefono=telefono, clave=clave)
+            nuevoCliente.set_password(clave)
             try:
                 nuevoCliente.save()
                 return render(request, "clientes/exito.html", contexto)
@@ -41,6 +42,13 @@ def registrar(request):
 
 def listar(request):
     contexto = {
-        "clientes": Cliente.objects.order_by("apellido"),
+        "clientes": Cliente.objects.filter(is_active=True, is_staff=False).order_by("apellido")
     }
     return render(request, "clientes/listar.html", contexto)
+
+def eliminar(request, dni):
+    cliente = Cliente.objects.get(dni=dni)
+    # cliente.is_active = False BORRADO LÓGICO
+    cliente.delete()
+    return redirect("clientes:listar")
+    

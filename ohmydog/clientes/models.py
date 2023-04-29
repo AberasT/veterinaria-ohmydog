@@ -1,25 +1,24 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 
 # Create your models here.
 class ClienteManager(BaseUserManager):
     
-    def create_user(self, dni, email, nombre, apellido, telefono, clave, **other_fields):
+    def create_user(self, dni, email, nombre, apellido, telefono, clave, is_staff, is_superuser, **other_fields):
         email = self.normalize_email(email)
-        cliente = self.model(user_name=dni, email=email, nombre=nombre, apellido=apellido, telefono=telefono, clave=clave)
+        cliente = self.model(dni=dni, email=email, nombre=nombre, apellido=apellido, telefono=telefono, clave=clave, password=clave, is_staff=is_staff, is_superuser=is_superuser)
         cliente.set_password(clave)
         cliente.save()
         return cliente
     
     def create_superuser(self, dni, email, nombre, apellido, telefono, clave, **other_fields):
-        other_fields.setdefault("is_staff", True)
-        other_fields.setdefault("is_active", True)
-        other_fields.setdefault("is_superuser", True)
+        is_staff = True
+        is_superuser = True
 
-        return self.create_user(dni, email, nombre, apellido, telefono, clave, **other_fields)
+        return self.create_user(dni, email, nombre, apellido, telefono, clave, is_staff, is_superuser, **other_fields)
         
-class Cliente(AbstractBaseUser):
+class Cliente(AbstractBaseUser, PermissionsMixin):
 
     dni = models.IntegerField(unique=True)
     email = models.EmailField()
@@ -28,6 +27,8 @@ class Cliente(AbstractBaseUser):
     telefono = models.CharField(max_length=15)
     clave = models.CharField(max_length=12)
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = "dni"
     EMAIL_FIELD = "email"

@@ -10,6 +10,8 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Email</th>
+            <th scope="col">Clave</th>
+            <th scope="col">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -19,6 +21,9 @@
             <td>{{ cliente.nombre }}</td>
             <td>{{ cliente.apellido }}</td>
             <td>{{ cliente.email }}</td>
+            <td>{{ cliente.clave }}</td>
+            <td><a href="{% url 'clientes:eliminar' dni=cliente.dni %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></td>
+            
           </tr>
 
         {% endfor %}
