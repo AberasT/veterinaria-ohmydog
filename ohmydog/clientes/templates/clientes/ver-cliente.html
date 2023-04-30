@@ -9,7 +9,8 @@
         <li class="list-group-item">Apellido: {{ cliente.apellido }}</li>
         <li class="list-group-item">Email: {{ cliente.email }}</li>
         <li class="list-group-item">Teléfono: {{ cliente.telefono }}</li>
-        <td><a href="{% url 'clientes:eliminar' dni=cliente.dni %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></td>
+        <li class="list-group-item"><a href="{% url 'clientes:registrar_perro' dni=cliente.dni %}" class="btn btn-success">Registrar perro</a></li>
+        <li class="list-group-item"><a href="{% url 'clientes:eliminar' dni=cliente.dni %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></li>
       </ul>
     {% else %}
     <h3>El DNI no es válido.</h3>

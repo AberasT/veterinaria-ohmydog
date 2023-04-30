@@ -11,3 +11,7 @@ class RegistrarClienteForm(Form):
     email = CharField(widget=forms.EmailInput, label="Email", required=True, error_messages=error_messages)
     telefono = forms.CharField(required=True, error_messages=error_messages)
     clave = forms.CharField(widget=forms.PasswordInput, required=True, error_messages=error_messages)
+
+class RegistrarPerroForm(ModelForm):
+    class Meta:
+        model = Perro
