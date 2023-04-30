@@ -21,7 +21,7 @@ def loginView(request):
             login(request, usuario)
             return redirect("main:index")
         else:
-            messages.info(request, "DNI o clave incorrecto/a")
+            messages.info(request, "DNI y/o contraseña incorrecto/a")
 
     return render(request, "main/login.html", contexto)
 
