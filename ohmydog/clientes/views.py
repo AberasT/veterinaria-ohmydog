@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from .forms import RegistrarClienteForm, RegistrarPerroForm
-from .models import Cliente
+from .models import Cliente, Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 # TESTS
@@ -41,14 +41,15 @@ def registrar_cliente(request):
             nuevoCliente.set_password(clave)
             try:
                 nuevoCliente.save()
-                return render(request, "clientes/exito.html", contexto)
+                return render(request, "clientes/exito.html", {
+                    "msj": "El cliente se ha registrado exitosamente"
+                })
             except IntegrityError:
                 print("Exception raised")
                 return render(request, "clientes/error.html",{
                     "error": "El DNI ingresado ya se encuentra registrado en el sistema."
                 })
         else: 
-            print("Form is not valid")
             return render(request, "clientes/registrar_cliente.html", {"form": form})
     return render(request, "clientes/registrar_cliente.html", contexto)
 
@@ -89,23 +90,24 @@ def registrar_perro(request, dni):
     if request.method == "POST":
         form = RegistrarPerroForm(request.POST)
         if form.is_valid():
-            dni = form.cleaned_data["dni"]
             nombre = form.cleaned_data["nombre"]
-            apellido = form.cleaned_data["apellido"]
-            email = form.cleaned_data["email"]
-            telefono = form.cleaned_data["telefono"]
-            clave = form.cleaned_data["clave"]
-            nuevoCliente = Cliente(dni=dni, nombre=nombre, apellido=apellido, email=email, telefono=telefono, clave=clave)
-            nuevoCliente.set_password(clave)
+            color = form.cleaned_data["color"]
+            raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
+            fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
+            peso = form.cleaned_data["peso"]
+            cliente = Cliente.objects.get(dni=dni)
+            nuevoPerro = Perro(nombre=nombre, color=color, raza=raza, sexo=sexo, fecha_nacimiento=fecha_nacimiento, peso=peso, cliente=cliente)
             try:
-                nuevoCliente.save()
-                return render(request, "clientes/exito.html", contexto)
-            except IntegrityError:
+                nuevoPerro.save()
+                return render(request, "clientes/exito.html", {
+                    "msg": "El perro se ha registrado exitosamente"
+                })
+            except:
                 print("Exception raised")
                 return render(request, "clientes/error.html",{
-                    "error": "El DNI ingresado ya se encuentra registrado en el sistema."
+                    "error": "Ha ocurrido un error."
                 })
         else: 
-            print("Form is not valid")
-            return render(request, "clientes/registrar_cliente.html", {"form": form})
-    return render(request, "clientes/registrar_cliente.html", contexto)
+            return render(request, "clientes/registrar_perro.html", {"form": form})
+    return render(request, "clientes/registrar_perro.html", contexto)
