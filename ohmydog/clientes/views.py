@@ -3,14 +3,24 @@ from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from .forms import RegistrarClienteForm
 from .models import Cliente
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-# Create your views here.
+# TESTS
+def es_veterinario(user):
+    return user.is_staff
+
+
+# VIEWS
+@login_required
+@user_passes_test(es_veterinario)
 def index(request):
     contexto = {
         "form": RegistrarClienteForm()
         }
     return render(request, "clientes/index.html", contexto)
 
+@login_required
+@user_passes_test(es_veterinario)
 def registrar(request):
     contexto = {
         "form": RegistrarClienteForm()
@@ -40,15 +50,26 @@ def registrar(request):
             return render(request, "clientes/registrar.html", {"form": form})
     return render(request, "clientes/registrar.html", contexto)
 
+@login_required
+@user_passes_test(es_veterinario)
 def listar(request):
     contexto = {
         "clientes": Cliente.objects.filter(is_active=True, is_staff=False).order_by("apellido")
     }
     return render(request, "clientes/listar.html", contexto)
 
+@login_required
+@user_passes_test(es_veterinario)
 def eliminar(request, dni):
     cliente = Cliente.objects.get(dni=dni)
     # cliente.is_active = False BORRADO LÓGICO
     cliente.delete()
     return redirect("clientes:listar")
-    
+
+@login_required
+@user_passes_test(es_veterinario)
+def ver_cliente(request, dni):
+    contexto = {
+        "cliente": Cliente.objects.get(dni=dni)
+    }
+    return render(request, "clientes/ver-cliente.html", contexto)

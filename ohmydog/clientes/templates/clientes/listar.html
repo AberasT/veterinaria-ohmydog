@@ -10,20 +10,19 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Email</th>
-            <th scope="col">Eliminar</th>
+            <th scope="col">Teléfono</th>
           </tr>
         </thead>
         <tbody>
         {% for cliente in clientes %}
         <tr>
-            <th scope="row">{{ cliente.dni }}</th>
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.apellido }}</td>
-            <td>{{ cliente.email }}</td>
-            <td><a href="{% url 'clientes:eliminar' dni=cliente.dni %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></td>
-            
-          </tr>
-
+          <th scope="row">{{ cliente.dni }}</th>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.apellido }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td><a href="{% url 'clientes:info' dni=cliente.dni %}" class="btn btn-primary">Ver cliente</a></td>
+        </tr>
         {% endfor %}
         </tbody>
       </table>
@@ -32,6 +31,5 @@
     <h3>No hay clientes registrados</h3>
     {% endif %}
 </div>
-
 
 {% endblock %}

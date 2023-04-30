@@ -2,13 +2,19 @@ from django.shortcuts import render, redirect
 from .forms import IniciarSesionForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-# Create your views here.
+# TESTS
+def usuario_no_autenticado(user):
+    return not user.is_authenticated
+
+# VIEWS
 def index(request):
     return render(request, "main/index.html", {
     })
 
-def loginView(request):
+@user_passes_test(usuario_no_autenticado)
+def login_view(request):
     contexto = {
         "form": IniciarSesionForm()
         }
@@ -25,6 +31,7 @@ def loginView(request):
 
     return render(request, "main/login.html", contexto)
 
-def logoutView(request):
+@login_required
+def logout_view(request):
     logout(request)
     return redirect("main:index")

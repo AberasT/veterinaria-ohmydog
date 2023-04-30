@@ -5,6 +5,8 @@ app_name = "clientes"
 urlpatterns = [
     path("", views.index, name='index'),
     path("registrar/", views.registrar, name='registrar'),
+    path("registrar/", views.registrar, name='registrar'),
     path("listar/", views.listar, name='listar'),
-    path("eliminar/<int:dni>/", views.eliminar, name='eliminar')
+    path("eliminar/<int:dni>/", views.eliminar, name='eliminar'),
+    path("info/<int:dni>/", views.ver_cliente, name='info')
 ]
