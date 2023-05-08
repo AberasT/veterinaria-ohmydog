@@ -19,7 +19,7 @@ def index(request):
 @user_passes_test(es_veterinario)
 def listar(request):
     contexto = {
-        "perros": Perro.objects.filter().order_by("nombre")
+        "perros": Perro.objects.order_by("nombre")
     }
     return render(request, "perros/listar.html", contexto)
 
@@ -54,21 +54,19 @@ def registrar(request, dni):
 
 # # VIEWS - CLIENTES
 
-# @login_required
-# @user_passes_test(es_veterinario)
-# def eliminar(request, dni):
-#     cliente = Cliente.objects.get(dni=dni)
-#     # cliente.is_active = False BORRADO LÓGICO
-#     cliente.delete()
-#     return redirect("clientes:listar")
+@login_required
+@user_passes_test(es_veterinario)
+def eliminar(request, id):
+    perro = Perro.objects.get(id=id)
+    perro.delete()
+    return redirect("perros:listar")
 
-# @login_required
-# @user_passes_test(es_veterinario)
-# def ver_cliente(request, dni):
-#     cliente = Cliente.objects.get(dni=dni)
-#     contexto = {
-#         "cliente": cliente,
-#         "perros_cliente": Perro.objects.filter(cliente=cliente)
-#     }
-#     return render(request, "clientes/ver-cliente.html", contexto)
+@login_required
+@user_passes_test(es_veterinario)
+def ver_perro(request, id):
+    perro = Perro.objects.get(id=id)
+    contexto = {
+        "perro": perro
+    }
+    return render(request, "perros/ver-perro.html", contexto)
 

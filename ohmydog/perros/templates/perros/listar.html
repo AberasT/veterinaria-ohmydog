@@ -21,7 +21,7 @@
           <td>{{ perro.raza }}</td>
           <td>{{ perro.fecha_nacimiento }}</td>
           <td>{{ perro.cliente.dni }}</td>
-          <td><a href="{% url 'perros:listar' %}" class="btn btn-primary">Ver perro</a></td>
+          <td><a href="{% url 'perros:info' id=perro.id %}" class="btn btn-primary">Ver perro</a></td>
         </tr>
         {% endfor %}
         </tbody>
