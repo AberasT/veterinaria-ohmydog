@@ -9,6 +9,7 @@
       <li class="list-group-item">Color: {{ perro.color }}</li>
       <li class="list-group-item">Fecha de nacimiento: {{ perro.fecha_nacimiento }}</li>
       <li class="list-group-item">Sexo: {{ perro.sexo }}</li>
+      <li class="list-group-item"><a href="{% url 'perros:modificar' id=perro.id %}"  class="btn btn-secondary">Modificar Perro</a></li>
       <li class="list-group-item"><a href="{% url 'perros:eliminar' id=perro.id %}" onclick="return confirm('Eliminar perro?');" class="btn btn-danger">Eliminar Perro</a></li>
     </ul>
     <hr>

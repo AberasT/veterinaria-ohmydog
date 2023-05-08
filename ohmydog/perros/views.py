@@ -50,9 +50,12 @@ def registrar(request, dni):
                 return render(request, "main/infomsj.html",{
                     "msj": "Ha ocurrido un error."
                 })
+        else: 
+            return render(request, "main/infomsj.html",{
+                "msj": "Ha ocurrido un error."
+            })
     return render(request, "perros/registrar.html", contexto)
 
-# # VIEWS - CLIENTES
 
 @login_required
 @user_passes_test(es_veterinario)
@@ -69,4 +72,44 @@ def ver_perro(request, id):
         "perro": perro
     }
     return render(request, "perros/ver-perro.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def modificar(request, id):
+    perro = Perro.objects.get(id=id)
+    form = RegistrarPerroForm(instance=perro)
+    contexto = {
+        "perro": perro,
+        "form": form
+    }
+    if request.method == "POST":
+        form = RegistrarPerroForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            color = form.cleaned_data["color"]
+            raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
+            fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
+            peso = form.cleaned_data["peso"]
+            perro.nombre = nombre
+            perro.color = color
+            perro.raza = raza
+            perro.sexo = sexo
+            perro.fecha_nacimiento = fecha_nacimiento
+            perro.peso = peso
+            try:
+                perro.save()
+                return render(request, "main/infomsj.html", {
+                    "msj": "Los datos del perro se han modificado exitosamente."
+                })
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else: 
+            return render(request, "main/infomsj.html",{
+                "msj": "Ha ocurrido un error."
+            })
+    return render(request, "perros/modificar.html", contexto)
+
 
