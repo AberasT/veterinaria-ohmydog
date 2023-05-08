@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from .forms import RegistrarClienteForm
 from .models import Cliente
+from perros.models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 # TESTS
@@ -11,13 +11,11 @@ def es_veterinario(user):
 
 
 # VIEWS
+
 @login_required
 @user_passes_test(es_veterinario)
 def index(request):
-    contexto = {
-        "form": RegistrarClienteForm()
-        }
-    return render(request, "clientes/index.html", contexto)
+    return render(request, "clientes/index.html")
 
 @login_required
 @user_passes_test(es_veterinario)
@@ -39,15 +37,14 @@ def registrar(request):
             nuevoCliente.set_password(clave)
             try:
                 nuevoCliente.save()
-                return render(request, "clientes/exito.html", contexto)
+                return render(request, "main/infomsj.html", {
+                    "msj": "El cliente se ha registrado exitosamente"
+                })
             except IntegrityError:
                 print("Exception raised")
-                return render(request, "clientes/error.html",{
-                    "error": "El DNI ingresado ya se encuentra registrado en el sistema."
+                return render(request, "main/infomsj.html",{
+                    "msj": "El DNI ingresado ya se encuentra registrado en el sistema."
                 })
-        else: 
-            print("Form is not valid")
-            return render(request, "clientes/registrar.html", {"form": form})
     return render(request, "clientes/registrar.html", contexto)
 
 @login_required
@@ -69,7 +66,9 @@ def eliminar(request, dni):
 @login_required
 @user_passes_test(es_veterinario)
 def ver_cliente(request, dni):
+    cliente = Cliente.objects.get(dni=dni)
     contexto = {
-        "cliente": Cliente.objects.get(dni=dni)
+        "cliente": cliente,
+        "perros_cliente": Perro.objects.filter(cliente=cliente)
     }
     return render(request, "clientes/ver-cliente.html", contexto)

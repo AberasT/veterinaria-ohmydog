@@ -1,0 +1,35 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    {% if perros %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Color</th>
+            <th scope="col">Raza</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">DNI Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for perro in perros %}
+        <tr>
+          <th scope="row">{{ perro.nombre }}</th>
+          <td>{{ perro.color }}</td>
+          <td>{{ perro.raza }}</td>
+          <td>{{ perro.fecha_nacimiento }}</td>
+          <td>{{ perro.cliente.dni }}</td>
+          <td><a href="{% url 'perros:listar' %}" class="btn btn-primary">Ver perro</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    
+    {% else %}
+    <h3>No hay perros registrados</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

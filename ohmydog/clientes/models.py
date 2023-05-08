@@ -38,8 +38,3 @@ class Cliente(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.dni} + {self.nombre} + {self.apellido} + {self.telefono} + {self.email} + {self.clave}"
-
-
-
-class Perro(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="cliente_perros")

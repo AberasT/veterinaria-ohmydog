@@ -1,5 +1,4 @@
-from django.forms import Form, IntegerField, CharField,ModelForm
-from .models import Cliente
+from django.forms import Form, IntegerField, CharField
 from django import forms
 
 error_messages = {"required": "Se deben completar todos los campos"}
