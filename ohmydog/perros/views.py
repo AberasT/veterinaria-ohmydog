@@ -25,14 +25,6 @@ def listar(request):
 
 @login_required
 @user_passes_test(es_veterinario)
-def exito(request, msj):
-    contexto = {
-        "msj": msj
-    }
-    return render(request, "main/exito.html", contexto)
-
-@login_required
-@user_passes_test(es_veterinario)
 def registrar(request, dni):
     contexto = {
         "form": RegistrarPerroForm()
@@ -52,44 +44,15 @@ def registrar(request, dni):
             try:
                 nuevoPerro.save()
                 return render(request, "main/infomsj.html", {
-                    "msj": "El perro se ha registrado exitosamente"
+                    "msj": "El perro se ha registrado exitosamente."
                 })
             except:
                 return render(request, "main/infomsj.html",{
                     "msj": "Ha ocurrido un error."
                 })
     return render(request, "perros/registrar.html", contexto)
-# # VIEWS - CLIENTES
-# @login_required
-# @user_passes_test(es_veterinario)
-# def registrar(request):
-#     contexto = {
-#         "form": RegistrarPerroForm()
-#         }
-    
-#     if request.method == "POST":
-#         form = RegistrarPerroForm(request.POST)
-#         if form.is_valid():
-#             dni = form.cleaned_data["dni"]
-#             nombre = form.cleaned_data["nombre"]
-#             apellido = form.cleaned_data["apellido"]
-#             email = form.cleaned_data["email"]
-#             telefono = form.cleaned_data["telefono"]
-#             clave = form.cleaned_data["clave"]
-#             nuevoCliente = Cliente(dni=dni, nombre=nombre, apellido=apellido, email=email, telefono=telefono, clave=clave)
-#             nuevoCliente.set_password(clave)
-#             try:
-#                 nuevoCliente.save()
-#                 return render(request, "clientes/exito.html", {
-#                     "msj": "El cliente se ha registrado exitosamente"
-#                 })
-#             except IntegrityError:
-#                 print("Exception raised")
-#                 return render(request, "clientes/error.html",{
-#                     "error": "El DNI ingresado ya se encuentra registrado en el sistema."
-#                 })
-#     return render(request, "clientes/registrar_cliente.html", contexto)
 
+# # VIEWS - CLIENTES
 
 # @login_required
 # @user_passes_test(es_veterinario)
