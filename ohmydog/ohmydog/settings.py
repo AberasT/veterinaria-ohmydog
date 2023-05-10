@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "perros",
     "main",
     "clientes",
+    "adopcion",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
