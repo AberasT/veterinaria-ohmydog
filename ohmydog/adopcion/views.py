@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import publicar_perro_form
 from .models import PerroAdopcion
 from django.contrib.auth.decorators import login_required, user_passes_test
-from clientes.models import Cliente
+from usuarios.models import Usuario
 from main.tests import es_veterinario
 
 # Create your views here.
@@ -12,7 +12,7 @@ def index(request):
 
 def listar(request):
     contexto={
-        "publicaciones": PerroAdopcion.objects.order_by("nombre")
+        "publicaciones": PerroAdopcion.objects.filter(adoptado=False)
     }
     return render(request, "adopcion/listar.html", contexto)
 

@@ -9,7 +9,7 @@ error_messages = {"required": "Se deben completar todos los campos"}
 class RegistrarPerroForm(ModelForm):
     class Meta:
         model = Perro
-        fields = ["nombre", "color", "raza", "sexo", "fecha_nacimiento", "peso"]
+        fields = ["nombre", "raza", "color", "sexo", "fecha_nacimiento", "peso"]
         widgets = {
             'fecha_nacimiento': DateInput(attrs={'type': 'date'})
         }

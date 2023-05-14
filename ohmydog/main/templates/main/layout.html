@@ -21,11 +21,16 @@
               </li>
               {% if request.user.is_authenticated and request.user.is_staff %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'clientes:index' %}">Clientes</a>
+                <a class="nav-link" href="{% url 'usuarios:index' %}">Clientes</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'perros:index' %}">Perros</a>
               </li>
+              {% if request.user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'usuarios:registrar_veterinario' %}">Registrar veterinario</a>
+              </li>
+              {% endif %}
               {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'adopcion:index' %}">Adopcion</a>

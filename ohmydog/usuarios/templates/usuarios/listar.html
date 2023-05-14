@@ -1,0 +1,35 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    {% if clientes %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">DNI</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for cliente in clientes %}
+        <tr>
+          <th scope="row">{{ cliente.dni }}</th>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.apellido }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-primary">Ver cliente</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    
+    {% else %}
+    <h3>No hay clientes registrados</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

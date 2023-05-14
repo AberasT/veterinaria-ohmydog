@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "perros",
     "main",
-    "clientes",
+    "usuarios",
     "adopcion",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -135,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "url main:index"
 
-AUTH_USER_MODEL = "clientes.Cliente"
+AUTH_USER_MODEL = "usuarios.Usuario"

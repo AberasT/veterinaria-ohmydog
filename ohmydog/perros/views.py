@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db import IntegrityError
-from clientes.models import Cliente
+from usuarios.models import Usuario
 from .forms import RegistrarPerroForm
 from .models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -22,7 +21,7 @@ def listar(request):
 
 @login_required
 @user_passes_test(es_veterinario)
-def registrar(request, dni):
+def registrar(request, id):
     contexto = {
         "form": RegistrarPerroForm()
         }
@@ -36,8 +35,8 @@ def registrar(request, dni):
             sexo = form.cleaned_data["sexo"]
             fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
             peso = form.cleaned_data["peso"]
-            cliente = Cliente.objects.get(dni=dni)
-            nuevoPerro = Perro(nombre=nombre, color=color, raza=raza, sexo=sexo, fecha_nacimiento=fecha_nacimiento, peso=peso, cliente=cliente)
+            cliente = Usuario.objects.get(id=id)
+            nuevoPerro = Perro(nombre=nombre, color=color, raza=raza, sexo=sexo, fecha_nacimiento=fecha_nacimiento, peso=peso, responsable=cliente)
             try:
                 nuevoPerro.save()
                 return render(request, "main/infomsj.html", {

@@ -1,5 +1,5 @@
 from django.db import models
-from clientes.models import Cliente
+from usuarios.models import Usuario
 # Create your models here.
 
 
@@ -19,6 +19,6 @@ class Perro(models.Model):
         default=Sexo.NS)
     fecha_nacimiento = models.DateField()
     peso = models.CharField(max_length=5, blank=True, null=True, default="")
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="cliente_perros")
+    responsable = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="usuarios_perros")
 
     REQUIRED_FIELDS = ["nombre", "color", "raza", "sexo", "fecha_nacimiento", "peso"]

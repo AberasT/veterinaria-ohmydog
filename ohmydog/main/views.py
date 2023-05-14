@@ -20,14 +20,14 @@ def login_view(request):
         }
     
     if request.method == "POST":
-        dni = request.POST["dni"]
+        email = request.POST["email"]
         clave = request.POST["clave"]
-        usuario = authenticate(request, username=dni, password=clave)
+        usuario = authenticate(request, username=email, password=clave)
         if usuario is not None:
             login(request, usuario)
             return redirect("main:index")
         else:
-            messages.info(request, "DNI y/o contraseña incorrecto/a")
+            messages.info(request, "Email y/o contraseña incorrecto/a")
 
     return render(request, "main/login.html", contexto)
 

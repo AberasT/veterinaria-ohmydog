@@ -1,0 +1,51 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    {% if not cliente.is_staff %}
+    <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+      <li class="list-group-item active">DNI: {{ cliente.dni }}</li>
+      <li class="list-group-item">Nombre: {{ cliente.nombre }}</li>
+      <li class="list-group-item">Apellido: {{ cliente.apellido }}</li>
+      <li class="list-group-item">Email: {{ cliente.email }}</li>
+      <li class="list-group-item">Teléfono: {{ cliente.telefono }}</li>
+      <li class="list-group-item"><a href="{% url 'perros:registrar' id=cliente.id %}" class="btn btn-success">Registrar perro</a></li>
+      <li class="list-group-item"><a href="{% url 'usuarios:eliminar' id=cliente.id %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></li>
+    </ul>
+    <hr>
+    <h4>Perros del cliente</h4>
+    <div class="text-center">
+      {% if perros_cliente %}
+      <table class="table" style="max-width: 70vw; margin: 0 auto">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Raza</th>
+            <th scope="col">Color</th>
+            <th scope="col">Fecha Nacimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for perro in perros_cliente %}
+        <tr>
+          <th scope="row">{{ perro.nombre }}</th>
+          <td>{{ perro.raza }}</td>
+          <td>{{ perro.color }}</td>
+          <td>{{ perro.fecha_nacimiento }}</td>
+          <td><a href="{% url 'perros:info' id=perro.id %}" class="btn btn-primary">Ver perro</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      
+      {% else %}
+      <h5>El cliente no tiene perros registrados</h5>
+      {% endif %}
+    </div>
+
+    {% else %}
+    <h3>El DNI no es válido.</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -7,20 +7,18 @@
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Color</th>
             <th scope="col">Raza</th>
-            <th scope="col">Fecha de nacimiento</th>
-            <th scope="col">DNI Cliente</th>
+            <th scope="col">Color</th>
+            <th scope="col">Cliente</th>
           </tr>
         </thead>
         <tbody>
         {% for perro in perros %}
         <tr>
           <th scope="row">{{ perro.nombre }}</th>
-          <td>{{ perro.color }}</td>
           <td>{{ perro.raza }}</td>
-          <td>{{ perro.fecha_nacimiento }}</td>
-          <td>{{ perro.cliente.dni }}</td>
+          <td>{{ perro.color }}</td>
+          <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
           <td><a href="{% url 'perros:info' id=perro.id %}" class="btn btn-primary">Ver perro</a></td>
         </tr>
         {% endfor %}
