@@ -2,7 +2,7 @@
 {% block body %}
 
 <div class="text-center">
-    {% if perros %}
+    {% if publicaciones %}
     <table class="table">
         <thead>
             <tr>
@@ -15,15 +15,15 @@
             </tr>
         </thead>
         <tbody>
-            {% for perro in perros %}
+            {% for publicacion in publicaciones %}
             <tr>
-                <th scope="row">{{ perro.nombre }}</th>
-                <td>{{ perro.color }}</td>
-                <td>{{ perro.raza }}</td>
-                <td>{{ perro.edad }}</td>
-                <td>{{ perro.descripcion }} </td>
-                <td>{{ perro.publicador.dni }}</td>
-                <td><a href="{% url 'adopcion:info' id=perro.id %}" class="btn btn-primary">Ver perro</a></td>
+                <th scope="row">{{ publicacion.nombre }}</th>
+                <td>{{ publicacion.color }}</td>
+                <td>{{ publicacion.raza }}</td>
+                <td>{{ publicacion.edad }}</td>
+                <td>{{ publicacion.descripcion }} </td>
+                <td>{{ publicacion.publicador.dni }}</td>
+                <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver publicación</a></td>
             </tr>
             {% endfor %}
         </tbody>

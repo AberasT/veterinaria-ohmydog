@@ -4,11 +4,7 @@ from .forms import RegistrarClienteForm
 from .models import Cliente
 from perros.models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
-
-# TESTS
-def es_veterinario(user):
-    return user.is_staff
-
+from main.tests import es_veterinario
 
 # VIEWS
 

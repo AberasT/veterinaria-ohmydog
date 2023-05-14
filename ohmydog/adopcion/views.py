@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import publicar_perro_form
 from .models import PerroAdopcion
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from clientes.models import Cliente
+from main.tests import es_veterinario
 
 # Create your views here.
 
@@ -11,7 +12,7 @@ def index(request):
 
 def listar(request):
     contexto={
-        "perros": PerroAdopcion.objects.order_by("nombre")
+        "publicaciones": PerroAdopcion.objects.order_by("nombre")
     }
     return render(request, "adopcion/listar.html", contexto)
 
@@ -58,10 +59,18 @@ def info(request, id):
     }
     return render(request, "adopcion/info.html", contexto)
 
+@login_required
 def publicaciones(request):
     usuario = request.user
-    perros = PerroAdopcion.objects.filter(publicador=usuario)
+    publicaciones = PerroAdopcion.objects.filter(publicador=usuario)
     contexto = {
-        "perros": perros
+        "publicaciones": publicaciones
     }
     return render(request, "adopcion/mis_publicaciones.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def eliminar(request, id):
+    publicacion = PerroAdopcion.objects.get(id=id)
+    publicacion.delete()
+    return redirect("adopcion:listar")
