@@ -60,7 +60,7 @@ def info(request, id):
     return render(request, "adopcion/info.html", contexto)
 
 @login_required
-def publicaciones(request):
+def mis_publicaciones(request):
     usuario = request.user
     publicaciones = PerroAdopcion.objects.filter(publicador=usuario)
     contexto = {

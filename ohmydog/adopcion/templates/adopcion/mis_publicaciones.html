@@ -11,7 +11,6 @@
                 <th scope="col">Raza</th>
                 <th scope="col">Edad</th>
                 <th scopte="col">Descripcion</th>
-                <th scope="col">DNI Cliente</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +21,6 @@
                 <td>{{ publicacion.raza }}</td>
                 <td>{{ publicacion.edad }}</td>
                 <td>{{ publicacion.descripcion }} </td>
-                <td>{{ publicacion.publicador.dni }}</td>
                 <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver publicación</a></td>
             </tr>
             {% endfor %}

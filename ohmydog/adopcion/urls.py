@@ -7,6 +7,6 @@ urlpatterns = [
     path("publicar", views.publicar_perro, name="publicar"),
     path("listar", views.listar, name="listar"),
     path("info/<int:id>", views.info, name="info"),
-    path("publicaciones", views.publicaciones, name="mis_publicaciones"),
+    path("publicaciones", views.mis_publicaciones, name="mis_publicaciones"),
     path("eliminar/<int:id>", views.eliminar, name="eliminar")
 ]

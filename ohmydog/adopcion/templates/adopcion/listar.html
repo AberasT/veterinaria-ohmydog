@@ -11,6 +11,8 @@
                     <th scope="col">Color</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Descripcion</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +22,7 @@
                     <td>{{ publicacion.raza }}</td>
                     <td>{{ publicacion.color }}</td>
                     <td>{{ publicacion.edad }}</td>
+                    <td><a href="{% url '' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-secondary">Ver contacto</a></td>
                     <td>{{ publicacion.descripcion }} </td>
                     {% if user.is_authenticated and user.is_staff %}
                     <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
