@@ -22,7 +22,7 @@
                     <td>{{ publicacion.raza }}</td>
                     <td>{{ publicacion.color }}</td>
                     <td>{{ publicacion.edad }}</td>
-                    <td><a href="{% url '' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-secondary">Ver contacto</a></td>
+                    <td><a href="{% url 'adopcion:listar' %}" class="btn btn-secondary">Ver contacto</a></td>
                     <td>{{ publicacion.descripcion }} </td>
                     {% if user.is_authenticated and user.is_staff %}
                     <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
