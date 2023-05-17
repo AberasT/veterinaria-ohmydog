@@ -1,0 +1,45 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+
+<div class="text-center">
+    {% if cuidadores %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Horarios</th>
+                <th scope="col">Experiencia</th>
+                <th scope="col">Tiempo con nosotros</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cuidador in cuidadores %}
+            <tr>
+                <th scope="row">{{ cuidador.nombre }}</th>
+                <td>{{ cuidador.edad }}</td>
+                <td>{{ cuidador.horario_inicio }} - {{ cuidador.horario_fin }}</td>
+                <td>{{ cuidador.experiencia }}</td>
+                <td>{{ cuidador.tiempo_con_veterinaria }}</td>
+                {% if user.is_authenticated %}
+                <td><a href="{% url 'cuidadores:index' %}" class="btn btn-secondary">Solicitar contacto</a></td>
+                <td> Calificar </td>
+                {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                <td><a href="{% url 'cuidadores:index' %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-danger">Eliminar Cuidador/Paseador</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% else %}
+    <h3>No hay cuidadores/paseadores registrados.</h3>
+    {% endif %}
+</div>
+
+{% endblock %}
