@@ -21,6 +21,7 @@
                 <td>{{ publicacion.raza }}</td>
                 <td>{{ publicacion.edad }}</td>
                 <td>{{ publicacion.descripcion }} </td>
+                <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
                 <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver publicación</a></td>
             </tr>
             {% endfor %}
