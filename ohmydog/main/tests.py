@@ -6,3 +6,6 @@ def es_veterinario(user):
 
 def es_superuser(user):
     return user.is_superuser
+
+def es_cliente(user):
+    return not user.is_staff

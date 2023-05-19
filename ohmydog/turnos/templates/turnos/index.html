@@ -1,0 +1,11 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    {% if user.is_authenticated and not user.is_staff %}
+
+    <a href="{% url 'turnos:solicitar'  %}" class="btn btn-success">Solicitar turno</a>
+    {% endif %}
+</div>
+
+{% endblock %}
