@@ -12,7 +12,7 @@ def index(request):
 
 def listar(request):
     contexto={
-        "publicaciones": PerroAdopcion.objects.filter(adoptado=False)
+        "publicaciones": PerroAdopcion.objects.all
     }
     return render(request, "adopcion/listar.html", contexto)
 
@@ -53,11 +53,14 @@ def publicar_perro(request):
             })
     return render(request, "adopcion/publicar.html", contexto)
 
-def info(request, id):
-    contexto = {
-        "perro": PerroAdopcion.objects.get(id=id)
-    }
-    return render(request, "adopcion/info.html", contexto)
+@login_required
+def marcar_adoptado(request, id):
+    perro = PerroAdopcion.objects.get(id=id)
+    perro.adoptado = True
+    perro.save()
+    mis_publicaciones(request)
+    return redirect("adopcion:mis_publicaciones")
+
 
 @login_required
 def mis_publicaciones(request):
@@ -67,6 +70,13 @@ def mis_publicaciones(request):
         "publicaciones": publicaciones
     }
     return render(request, "adopcion/mis_publicaciones.html", contexto)
+
+@login_required
+def info(request, id):
+    contexto = {
+        "perro": PerroAdopcion.objects.get(id=id)
+    }
+    return render(request, "adopcion/info.html", contexto)
 
 @login_required
 @user_passes_test(es_veterinario)

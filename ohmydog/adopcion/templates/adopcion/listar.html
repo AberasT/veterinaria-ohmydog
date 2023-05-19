@@ -12,7 +12,6 @@
                     <th scope="col">Edad</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,9 +22,13 @@
                     <td>{{ publicacion.color }}</td>
                     <td>{{ publicacion.edad }}</td>
                     <td>{{ publicacion.descripcion }} </td>
-                    <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
+                    {% if not publicacion.adoptado %}
+                        <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
+                    {% else %}
+                        <td style="color:green;">¡Adoptado!</td>
+                    {% endif %}
                     {% if user.is_authenticated and user.is_staff %}
-                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                        <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
                     {% endif %}
                 </tr>
                 {% endfor %}

@@ -21,8 +21,12 @@
                 <td>{{ publicacion.raza }}</td>
                 <td>{{ publicacion.edad }}</td>
                 <td>{{ publicacion.descripcion }} </td>
-                <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
-                <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver publicación</a></td>
+                <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
+                {% if not publicacion.adoptado %}
+                <td><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado?');">Marcar como Adoptado</a></td>
+                {% else %}
+                <td style="color:green;">¡Adoptado!</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
