@@ -15,10 +15,10 @@ class Migration(migrations.Migration):
             name='Cuidador',
             fields=[
                 ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('nombre', models.CharField(default='', max_length=20, null=True)),
+                ('nombre_completo', models.CharField(default='', max_length=20, null=True)),
                 ('edad', models.CharField(default='', max_length=20, null=True)),
-                ('horario_inicio', models.CharField(default='', max_length=10, null=True)),
-                ('horario_fin', models.CharField(default='', max_length=10, null=True)),
+                ('horario_inicial', models.CharField(default='', max_length=10, null=True)),
+                ('horario_final', models.CharField(default='', max_length=10, null=True)),
                 ('experiencia', models.CharField(default='', max_length=10, null=True)),
                 ('tiempo_con_veterinaria', models.CharField(blank=True, default='', max_length=10, null=True)),
                 ('contacto', models.CharField(default='', max_length=50, null=True)),

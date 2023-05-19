@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Cuidador
 from .forms import RegistrarCuidadorForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
+from django.db import IntegrityError
+import datetime
 
 # Create your views here.
 
@@ -22,23 +24,23 @@ def registrar(request):
     if request.method == "POST":
         form = RegistrarCuidadorForm(request.POST)
         if form.is_valid():
-            nombre = form.cleaned_data["nombre"]
+            nombre_completo = form.cleaned_data["nombre_completo"]
             edad = form.cleaned_data["edad"]
-            for cuidador in Cuidador.objects.all():
-                if cuidador.nombre == nombre and cuidador.edad == edad :
-                    return render(request, "main/infomsj.html",{
-                        "msj": f"El cuidador/paseador {nombre} ya se encuentra publicado y no puede volver a publicarse."
-                    })
-            horario_inicio = form.cleaned_data["horario_inicio"]
-            horario_fin = form.cleaned_data["horario_fin"]
+            horario_inicial = form.cleaned_data["horario_inicial"]
+            horario_final = form.cleaned_data["horario_final"]
             experiencia = form.cleaned_data["experiencia"]
             contacto = form.cleaned_data["contacto"]
-            nuevoCuidador = Cuidador(nombre=nombre, edad=edad, horario_inicio=horario_inicio, horario_fin=horario_fin, experiencia=experiencia, contacto=contacto)
+            nuevoCuidador = Cuidador(nombre_completo=nombre_completo, edad=edad, horario_inicial=horario_inicial, horario_final=horario_final, experiencia=experiencia, contacto=contacto)
             try:
                 nuevoCuidador.save()
                 return render(request, "main/infomsj.html", {
                     "msj": "El cuidador/paseador se ha registrado exitosamente."
                 })
+            except IntegrityError:
+                print("Exception raised")
+                return render(request, "main/infomsj.html",{
+                    "msj": "El cuidador/paseador ingresado ya se encuentra registrado en el sistema."
+            })
             except:
                 return render(request, "main/infomsj.html",{
                     "msj": "Ha ocurrido un error."
@@ -48,3 +50,10 @@ def registrar(request):
                 "msj": "Ha ocurrido un error."
             })
     return render(request, "cuidadores/registrar.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def eliminar(request, id):
+    cuidador = Cuidador.objects.get(id=id)
+    cuidador.delete()
+    return redirect("cuidadores:index")
