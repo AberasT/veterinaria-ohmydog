@@ -12,11 +12,15 @@ class Email:
         self.para = "ohmydog@mail.com"
 
     def toStr(self):
-        return f"""
-                -------------------------------------------------------
-                De: {self.de}
-                Para: {self.para}
-                Asunto: {self.asunto}
+        return ("-"*30 +
+            f"\nDe: {self.de}\n"
+            f"Para: {self.para}\n"
+            f"Asunto: {self.asunto}\n"
+            f"Contenido:\n"
+            )
+        
+                
+                
+                
 
-                Contenido:
-                """
+                

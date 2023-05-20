@@ -39,3 +39,4 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.id}, {self.email}, {self.nombre} {self.apellido}, {self.telefono}, {self.dni}, {self.clave}, is_staff: {self.is_staff}"
+    
