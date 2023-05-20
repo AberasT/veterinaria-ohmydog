@@ -26,15 +26,15 @@ def solicitar(request):
             motivo = form.cleaned_data["motivo"]
             detalles = form.cleaned_data["detalles"]
             cliente = request.user
-            nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
+            # nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
             try:
-                nuevoTurno.save()
+                # nuevoTurno.save()
                 mail = SolicitudTurno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, email=cliente.email)
                 try:
                     mail.enviar()
-                except Exception as ex:
+                except:
                     return render(request, "main/infomsj.html", {
-                    "msj": type(ex).__name__
+                    "msj": "Ha ocurrido un error."
                 })
                 return render(request, "main/infomsj.html", {
                     "msj": "El turno está a la espera de confirmación. Cualquier novedad será informada vía email"
