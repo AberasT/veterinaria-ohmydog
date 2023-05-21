@@ -11,6 +11,9 @@ class Email:
     def para_veterinaria(self):
         self.para = "ohmydog@mail.com"
 
+    def para_cliente(self, email):
+        self.para= email
+
     def toStr(self):
         return ("-"*30 +
             f"\nDe: {self.de}\n"
