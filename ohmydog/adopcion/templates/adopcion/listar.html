@@ -29,6 +29,9 @@
                     {% endif %}
                     {% if user.is_authenticated and user.is_staff %}
                         <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                        {% if not publicacion.adoptado %}
+                            <td scope="row"><a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-secondary">Modificar Publicacion</a></td>
+                        {% endif %}
                     {% endif %}
                 </tr>
                 {% endfor %}
