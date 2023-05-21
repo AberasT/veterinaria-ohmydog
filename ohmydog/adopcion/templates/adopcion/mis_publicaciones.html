@@ -10,22 +10,26 @@
                 <th scope="col">Color</th>
                 <th scope="col">Raza</th>
                 <th scope="col">Edad</th>
-                <th scopte="col">Descripcion</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             {% for publicacion in publicaciones %}
             <tr>
                 <th scope="row">{{ publicacion.nombre }}</th>
-                <td>{{ publicacion.color }}</td>
-                <td>{{ publicacion.raza }}</td>
-                <td>{{ publicacion.edad }}</td>
-                <td>{{ publicacion.descripcion }} </td>
-                <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
+                <td scope="row">{{ publicacion.color }}</td>
+                <td scope="row">{{ publicacion.raza }}</td>
+                <td scope="row">{{ publicacion.edad }}</td>
+                <td scope="row">{{ publicacion.descripcion }} </td>
+                <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
                 {% if not publicacion.adoptado %}
-                <td><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado?');">Marcar como Adoptado</a></td>
+                <td scope="row"><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado?');">Marcar como Adoptado</a></td>
+                <td scope="row"><a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-secondary">Modificar Publicacion</a></td>
                 {% else %}
-                <td style="color:green;">¡Adoptado!</td>
+                <td scope="row" style="color:green;">¡Adoptado!</td>
                 {% endif %}
             </tr>
             {% endfor %}

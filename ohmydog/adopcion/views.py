@@ -84,3 +84,49 @@ def eliminar(request, id):
     publicacion = PerroAdopcion.objects.get(id=id)
     publicacion.delete()
     return redirect("adopcion:listar")
+
+@login_required
+def modificar(request, id):
+    publicacion = PerroAdopcion.objects.get(id=id)
+    form = publicar_perro_form(instance=publicacion)
+    contexto = {
+        "publicacion": publicacion,
+        "form": form
+    }
+    if request.method == "POST":
+        form = publicar_perro_form(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            color = form.cleaned_data["color"]
+            raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
+            edad = form.cleaned_data["edad"]
+            peso = form.cleaned_data["peso"]
+            altura = form.cleaned_data["altura"]
+            historial_vacunacion = form.cleaned_data["historial_vacunacion"]
+            descripcion = form.cleaned_data["descripcion"]
+            contacto = form.cleaned_data["contacto"]
+            publicacion.nombre = nombre
+            publicacion.color = color
+            publicacion.raza = raza
+            publicacion.sexo = sexo
+            publicacion.edad = edad
+            publicacion.peso = peso
+            publicacion.altura = altura
+            publicacion.historial_vacunacion = historial_vacunacion
+            publicacion.descripcion = descripcion
+            publicacion.contacto = contacto
+            try:
+                publicacion.save()
+                return render(request, "main/infomsj.html", {
+                    "msj": "Los datos del perro se han modificado exitosamente."
+                })
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else: 
+            return render(request, "main/infomsj.html",{
+                "msj": "Ha ocurrido un error."
+            })
+    return render(request, "adopcion/modificar.html", contexto)

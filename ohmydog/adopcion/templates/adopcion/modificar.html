@@ -1,0 +1,10 @@
+{% extends 'main/layout.html' %}
+{% block body %}
+<div class="text-center">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-secondary" type="submit" name="Modificar publicacion" value="Modificar publicacion">
+    </form>
+</div>
+{% endblock %}
