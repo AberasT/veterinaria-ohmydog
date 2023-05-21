@@ -1,6 +1,4 @@
-from django.forms import Form, CharField, ChoiceField, ModelForm
-from django import forms
-from datetime import datetime
+from django.forms import ModelForm
 from .models import Perro
 from django.forms.widgets import DateInput
 

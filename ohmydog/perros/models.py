@@ -5,8 +5,8 @@ from usuarios.models import Usuario
 
 class Perro(models.Model):
     class Sexo(models.TextChoices):
-        M = 'MACHO'
-        H = 'HEMBRA'
+        macho = 'MACHO'
+        hembra = 'HEMBRA'
         NS = '-'
 
     id = models.BigAutoField(primary_key=True)
