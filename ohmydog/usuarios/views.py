@@ -40,6 +40,10 @@ def registrar_cliente(request):
                 return render(request, "main/infomsj.html",{
                     "msj": "El email ingresado ya se encuentra registrado en el sistema."
                 })
+        else:
+            return render(request, "main/infomsj.html",{
+                    "msj": "El email ingresado ya se encuentra registrado en el sistema."
+                })
     return render(request, "usuarios/registrar-cliente.html", contexto)
 
 @login_required
