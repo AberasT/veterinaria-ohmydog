@@ -4,7 +4,7 @@ from .forms import RegistrarUsuarioForm
 from .models import Usuario
 from perros.models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
-from main.tests import es_veterinario, es_superuser
+from main.tests import es_veterinario, es_superuser, no_es_primer_login
 
 # VIEWS
 
@@ -27,7 +27,7 @@ def registrar_cliente(request):
             apellido = form.cleaned_data["apellido"]
             email = form.cleaned_data["email"]
             telefono = form.cleaned_data["telefono"]
-            clave = form.cleaned_data["clave"]
+            clave = "123456"
             nuevoUsuario = Usuario(dni=dni, nombre=nombre, apellido=apellido, email=email, telefono=telefono, clave=clave)
             nuevoUsuario.set_password(clave)
             try:
@@ -57,7 +57,7 @@ def registrar_veterinario(request):
             email = form.cleaned_data["email"]
             telefono = form.cleaned_data["telefono"]
             clave = form.cleaned_data["clave"]
-            nuevoUsuario = Usuario(dni=dni, nombre=nombre, apellido=apellido, email=email, is_staff=True, telefono=telefono, clave=clave)
+            nuevoUsuario = Usuario(dni=dni, nombre=nombre, apellido=apellido, primer_login=False, email=email, is_staff=True, telefono=telefono, clave=clave)
             nuevoUsuario.set_password(clave)
             try:
                 nuevoUsuario.save()

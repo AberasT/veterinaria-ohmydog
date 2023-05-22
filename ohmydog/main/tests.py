@@ -9,3 +9,6 @@ def es_superuser(user):
 
 def es_cliente(user):
     return not user.is_staff
+
+def no_es_primer_login(user):
+    return not user.primer_login

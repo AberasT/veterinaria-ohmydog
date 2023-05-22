@@ -3,10 +3,9 @@ from .forms import publicar_perro_form
 from .models import PerroAdopcion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
-from main.tests import es_veterinario
+from main.tests import es_veterinario, no_es_primer_login
 
 # Create your views here.
-
 def index(request):
     return render(request, "adopcion/index.html")
 
@@ -17,6 +16,7 @@ def listar(request):
     return render(request, "adopcion/listar.html", contexto)
 
 @login_required
+@user_passes_test(no_es_primer_login)
 def publicar_perro(request):
     usuario = request.user
     contexto = {
@@ -54,6 +54,7 @@ def publicar_perro(request):
     return render(request, "adopcion/publicar.html", contexto)
 
 @login_required
+@user_passes_test(no_es_primer_login)
 def marcar_adoptado(request, id):
     perro = PerroAdopcion.objects.get(id=id)
     perro.adoptado = True
@@ -63,6 +64,7 @@ def marcar_adoptado(request, id):
 
 
 @login_required
+@user_passes_test(no_es_primer_login)
 def mis_publicaciones(request):
     usuario = request.user
     publicaciones = PerroAdopcion.objects.filter(publicador=usuario)
@@ -72,6 +74,7 @@ def mis_publicaciones(request):
     return render(request, "adopcion/mis_publicaciones.html", contexto)
 
 @login_required
+@user_passes_test(no_es_primer_login)
 def info(request, id):
     contexto = {
         "perro": PerroAdopcion.objects.get(id=id)

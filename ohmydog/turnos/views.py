@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from main.tests import es_veterinario, es_cliente
+from main.tests import es_veterinario, es_cliente, no_es_primer_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import SolicitarTurnoForm, AsignarTurnoForm
 from .models import Turno
@@ -8,11 +8,13 @@ from usuarios.models import Usuario
 
 # Create your views here.
 @login_required
+@user_passes_test(no_es_primer_login)
 def index(request):
     return render(request, "turnos/index.html")
 
 @login_required
 @user_passes_test(es_cliente)
+@user_passes_test(no_es_primer_login)
 def solicitar(request):
     form = SolicitarTurnoForm()
     contexto = {

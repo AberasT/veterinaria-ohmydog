@@ -1,0 +1,8 @@
+------------------------------
+De: ohmydog@mail.com
+Para: 2@2.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno con los siguientes datos: 
+Fecha: 2023-01-01
+Hora: 17:30:00

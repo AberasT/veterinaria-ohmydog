@@ -21,6 +21,7 @@ class UsuarioManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
 
     id = models.AutoField(primary_key=True, auto_created=True, verbose_name="id")
+    primer_login = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
     dni = models.IntegerField()
     nombre = models.CharField(max_length=20)
