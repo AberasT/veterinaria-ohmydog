@@ -4,6 +4,7 @@
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.as_p }}
+        {{ form.fecha_nacimiento.value | date:'c' }}
         <input class="btn btn-secondary" type="submit" name="Modificar perro" value="Modificar perro">
     </form>
 </div>
