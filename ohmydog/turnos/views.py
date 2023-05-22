@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from main.tests import es_veterinario, es_cliente
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import SolicitarTurnoForm, AsignarTurnoForm
+from .forms import  AsignarTurnoForm
 from .models import Turno
-from correo.SolicitudTurno import SolicitudTurno, AsignacionTurno
+from correo.SolicitudTurno import SolicitudTurno
+from correo.AsignacionTurno import AsignacionTurno
 from usuarios.models import Usuario
 
 # Create your views here.
@@ -14,22 +15,22 @@ def index(request):
 @login_required
 @user_passes_test(es_cliente)
 def solicitar(request):
-    form = SolicitarTurnoForm()
+    form = AsignarTurnoForm()
     contexto = {
-        "form": SolicitarTurnoForm()
+        "form": form
     }
 
     if request.method == "POST":
-        form = SolicitarTurnoForm(request.POST)
+        form = AsignarTurnoForm(request.POST)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
             perro = form.cleaned_data["perro"]
             motivo = form.cleaned_data["motivo"]
             detalles = form.cleaned_data["detalles"]
             cliente = request.user
-            # nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
+            nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
             try:
-                # nuevoTurno.save()
+                nuevoTurno.save()
                 mail = SolicitudTurno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, email=cliente.email)
                 try:
                     mail.enviar()
@@ -51,22 +52,36 @@ def solicitar(request):
     
     return render(request, "turnos/solicitar.html", contexto)
 
+
 @login_required
 @user_passes_test(es_veterinario)
 def asignar(request, id):
-    form = AsignarTurnoForm
+    cliente = Usuario.objects.get(id=id)
+    if Turno.objects.filter(cliente=cliente, hora__isnull=True):
+        turno = Turno.objects.filter(cliente=cliente).last()
+        form = AsignarTurnoForm(instance=turno)
+    else:
+        form = AsignarTurnoForm()
+    
     contexto = {
-        "form": AsignarTurnoForm()
+        "form": form
     }
     if request.method == "POST":
         form = AsignarTurnoForm(request.POST)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
+            perro = form.cleaned_data["perro"]
+            motivo = form.cleaned_data["motivo"]
+            detalles = form.cleaned_data["detalles"]
             hora = form.cleaned_data["hora"]
             cliente = Usuario.objects.get(id=id)
-            # nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
+            if not "turno" in locals():
+                turno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
+            else:
+                turno.fecha = fecha
+                turno.hora = hora
             try:
-                # nuevoTurno.save()
+                turno.save()
                 mail = AsignacionTurno(fecha=fecha, hora=hora, email=cliente.email)
                 try:
                     mail.enviar()
@@ -75,7 +90,7 @@ def asignar(request, id):
                     "msj": "Ha ocurrido un error."
                 })
                 return render(request, "main/infomsj.html", {
-                    "msj": "El turno fue asignado correctamente y el cliente será informado via email"
+                    "msj": "El turno fue asignado correctamente y el cliente será informado vía email"
                 })
             except:
                 return render(request, "main/infomsj.html",{
