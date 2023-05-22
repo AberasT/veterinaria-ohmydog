@@ -2,35 +2,39 @@
 {% block body %}
 
 <div class="text-center">
+  <div class="text-center">
+    <a href="{% url 'usuarios:registrar_cliente'  %}" class="btn btn-success">Registrar cliente</a>
+  </div> <br> <br>
     {% if clientes %}
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">DNI</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Email</th>
-            <th scope="col">Teléfono</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for cliente in clientes %}
-        <tr>
-          <th scope="row">{{ cliente.dni }}</th>
-          <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.apellido }}</td>
-          <td>{{ cliente.email }}</td>
-          <td>{{ cliente.telefono }}</td>
-          <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-primary">Ver cliente</a></td>
-          <td><a href="{% url 'turnos:asignar' id=cliente.id %}" class="btn btn-primary">Asignar turno</a></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
+    <h3>Listado de clientes registrados</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Email</th>
+        <th scope="col">Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for cliente in clientes %}
+    <tr>
+      <th scope="row">{{ cliente.dni }}</th>
+      <td>{{ cliente.nombre }}</td>
+      <td>{{ cliente.apellido }}</td>
+      <td>{{ cliente.email }}</td>
+      <td>{{ cliente.telefono }}</td>
+      <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-primary">Ver cliente</a></td>
+      <td><a href="{% url 'turnos:asignar' id=cliente.id %}" class="btn btn-primary">Asignar turno</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
     
-    {% else %}
-    <h3>No hay clientes registrados</h3>
-    {% endif %}
+  {% else %}
+  <h3>No hay clientes registrados</h3>
+  {% endif %}
 </div>
 
 {% endblock %}

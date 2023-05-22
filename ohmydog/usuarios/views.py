@@ -10,11 +10,6 @@ from main.tests import es_veterinario, es_superuser
 
 @login_required
 @user_passes_test(es_veterinario)
-def index(request):
-    return render(request, "usuarios/index.html")
-
-@login_required
-@user_passes_test(es_veterinario)
 def registrar_cliente(request):
     contexto = {
         "form": RegistrarUsuarioForm()
@@ -77,7 +72,7 @@ def registrar_veterinario(request):
 
 @login_required
 @user_passes_test(es_veterinario)
-def listar(request):
+def index(request):
     contexto = {
         "clientes": Usuario.objects.filter(is_active=True, is_staff=False).order_by("apellido")
     }
@@ -89,7 +84,7 @@ def eliminar(request, id):
     usuario = Usuario.objects.get(id=id)
     # cliente.is_active = False BORRADO LÓGICO
     usuario.delete()
-    return redirect("usuarios:listar")
+    return redirect("usuarios:index")
 
 @login_required
 @user_passes_test(es_veterinario)
