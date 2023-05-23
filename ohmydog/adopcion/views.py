@@ -32,8 +32,8 @@ def publicar_perro(request):
             historial_vacunacion = form.cleaned_data["historial_vacunacion"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
-            publicaciones_usuario = PerroAdopcion.objects.filter(publicador = usuario.id)
-            if publicaciones_usuario.filter(nombre=nombre):
+            publicaciones_no_adoptados_usuario = PerroAdopcion.objects.filter(publicador = usuario.id, adoptado=False)
+            if publicaciones_no_adoptados_usuario.filter(nombre=nombre):
                 return render(request, "main/infomsj.html",{
                     "msj": "El perro ingresado ya está publicado."
                 })
@@ -89,6 +89,7 @@ def eliminar(request, id):
 
 @login_required
 def modificar(request, id):
+    usuario = request.user
     publicacion = PerroAdopcion.objects.get(id=id)
     form = publicar_perro_form(instance=publicacion)
     contexto = {
@@ -118,52 +119,11 @@ def modificar(request, id):
             publicacion.historial_vacunacion = historial_vacunacion
             publicacion.descripcion = descripcion
             publicacion.contacto = contacto
-            try:
-                publicacion.save()
-                return render(request, "main/infomsj.html", {
-                    "msj": "Los datos del perro se han modificado exitosamente."
-                })
-            except:
+            publicaciones_no_adoptados_usuario = PerroAdopcion.objects.filter(publicador = usuario.id, adoptado=False)
+            if publicaciones_no_adoptados_usuario.filter(nombre=nombre):
                 return render(request, "main/infomsj.html",{
-                    "msj": "Ha ocurrido un error."
+                    "msj": "No puede renombrar el perro como otro que usted publicó y no esté adoptado."
                 })
-        else: 
-            return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
-            })
-    return render(request, "adopcion/modificar.html", contexto)
-
-@login_required
-def modificar(request, id):
-    publicacion = PerroAdopcion.objects.get(id=id)
-    form = publicar_perro_form(instance=publicacion)
-    contexto = {
-        "publicacion": publicacion,
-        "form": form
-    }
-    if request.method == "POST":
-        form = publicar_perro_form(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data["nombre"]
-            color = form.cleaned_data["color"]
-            raza = form.cleaned_data["raza"]
-            sexo = form.cleaned_data["sexo"]
-            edad = form.cleaned_data["edad"]
-            peso = form.cleaned_data["peso"]
-            altura = form.cleaned_data["altura"]
-            historial_vacunacion = form.cleaned_data["historial_vacunacion"]
-            descripcion = form.cleaned_data["descripcion"]
-            contacto = form.cleaned_data["contacto"]
-            publicacion.nombre = nombre
-            publicacion.color = color
-            publicacion.raza = raza
-            publicacion.sexo = sexo
-            publicacion.edad = edad
-            publicacion.peso = peso
-            publicacion.altura = altura
-            publicacion.historial_vacunacion = historial_vacunacion
-            publicacion.descripcion = descripcion
-            publicacion.contacto = contacto
             try:
                 publicacion.save()
                 return render(request, "main/infomsj.html", {
