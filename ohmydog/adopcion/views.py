@@ -32,7 +32,8 @@ def publicar_perro(request):
             historial_vacunacion = form.cleaned_data["historial_vacunacion"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
-            if PerroAdopcion.objects.filter(nombre=nombre):
+            publicaciones_usuario = PerroAdopcion.objects.filter(publicador = usuario.id)
+            if publicaciones_usuario.filter(nombre=nombre):
                 return render(request, "main/infomsj.html",{
                     "msj": "El perro ingresado ya está publicado."
                 })

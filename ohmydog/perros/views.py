@@ -32,7 +32,8 @@ def registrar(request, id):
             fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
             peso = form.cleaned_data["peso"]
             cliente = Usuario.objects.get(id=id)
-            if Perro.objects.filter(nombre=nombre):
+            perros_cliente = Perro.objects.filter(responsable = cliente)
+            if perros_cliente.filter(nombre=nombre):
                 return render(request, "main/infomsj.html",{
                     "msj": "El cliente ya tiene ese perro registrado."
                 })
