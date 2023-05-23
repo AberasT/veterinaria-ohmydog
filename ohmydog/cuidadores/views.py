@@ -34,7 +34,7 @@ def registrar(request):
             try:
                 nuevoCuidador.save()
                 return render(request, "main/infomsj.html", {
-                    "msj": "El cuidador/paseador se ha registrado exitosamente."
+                    "msj": "El cuidador/paseador se publicó exitosamente."
                 })
             except IntegrityError:
                 print("Exception raised")
@@ -47,7 +47,7 @@ def registrar(request):
                 })
         else: 
             return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
+                "msj": "El cuidador/paseador ingresado ya se encuentra publicado en el sistema y no puede volver a publicarse."
             })
     return render(request, "cuidadores/registrar.html", contexto)
 

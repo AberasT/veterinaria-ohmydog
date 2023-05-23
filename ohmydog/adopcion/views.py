@@ -8,9 +8,6 @@ from main.tests import es_veterinario
 # Create your views here.
 
 def index(request):
-    return render(request, "adopcion/index.html")
-
-def listar(request):
     contexto={
         "publicaciones": PerroAdopcion.objects.all
     }
@@ -35,13 +32,17 @@ def publicar_perro(request):
             historial_vacunacion = form.cleaned_data["historial_vacunacion"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
+            if PerroAdopcion.objects.filter(nombre=nombre):
+                return render(request, "main/infomsj.html",{
+                    "msj": "El perro ingresado ya está publicado."
+                })
             nuevoPerroAdopcion = PerroAdopcion(nombre=nombre, color=color, raza=raza, sexo=sexo,
                                                 edad=edad, peso=peso, altura=altura, contacto=contacto,
                                                 historial_vacunacion=historial_vacunacion, descripcion=descripcion, publicador=usuario)
             try:
                 nuevoPerroAdopcion.save()
                 return render(request, "main/infomsj.html", {
-                    "msj": "El perro se ha publicado para adopción exitosamente."
+                    "msj": "El perro se ha publicado para su adopción exitosamente."
                 })
             except:
                 return render(request, "main/infomsj.html",{
@@ -83,4 +84,4 @@ def info(request, id):
 def eliminar(request, id):
     publicacion = PerroAdopcion.objects.get(id=id)
     publicacion.delete()
-    return redirect("adopcion:listar")
+    return redirect("adopcion:index")
