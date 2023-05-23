@@ -51,13 +51,6 @@
         </div>
       </nav>
       <hr>
-    <div class="text-center">
-      {% if request.user.is_authenticated and request.user.is_staff %}
-      <p>Sesión iniciada como veterinario</p>
-      {% elif request.user.is_authenticated and not request.user.is_staff %}
-      <p>Sesión iniciada como cliente</p>
-      {% endif %}
-    </div>
     {% block body %}
     
     {% endblock %}

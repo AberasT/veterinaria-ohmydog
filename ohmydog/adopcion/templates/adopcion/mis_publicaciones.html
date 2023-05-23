@@ -31,13 +31,16 @@
                 {% else %}
                 <td scope="row" style="color:green;">¡Adoptado!</td>
                 {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
     {% else %}
-    <h3>No has publicado perros en adopcion</h3>
+    <h3>No has publicado perros en adopción</h3>
     {% endif %}
 </div>
 {% endblock %}

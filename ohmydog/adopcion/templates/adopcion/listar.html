@@ -2,44 +2,48 @@
 {% block body %}
 
 <div class="text-center">
-        {% if publicaciones %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Raza</th>
-                    <th scope="col">Color</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for publicacion in publicaciones %}
-                <tr>
-                    <th scope="row">{{ publicacion.nombre }}</th>
-                    <td>{{ publicacion.raza }}</td>
-                    <td>{{ publicacion.color }}</td>
-                    <td>{{ publicacion.edad }}</td>
-                    <td>{{ publicacion.descripcion }} </td>
-                    {% if not publicacion.adoptado %}
-                        <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
-                    {% else %}
-                        <td style="color:green;">¡Adoptado!</td>
-                    {% endif %}
-                    {% if user.is_authenticated and user.is_staff %}
-                        <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
-                        {% if not publicacion.adoptado %}
-                            <td scope="row"><a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-secondary">Modificar Publicacion</a></td>
-                        {% endif %}
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        
-        {% else %}
-        <h3>No hay perros publicados para adoptar.</h3>
-        {% endif %}
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'adopcion:publicar' %}" class="btn btn-success">Publicar Perro para Adopción</a>
+    <a href="{% url 'adopcion:mis_publicaciones' %}" class="btn btn-success">Mis Publicaciones</a>
+    <br>
+    <br>
+    {% endif %}
+    {% if publicaciones %}
+    <h3>Listado de perros en adopción:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Raza</th>
+                <th scope="col">Color</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for publicacion in publicaciones %}
+            <tr>
+                <th scope="row">{{ publicacion.nombre }}</th>
+                <td>{{ publicacion.raza }}</td>
+                <td>{{ publicacion.color }}</td>
+                <td>{{ publicacion.edad }}</td>
+                <td>{{ publicacion.descripcion }} </td>
+                {% if not publicacion.adoptado %}
+                    <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
+                {% else %}
+                    <td style="color:green;">¡Adoptado!</td>
+                {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% else %}
+    <h3>No hay perros publicados en adopción.</h3>
+    {% endif %}
 </div>
 {% endblock %}

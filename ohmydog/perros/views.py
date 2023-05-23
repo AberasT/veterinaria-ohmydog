@@ -6,14 +6,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
 
 # VIEWS
-@login_required
-@user_passes_test(es_veterinario)
-def index(request):
-    return render(request, "perros/index.html")
 
 @login_required
 @user_passes_test(es_veterinario)
-def listar(request):
+def index(request):
     contexto = {
         "perros": Perro.objects.order_by("nombre")
     }
@@ -36,6 +32,11 @@ def registrar(request, id):
             fecha_nacimiento = form.cleaned_data["fecha_nacimiento"]
             peso = form.cleaned_data["peso"]
             cliente = Usuario.objects.get(id=id)
+            perros_cliente = Perro.objects.filter(responsable = cliente)
+            if perros_cliente.filter(nombre=nombre):
+                return render(request, "main/infomsj.html",{
+                    "msj": "El cliente ya tiene ese perro registrado."
+                })
             nuevoPerro = Perro(nombre=nombre, color=color, raza=raza, sexo=sexo, fecha_nacimiento=fecha_nacimiento, peso=peso, responsable=cliente)
             try:
                 nuevoPerro.save()
@@ -58,7 +59,7 @@ def registrar(request, id):
 def eliminar(request, id):
     perro = Perro.objects.get(id=id)
     perro.delete()
-    return redirect("perros:listar")
+    return redirect("perros:index")
 
 @login_required
 @user_passes_test(es_veterinario)
@@ -96,7 +97,7 @@ def modificar(request, id):
             try:
                 perro.save()
                 return render(request, "main/infomsj.html", {
-                    "msj": "Los datos del perro se han modificado exitosamente."
+                    "msj": "Los cambios se guardaron con éxito."
                 })
             except:
                 return render(request, "main/infomsj.html",{

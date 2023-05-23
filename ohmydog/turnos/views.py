@@ -90,7 +90,7 @@ def asignar(request, id):
                     "msj": "Ha ocurrido un error."
                 })
                 return render(request, "main/infomsj.html", {
-                    "msj": "El turno fue asignado correctamente y el cliente será informado vía email"
+                    "msj": "El turno fue asignado correctamente."
                 })
             except:
                 return render(request, "main/infomsj.html",{

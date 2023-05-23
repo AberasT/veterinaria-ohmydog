@@ -3,17 +3,16 @@ from usuarios.models import Usuario
 
 # Create your models here.
 class PerroAdopcion(models.Model):
-    class Sexo(models.TextChoices):
-        M = 'MACHO'
-        H = 'HEMBRA'
-        NS = '-'
-    
+    SEXO_CHOICES = [
+        ("macho", "MACHO"),
+        ("hembra", "HEMBRA"),
+        ("ns", "NS")
+    ]
     id = models.BigAutoField(primary_key=True, verbose_name="id")
     nombre = models.CharField(max_length=20, blank=False, null=True, default="")
     sexo = models.CharField(
         max_length = 6,
-        choices=Sexo.choices,
-        default=Sexo.NS
+        choices = SEXO_CHOICES
     )
 
     color = models.CharField(max_length=20, blank=False, null=True, default="")
