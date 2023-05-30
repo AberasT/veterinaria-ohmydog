@@ -4,6 +4,7 @@ from .models import PerroAdopcion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
 from main.tests import es_veterinario
+from datetime import datetime
 
 # Create your views here.
 
@@ -52,6 +53,7 @@ def publicar_perro(request):
 def marcar_adoptado(request, id):
     perro = PerroAdopcion.objects.get(id=id)
     perro.adoptado = True
+    perro.fecha_adopcion = datetime.now().date()
     perro.save()
     mis_publicaciones(request)
     return redirect("adopcion:mis_publicaciones")

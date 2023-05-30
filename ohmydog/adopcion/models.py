@@ -1,5 +1,6 @@
 from django.db import models
 from usuarios.models import Usuario
+from datetime import datetime
 
 # Create your models here.
 class PerroAdopcion(models.Model):
@@ -24,6 +25,8 @@ class PerroAdopcion(models.Model):
     historial_vacunacion = models.CharField(max_length=500, blank=False, null=True, default="")
     descripcion = models.CharField(max_length=500, blank=False, null=True, default="")
     adoptado = models.BooleanField(default=False)
+    fecha_publicacion = models.DateField(auto_now_add=True)
+    fecha_adopcion = models.DateField(null=True, blank=True)
     publicador = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="publicador_perro_adopcion")
 
     REQUIRED_FIELDS = ["nombre", "color", "raza", "sexo", "edad", "peso", "altura", "historial_vacunacion"]

@@ -18,6 +18,11 @@
                 <th scope="col">Color</th>
                 <th scope="col">Edad</th>
                 <th scope="col">Descripcion</th>
+                <th scope="col">Fecha de Publicacion</th>
+                <th scope="col">Fecha de Adopcion</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -29,6 +34,12 @@
                 <td>{{ publicacion.color }}</td>
                 <td>{{ publicacion.edad }}</td>
                 <td>{{ publicacion.descripcion }} </td>
+                <td>{{ publicacion.fecha_publicacion }} </td>
+                {% if publicacion.fecha_adopcion == None %}
+                    <td> - </td>
+                {% else %}
+                    <td>{{ publicacion.fecha_adopcion }} </td>
+                {% endif %}
                 {% if publicacion.adoptado %}
                     <td style="color:green;">¡Adoptado!</td>
                 {% elif user.is_authenticated %}
