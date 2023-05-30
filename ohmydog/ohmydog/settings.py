@@ -138,3 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "url main:index"
 
 AUTH_USER_MODEL = "usuarios.Usuario"
+
+DATE_INPUT_FORMT = ['%Y-%m-%d']

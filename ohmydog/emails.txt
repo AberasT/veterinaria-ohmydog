@@ -44,3 +44,13 @@ Contenido:
 Se confirmó su turno con los siguientes datos: 
 Fecha: 2023-07-01
 Hora: 10:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado un turno:
+Fecha: 2023-07-07
+Motivo: castracion
+Perro: pepe
+Detalles: -
