@@ -4,7 +4,42 @@
 <div class="text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for error in form.nombre.errors %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+        
+        {{ form.nombre.label }}
+        {{ form.nombre }}
+        <br><br>
+        {{ form.color.label }}
+        {{ form.color }}
+        <br><br>
+        {{ form.raza.label }}
+        {{ form.raza }}
+        <br><br>
+        {{ form.sexo.label }}
+        {{ form.sexo }}
+        <br><br>
+        {{ form.edad.label }}
+        {{ form.edad }}
+        <br><br>
+        {{ form.peso.label }}
+        {{ form.peso }}
+        <br><br>
+        {{ form.altura.label }}
+        {{ form.altura }}
+        <br><br>
+        {{ form.contacto.label }}
+        {{ form.contacto }}
+        <br><br>
+        {{ form.historial_vacunacion.label }}
+        {{ form.historial_vacunacion }}
+        <br><br>
+        {{ form.descripcion.label }}
+        {{ form.descripcion }}
+        <br><br>
         <input class="btn btn-secondary" type="submit" name="Publicar Perro" value="Publicar Perro">
     </form>
 </div>

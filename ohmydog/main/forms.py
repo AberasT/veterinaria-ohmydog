@@ -10,12 +10,14 @@ class IniciarSesionForm(Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
+        self.usuario = kwargs.pop('usuario', None)
         super(Form, self).__init__(*args, **kwargs)
 
     def clean(self):
-        email = self.cleaned_data.get('email')
-        clave = self.cleaned_data.get('clave')
-        usuario = authenticate(self.request, username=email, password=clave)
-        if usuario is None:
-            raise forms.ValidationError("Email y/o contraseña incorrecto/a.")
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        clave = cleaned_data.get('clave')
+        if email and clave: 
+            if self.usuario is None:
+                raise forms.ValidationError("Email y/o contraseña incorrecto/a.")
         return email, clave

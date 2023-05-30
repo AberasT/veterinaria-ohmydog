@@ -21,11 +21,11 @@ def login_view(request):
         }
     
     if request.method == "POST":
-        form = IniciarSesionForm(request.POST)
+        email = request.POST["email"]
+        clave = request.POST["clave"]
+        usuario = authenticate(request, username=email, password=clave)
+        form = IniciarSesionForm(request.POST, usuario=usuario)
         if form.is_valid():
-            email = request.POST["email"]
-            clave = request.POST["clave"]
-            usuario = authenticate(request, username=email, password=clave)
             if usuario is not None:
                 login(request, usuario)
                 return redirect("main:index")
