@@ -42,8 +42,9 @@ def registrar_cliente(request):
 @login_required
 @user_passes_test(es_superuser)
 def registrar_veterinario(request):
+    form = RegistrarUsuarioForm()
     contexto = {
-        "form": RegistrarUsuarioForm()
+        "form": form
         }
     if request.method == "POST":
         form = RegistrarUsuarioForm(request.POST)
@@ -61,11 +62,13 @@ def registrar_veterinario(request):
                 return render(request, "main/infomsj.html", {
                     "msj": "El veterinario se ha registrado exitosamente"
                 })
-            except IntegrityError:
+            except:
                 print("Exception raised")
                 return render(request, "main/infomsj.html",{
-                    "msj": "El email ingresado ya se encuentra registrado en el sistema."
+                    "msj": "Ha ocurrido un error."
                 })
+        else:
+            return render(request, "usuarios/registrar-cliente.html", {"form": form})
     return render(request, "usuarios/registrar-veterinario.html", contexto)
 
 @login_required
