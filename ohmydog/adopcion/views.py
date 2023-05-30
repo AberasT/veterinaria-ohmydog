@@ -74,7 +74,6 @@ def info(request, id):
     return render(request, "adopcion/info.html", contexto)
 
 @login_required
-@user_passes_test(es_veterinario)
 def eliminar(request, id):
     publicacion = PerroAdopcion.objects.get(id=id)
     publicacion.delete()

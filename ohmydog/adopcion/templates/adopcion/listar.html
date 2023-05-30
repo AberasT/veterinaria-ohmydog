@@ -34,7 +34,7 @@
                 {% elif user.is_authenticated %}
                     <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
                 {% endif %}
-                {% if user.is_authenticated and user.is_staff %}
+                {% if user.is_authenticated and user.is_staff or publicacion.publicador == user and user.is_authenticated %}
                     <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
                 {% endif %}
             </tr>
