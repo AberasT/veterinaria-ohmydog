@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import publicar_perro_form
+from .forms import PublicarPerroForm
 from .models import PerroAdopcion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
@@ -17,10 +17,10 @@ def index(request):
 def publicar_perro(request):
     usuario = request.user
     contexto = {
-        "form": publicar_perro_form()
+        "form": PublicarPerroForm()
     }
     if request.method == "POST":
-        form = publicar_perro_form(request.POST)
+        form = PublicarPerroForm(request.POST, cliente=usuario)
         if form.is_valid():
             nombre = form.cleaned_data["nombre"]
             color = form.cleaned_data["color"]
@@ -32,11 +32,6 @@ def publicar_perro(request):
             historial_vacunacion = form.cleaned_data["historial_vacunacion"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
-            publicaciones_no_adoptados_usuario = PerroAdopcion.objects.filter(publicador = usuario.id, adoptado=False)
-            if publicaciones_no_adoptados_usuario.filter(nombre=nombre):
-                return render(request, "main/infomsj.html",{
-                    "msj": "El perro ingresado ya está publicado."
-                })
             nuevoPerroAdopcion = PerroAdopcion(nombre=nombre, color=color, raza=raza, sexo=sexo,
                                                 edad=edad, peso=peso, altura=altura, contacto=contacto,
                                                 historial_vacunacion=historial_vacunacion, descripcion=descripcion, publicador=usuario)
@@ -50,9 +45,7 @@ def publicar_perro(request):
                     "msj": "Ha ocurrido un error."
                 })
         else: 
-            return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
-            })
+            return render(request, "adopcion/publicar.html",{"form": form})
     return render(request, "adopcion/publicar.html", contexto)
 
 @login_required
@@ -91,13 +84,12 @@ def eliminar(request, id):
 def modificar(request, id):
     usuario = request.user
     publicacion = PerroAdopcion.objects.get(id=id)
-    form = publicar_perro_form(instance=publicacion)
+    form = PublicarPerroForm(instance=publicacion)
     contexto = {
-        "publicacion": publicacion,
         "form": form
     }
     if request.method == "POST":
-        form = publicar_perro_form(request.POST)
+        form = PublicarPerroForm(request.POST, cliente=usuario, id=id)
         if form.is_valid():
             nombre = form.cleaned_data["nombre"]
             color = form.cleaned_data["color"]
@@ -119,11 +111,6 @@ def modificar(request, id):
             publicacion.historial_vacunacion = historial_vacunacion
             publicacion.descripcion = descripcion
             publicacion.contacto = contacto
-            publicaciones_no_adoptados_usuario = PerroAdopcion.objects.filter(publicador = usuario.id, adoptado=False)
-            if publicaciones_no_adoptados_usuario.filter(nombre=nombre):
-                return render(request, "main/infomsj.html",{
-                    "msj": "No puede renombrar el perro como otro que usted publicó y no esté adoptado."
-                })
             try:
                 publicacion.save()
                 return render(request, "main/infomsj.html", {
@@ -134,7 +121,5 @@ def modificar(request, id):
                     "msj": "Ha ocurrido un error."
                 })
         else: 
-            return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
-            })
+            return render(request, "adopcion/modificar.html",{"form": form})
     return render(request, "adopcion/modificar.html", contexto)

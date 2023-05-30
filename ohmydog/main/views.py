@@ -15,20 +15,22 @@ def index(request):
 
 @user_passes_test(usuario_no_autenticado)
 def login_view(request):
+    form = IniciarSesionForm()
     contexto = {
-        "form": IniciarSesionForm()
+        "form": form
         }
     
     if request.method == "POST":
-        email = request.POST["email"]
-        clave = request.POST["clave"]
-        usuario = authenticate(request, username=email, password=clave)
-        if usuario is not None:
-            login(request, usuario)
-            return redirect("main:index")
+        form = IniciarSesionForm(request.POST)
+        if form.is_valid():
+            email = request.POST["email"]
+            clave = request.POST["clave"]
+            usuario = authenticate(request, username=email, password=clave)
+            if usuario is not None:
+                login(request, usuario)
+                return redirect("main:index")
         else:
-            messages.info(request, "Email y/o contraseña incorrecto/a")
-
+            return render(request, "main/login.html", {"form":form})
     return render(request, "main/login.html", contexto)
 
 @login_required
