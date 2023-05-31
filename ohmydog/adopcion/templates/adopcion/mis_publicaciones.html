@@ -28,7 +28,11 @@
                 <td scope="row">{{ publicacion.edad }}</td>
                 <td scope="row">{{ publicacion.descripcion }} </td>
                 <td>{{ publicacion.fecha_publicacion }} </td>
-                <td>{{ publicacion.fecha_adopcion }} </td>
+                {% if publicacion.fecha_adopcion == None %}
+                    <td> - </td>
+                {% else %}
+                    <td>{{ publicacion.fecha_adopcion }} </td>
+                {% endif %}
                 <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
                 {% if not publicacion.adoptado %}
                 <td scope="row"><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado?');">Marcar como Adoptado</a></td>
