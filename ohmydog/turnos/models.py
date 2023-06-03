@@ -14,7 +14,7 @@ class Turno(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     fecha = models.DateField(blank=False, null=False)
-    hora = models.TimeField(null=True, blank=True)
+    hora = models.TimeField(null=True)
     cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="usuarios_turnos")
     perro = models.CharField(max_length=30)
     motivo = models.CharField(

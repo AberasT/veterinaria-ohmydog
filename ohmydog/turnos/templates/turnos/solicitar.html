@@ -1,14 +1,12 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
+    {{ perro.nombre }}
+    {% if form %}
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.fecha.label }}
         {{ form.fecha }}
-        <br>
-        <br>
-        {{ form.perro.label }}
-        {{ form.perro }}
         <br>
         <br>
         {{ form.motivo.label }}
@@ -21,6 +19,10 @@
         <br>
         <input class="btn btn-secondary" type="submit" name="Solicitar turno" value="Solicitar turno">
     </form>
+    {% else %}
+    <h3>Debe seleccionar uno de sus perros registrados para solicitar turno</h3>
+    <a href="{% url 'turnos:elegir_perro'  %}" class="btn btn-success">Elegir Perro</a>
+    {% endif %}
 </div>
 
 {% endblock %}

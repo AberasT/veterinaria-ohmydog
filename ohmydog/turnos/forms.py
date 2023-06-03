@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Form, ModelChoiceField
+from django.forms import ModelForm, Form, CharField, ChoiceField
 from .models import Turno
 from django.forms.widgets import SelectDateWidget, TimeInput
 from datetime import datetime
@@ -18,20 +18,16 @@ error_messages = {"required": "Se deben completar todos los campos"}
 class AsignarTurnoForm(ModelForm):
     class Meta:
         model = Turno
-        fields = ["fecha","hora", "perro", "motivo", "detalles"]
+        fields = ["fecha", "hora", "motivo", "detalles"]
         HOY = datetime.today()
         ANIO = HOY.year
         widgets = {
             'fecha': SelectDateWidget(years=[ANIO], attrs={'type': 'date'}),
-<<<<<<< HEAD
         }
 
 class ElegirPerroForm(Form):
     
-    perro = ModelChoiceField(queryset=None)
-=======
-            'hora': TimeInput(attrs={'type': 'time'})
-        }
+    perro = ChoiceField(choices=(("","")))
 
 # class AsignarTurnoForm(ModelForm):
 #     class Meta:
@@ -43,4 +39,3 @@ class ElegirPerroForm(Form):
 #             'fecha': SelectDateWidget(years=[ANIO], attrs={'type': 'date'}),
 #             'hora': TimeInput(attrs={'type': 'time'}),
 #         }
->>>>>>> dev

@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from main.tests import es_veterinario, es_cliente
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import  AsignarTurnoForm
+from .forms import  AsignarTurnoForm, ElegirPerroForm
 from .models import Turno
 from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
@@ -17,33 +18,48 @@ def index(request):
 @user_passes_test(es_cliente)
 def elegir_perro(request):
     form = ElegirPerroForm()
-    form.fields["perro"].queryset = Perro.objects.filter(responsable=request.user)
-    contexto = {
-        "form": form
-    }
-    return render(request, "turnos/elegir_perro.html", contexto)
-
-
-@login_required
-@user_passes_test(es_cliente)
-def solicitar(request):
-    form = AsignarTurnoForm()
+    query = Perro.objects.filter(responsable=request.user)
+    choices = []
+    for perro in query: choices.append((perro.id, perro.nombre))
+    form.fields["perro"].choices = choices
     contexto = {
         "form": form
     }
 
     if request.method == "POST":
+        contexto = {
+            "perro": Perro.objects.get(id=request.POST["perro"])
+        }
+        return redirect("turnos:solicitar", id=request.POST["perro"])
+
+    return render(request, "turnos/elegir_perro.html", contexto)
+
+
+@login_required
+@user_passes_test(es_cliente)
+def solicitar(request, id):
+    form = AsignarTurnoForm()
+    contexto = {}
+    try:
+        perro = Perro.objects.get(id=id)
+        if perro.responsable == request.user:
+            contexto = {
+            "perro": perro,
+            "form": form
+        }
+    except:
+        perro = None
+
+    if request.method == "POST":
         form = AsignarTurnoForm(request.POST)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
-            perro = form.cleaned_data["perro"]
             motivo = form.cleaned_data["motivo"]
             detalles = form.cleaned_data["detalles"]
-            cliente = request.user
-            nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
+            nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles)
             try:
                 nuevoTurno.save()
-                mail = SolicitudTurno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, email=cliente.email)
+                mail = SolicitudTurno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, email=request.user.email)
                 try:
                     mail.enviar()
                 except:
