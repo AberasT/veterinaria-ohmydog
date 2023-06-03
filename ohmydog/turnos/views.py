@@ -1,14 +1,26 @@
 from django.shortcuts import render
 from main.tests import es_veterinario, es_cliente
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import SolicitarTurnoForm
+from .forms import SolicitarTurnoForm, ElegirPerroForm
 from .models import Turno
+from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
 
 # Create your views here.
 @login_required
 def index(request):
     return render(request, "turnos/index.html")
+
+@login_required
+@user_passes_test(es_cliente)
+def elegir_perro(request):
+    form = ElegirPerroForm()
+    form.fields["perro"].queryset = Perro.objects.filter(responsable=request.user)
+    contexto = {
+        "form": form
+    }
+    return render(request, "turnos/elegir_perro.html", contexto)
+
 
 @login_required
 @user_passes_test(es_cliente)

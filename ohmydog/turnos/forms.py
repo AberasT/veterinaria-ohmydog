@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, Form, ModelChoiceField
 from .models import Turno
 from django.forms.widgets import SelectDateWidget
 from datetime import datetime
@@ -14,3 +14,7 @@ class SolicitarTurnoForm(ModelForm):
         widgets = {
             'fecha': SelectDateWidget(years=[ANIO], attrs={'type': 'date'}),
         }
+
+class ElegirPerroForm(Form):
+    
+    perro = ModelChoiceField(queryset=None)
