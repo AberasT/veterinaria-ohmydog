@@ -5,7 +5,29 @@
     <p>Ingrese los datos del nuevo cliente:</p>
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for error in form.email.errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {{ form.email.label }}
+        {{ form.email }}
+        <br><br>
+        {{ form.dni.label }}
+        {{ form.dni }}
+        <br><br>
+        {{ form.nombre.label }}
+        {{ form.nombre }}
+        <br><br>
+        {{ form.apellido.label }}
+        {{ form.apellido }}
+        <br><br>
+        {{ form.telefono.label }}
+        {{ form.telefono }}
+        <br><br>
+        {{ form.clave.label }}
+        {{ form.clave }}
+        <br><br>
         <input class="btn btn-secondary" type="submit" name="Registrar cliente" value="Registrar cliente">
     </form>
 </div>

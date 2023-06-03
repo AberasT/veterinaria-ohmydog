@@ -17,8 +17,9 @@ def index(request):
 @login_required
 @user_passes_test(es_veterinario)
 def registrar(request):
+    form = RegistrarCuidadorForm()
     contexto = {
-        "form": RegistrarCuidadorForm()
+        "form": form
         }
     
     if request.method == "POST":
@@ -34,21 +35,14 @@ def registrar(request):
             try:
                 nuevoCuidador.save()
                 return render(request, "main/infomsj.html", {
-                    "msj": "El cuidador/paseador se ha registrado exitosamente."
+                    "msj": "El cuidador/paseador se publicó exitosamente."
                 })
-            except IntegrityError:
-                print("Exception raised")
-                return render(request, "main/infomsj.html",{
-                    "msj": "El cuidador/paseador ingresado ya se encuentra registrado en el sistema."
-            })
             except:
                 return render(request, "main/infomsj.html",{
                     "msj": "Ha ocurrido un error."
                 })
         else: 
-            return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
-            })
+            return render(request, "cuidadores/registrar.html",{"form":form})
     return render(request, "cuidadores/registrar.html", contexto)
 
 @login_required

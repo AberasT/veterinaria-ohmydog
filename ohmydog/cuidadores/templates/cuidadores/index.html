@@ -4,7 +4,7 @@
 
 <div class="text-center">
     {% if user.is_authenticated and user.is_staff %}
-    <a href="{% url 'cuidadores:registrar' %}" class="btn btn-success">Publicar nuevo cuidador/paseador</a>
+    <a href="{% url 'cuidadores:registrar' %}" class="btn btn-success">Publicar nuevo cuidador/paseador</a> <br><br>
     {% endif %}
     {% if cuidadores %}
     <h3>Cuidadores/paseadores: </h3>
@@ -25,39 +25,6 @@
     </ul>
     <hr>
     {% endfor %}
-    <!-- <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre completo</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Horarios</th>
-                <th scope="col">Experiencia</th>
-                <th scope="col">Con nosotros desde</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cuidador in cuidadores %}
-            <tr>
-                <th scope="row">{{ cuidador.nombre_completo }}</th>
-                <td>{{ cuidador.edad }}</td>
-                <td>{{ cuidador.horario_inicial }} - {{ cuidador.horario_final }}</td>
-                <td>{{ cuidador.experiencia }}</td>
-                <td>{{ cuidador.tiempo_con_veterinaria }}</td>
-                {% if user.is_authenticated %}
-                <td><a href="{% url 'cuidadores:index' %}" class="btn btn-secondary">Solicitar contacto</a></td>
-                <td> Calificar </td>
-                {% endif %}
-                {% if user.is_authenticated and user.is_staff %}
-                <td><a href="{% url 'cuidadores:index' %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-danger">Eliminar cuidador/paseador</a></td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table> -->
-    
     {% else %}
     <h3>No hay cuidadores/paseadores publicados.</h3>
     {% endif %}

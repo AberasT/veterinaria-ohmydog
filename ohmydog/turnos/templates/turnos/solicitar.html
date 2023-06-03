@@ -3,7 +3,22 @@
 <div class="text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.fecha.label }}
+        {{ form.fecha }}
+        <br>
+        <br>
+        {{ form.perro.label }}
+        {{ form.perro }}
+        <br>
+        <br>
+        {{ form.motivo.label }}
+        {{ form.motivo }}
+        <br>
+        <br>
+        {{ form.detalles.label }}
+        {{ form.detalles }}
+        <br>
+        <br>
         <input class="btn btn-secondary" type="submit" name="Solicitar turno" value="Solicitar turno">
     </form>
 </div>

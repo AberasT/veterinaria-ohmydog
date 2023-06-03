@@ -3,7 +3,29 @@
 <div class="text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for error in form.contacto.errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {{ form.nombre_completo.label }}
+        {{ form.nombre_completo }}
+        <br><br>
+        {{ form.edad.label }}
+        {{ form.edad }}
+        <br><br>
+        {{ form.horario_inicial.label }}
+        {{ form.horario_inicial}}
+        <br><br>
+        {{ form.horario_final.label }}
+        {{ form.horario_final}}
+        <br><br>
+        {{ form.experiencia.label }}
+        {{ form.experiencia}}
+        <br><br>
+        {{ form.contacto.label }}
+        {{ form.contacto}}
+        <br><br>
         <input class="btn btn-secondary" type="submit" name="Publicar cuidador/paseador" value="Publicar cuidador/paseador">
     </form>
 </div>

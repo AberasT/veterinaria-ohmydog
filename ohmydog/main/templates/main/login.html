@@ -3,12 +3,19 @@
 <div class="text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+        {{ form.email.label }}
+        {{ form.email }}
+        <br><br>
+        {{ form.clave.label }}
+        {{ form.clave }}
+        <br><br>
         <input class="btn btn-secondary" type="submit" name="Iniciar sesión" value="Iniciar sesión">
     </form>
-    {% for message in messages %}
-    <p id="messages">{{ message }}</p>
-    {% endfor %}
 </div>
 
 {% endblock %}

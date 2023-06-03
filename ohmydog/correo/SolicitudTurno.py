@@ -23,4 +23,3 @@ class SolicitudTurno(Email):
         f"Detalles: {self.detalles_solicitud}\n")
         with open("emails.txt", "a") as archivo:
             archivo.write(email)
-

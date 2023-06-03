@@ -4,10 +4,10 @@
 <div class="text-center">
     {% if not cliente.is_staff %}
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-      <li class="list-group-item active">DNI: {{ cliente.dni }}</li>
+      <li class="list-group-item active">Email: {{ cliente.email }}</li>
       <li class="list-group-item">Nombre: {{ cliente.nombre }}</li>
       <li class="list-group-item">Apellido: {{ cliente.apellido }}</li>
-      <li class="list-group-item">Email: {{ cliente.email }}</li>
+      <li class="list-group-item">DNI: {{ cliente.dni }}</li>
       <li class="list-group-item">Teléfono: {{ cliente.telefono }}</li>
       <li class="list-group-item"><a href="{% url 'perros:registrar' id=cliente.id %}" class="btn btn-success">Registrar perro</a></li>
       <li class="list-group-item"><a href="{% url 'usuarios:eliminar' id=cliente.id %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></li>

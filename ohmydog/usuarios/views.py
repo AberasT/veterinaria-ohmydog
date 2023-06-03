@@ -10,14 +10,10 @@ from main.tests import es_veterinario, es_superuser
 
 @login_required
 @user_passes_test(es_veterinario)
-def index(request):
-    return render(request, "usuarios/index.html")
-
-@login_required
-@user_passes_test(es_veterinario)
 def registrar_cliente(request):
+    form = RegistrarUsuarioForm()
     contexto = {
-        "form": RegistrarUsuarioForm()
+        "form": form
         }
     if request.method == "POST":
         form = RegistrarUsuarioForm(request.POST)
@@ -35,18 +31,20 @@ def registrar_cliente(request):
                 return render(request, "main/infomsj.html", {
                     "msj": "El cliente se ha registrado exitosamente"
                 })
-            except IntegrityError:
-                print("Exception raised")
+            except:
                 return render(request, "main/infomsj.html",{
-                    "msj": "El email ingresado ya se encuentra registrado en el sistema."
+                    "msj": "Ha ocurrido un error."
                 })
+        else:
+            return render(request, "usuarios/registrar-cliente.html", {"form": form})
     return render(request, "usuarios/registrar-cliente.html", contexto)
 
 @login_required
 @user_passes_test(es_superuser)
 def registrar_veterinario(request):
+    form = RegistrarUsuarioForm()
     contexto = {
-        "form": RegistrarUsuarioForm()
+        "form": form
         }
     if request.method == "POST":
         form = RegistrarUsuarioForm(request.POST)
@@ -64,16 +62,18 @@ def registrar_veterinario(request):
                 return render(request, "main/infomsj.html", {
                     "msj": "El veterinario se ha registrado exitosamente"
                 })
-            except IntegrityError:
+            except:
                 print("Exception raised")
                 return render(request, "main/infomsj.html",{
-                    "msj": "El email ingresado ya se encuentra registrado en el sistema."
+                    "msj": "Ha ocurrido un error."
                 })
+        else:
+            return render(request, "usuarios/registrar-cliente.html", {"form": form})
     return render(request, "usuarios/registrar-veterinario.html", contexto)
 
 @login_required
 @user_passes_test(es_veterinario)
-def listar(request):
+def index(request):
     contexto = {
         "clientes": Usuario.objects.filter(is_active=True, is_staff=False).order_by("apellido")
     }
@@ -85,7 +85,7 @@ def eliminar(request, id):
     usuario = Usuario.objects.get(id=id)
     # cliente.is_active = False BORRADO LÓGICO
     usuario.delete()
-    return redirect("usuarios:listar")
+    return redirect("usuarios:index")
 
 @login_required
 @user_passes_test(es_veterinario)

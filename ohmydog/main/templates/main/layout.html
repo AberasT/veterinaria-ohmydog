@@ -33,7 +33,7 @@
               {% endif %}
               {% endif %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'adopcion:index' %}">Adopcion</a>
+                <a class="nav-link" href="{% url 'adopcion:index' %}">Adopción</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'cuidadores:index' %}">Cuidadores/Paseadores</a>
@@ -51,13 +51,6 @@
         </div>
       </nav>
       <hr>
-    <div class="text-center">
-      {% if request.user.is_authenticated and request.user.is_staff %}
-      <p>Sesión iniciada como veterinario</p>
-      {% elif request.user.is_authenticated and not request.user.is_staff %}
-      <p>Sesión iniciada como cliente</p>
-      {% endif %}
-    </div>
     {% block body %}
     
     {% endblock %}

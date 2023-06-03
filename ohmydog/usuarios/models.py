@@ -21,7 +21,9 @@ class UsuarioManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
 
     id = models.AutoField(primary_key=True, auto_created=True, verbose_name="id")
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, error_messages={
+        'unique': "A user with that email address already exists.",
+    })
     dni = models.IntegerField()
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=30)

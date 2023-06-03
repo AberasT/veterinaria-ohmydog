@@ -4,19 +4,19 @@ from usuarios.models import Usuario
 
 
 class Perro(models.Model):
-    class Sexo(models.TextChoices):
-        macho = 'MACHO'
-        hembra = 'HEMBRA'
-        NS = '-'
-
+    SEXO_CHOICES = [
+        ("macho", "MACHO"),
+        ("hembra", "HEMBRA"),
+        ("ns", "NS")
+    ]
     id = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=20, blank=False, null=True, default="")
     color = models.CharField(max_length=20, blank=False, null=True, default="")
     raza = models.CharField(max_length=20, blank=True, null=True, default="")
     sexo = models.CharField(
         max_length=6,
-        choices=Sexo.choices,
-        default=Sexo.NS)
+        choices=SEXO_CHOICES
+    )
     fecha_nacimiento = models.DateField()
     peso = models.CharField(max_length=5, blank=True, null=True, default="")
     responsable = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="usuarios_perros")

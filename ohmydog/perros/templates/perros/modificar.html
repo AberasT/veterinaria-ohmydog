@@ -3,8 +3,30 @@
 <div class="text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input class="btn btn-secondary" type="submit" name="Modificar perro" value="Modificar perro">
+        {% for error in form.nombre.errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+        <br><br>
+        {{ form.nombre.label }}
+        {{ form.nombre }}
+        <br><br>
+        {{ form.raza.label }}
+        {{ form.raza }}
+        <br><br>
+        {{ form.color.label }}
+        {{ form.color }}
+        <br><br>
+        {{ form.sexo.label }}
+        {{ form.sexo }}
+        <br><br>
+        {{ form.fecha_nacimiento.label }}
+        {{form.fecha_nacimiento }}
+        <br><br>
+        {{ form.peso.label }}
+        {{ form.peso }}
+        <input class="btn btn-secondary" type="submit" name="Guardar Cambios" value="Guardar Cambios">
     </form>
 </div>
 
