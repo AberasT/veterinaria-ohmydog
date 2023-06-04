@@ -9,6 +9,19 @@ from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
 from usuarios.models import Usuario
 
+def get_turnos_pendientes(perro):
+    turnosPendientes = Turno.objects.filter(perro=perro, hora_isnull=True)
+    turnosString = []
+    for turno in turnosPendientes:
+        turnosString.append(f"Para el día {turno.fecha} con motivo de {turno.motivo}.")
+    return turnosString
+
+def set_opciones_perro(form, user):
+    query = Perro.objects.filter(responsable=user)
+    choices = []
+    for perro in query: choices.append((perro.id, perro.nombre))
+    form.fields["perro"].choices = choices
+
 # Create your views here.
 @login_required
 def index(request):
@@ -18,20 +31,11 @@ def index(request):
 @user_passes_test(es_cliente)
 def elegir_perro(request):
     form = ElegirPerroForm()
-    query = Perro.objects.filter(responsable=request.user)
-    choices = []
-    for perro in query: choices.append((perro.id, perro.nombre))
-    form.fields["perro"].choices = choices
+    set_opciones_perro(form, request.user)
     contexto = {
         "form": form
     }
-
-    if request.method == "POST":
-        contexto = {
-            "perro": Perro.objects.get(id=request.POST["perro"])
-        }
-        return redirect("turnos:solicitar", id=request.POST["perro"])
-
+    if request.method == "POST": return redirect("turnos:solicitar", id=request.POST["perro"])
     return render(request, "turnos/elegir_perro.html", contexto)
 
 
@@ -45,7 +49,8 @@ def solicitar(request, id):
         if perro.responsable == request.user:
             contexto = {
             "perro": perro,
-            "form": form
+            "form": form,
+            "turnosPendientes": get_turnos_pendientes(perro)
         }
     except:
         perro = None
@@ -85,8 +90,8 @@ def solicitar(request, id):
 @user_passes_test(es_veterinario)
 def asignar(request, id):
     cliente = Usuario.objects.get(id=id)
-    if Turno.objects.filter(cliente=cliente, hora__isnull=True):
-        turno = Turno.objects.filter(cliente=cliente).last()
+    if Turno.objects.filter(perro=perro, hora__isnull=True):
+        turno = Turno.objects.filter(perro=perro).last()
         form = AsignarTurnoForm(instance=turno)
     else:
         form = AsignarTurnoForm()
@@ -104,7 +109,7 @@ def asignar(request, id):
             hora = form.cleaned_data["hora"]
             cliente = Usuario.objects.get(id=id)
             if not "turno" in locals():
-                turno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, cliente=cliente)
+                turno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles)
             else:
                 turno.fecha = fecha
                 turno.hora = hora

@@ -1,7 +1,14 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    {{ perro.nombre }}
+
+    {% if turnosPendientes %}
+    <h4>Sólo podrá solicitar un turno para {{ perro.nombre }} si no posee actualmente un turno pendiente con el mismo motivo.</h4>
+    <h5>Los turnos pendientes para {{ perro.nombre }} son:</h5>
+    {% for turno in turnosPendientes %}
+    <p>turno</p>
+    {% endfor %}
+    {% endif %}
     {% if form %}
     <form method="POST" action="">
         {% csrf_token %}
