@@ -9,11 +9,22 @@ from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
 from usuarios.models import Usuario
 
+def puede_solicitar_turno(turno):
+    turnosPendientes = Turno.objects.filter(perro=turno.perro, hora__isnull=True):
+    
+
 def get_turnos_pendientes(perro):
-    turnosPendientes = Turno.objects.filter(perro=perro, hora_isnull=True)
+    turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True)
     turnosString = []
-    for turno in turnosPendientes:
-        turnosString.append(f"Para el día {turno.fecha} con motivo de {turno.motivo}.")
+    tabla_motivos = {
+        'vacunacion': 'vacunación',
+        'castracion': 'castración',
+        'consulta': 'consulta general',
+        'urgencia': 'consulta de urgencia',
+        'desparasitacion': 'desparasitación'
+    }        
+    for turno in turnosPendientes: 
+        turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}.")
     return turnosString
 
 def set_opciones_perro(form, user):
