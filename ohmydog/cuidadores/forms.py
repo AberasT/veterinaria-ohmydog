@@ -24,5 +24,5 @@ class RegistrarCuidadorForm(ModelForm):
         contacto = self.cleaned_data.get("contacto")
         cuidadores = Cuidador.objects.filter(contacto=contacto).exclude(id=self.id)
         if cuidadores:
-            raise forms.ValidationError("El cuidador/paseador ingresado ya se encuentra registrado en el sistema.")
+            raise forms.ValidationError("El contacto ingresado ya se encuentra registrado en el sistema con otro cuidador/paseador.")
         return contacto

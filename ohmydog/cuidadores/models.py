@@ -10,6 +10,6 @@ class Cuidador(models.Model):
     horario_final = models.TimeField()
     experiencia = models.CharField(max_length=10, blank=False, null=True, default="")
     tiempo_con_veterinaria = models.DateField(auto_now_add=True)
-    contacto = models.CharField(max_length=50, blank=False, null=True, default="", unique=True)
+    contacto = models.CharField(max_length=50, blank=False, null=True, default="")
 
     REQUIRED_FIELDS = ["nombre_completo", "edad", "horario_inicial", "horario_final", "experiencia", "contacto"]

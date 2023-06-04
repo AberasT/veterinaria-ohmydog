@@ -51,3 +51,40 @@ def eliminar(request, id):
     cuidador = Cuidador.objects.get(id=id)
     cuidador.delete()
     return redirect("cuidadores:index")
+
+
+@login_required
+@user_passes_test(es_veterinario)
+def modificar(request, id):
+    publicacion = Cuidador.objects.get(id=id)
+    form = RegistrarCuidadorForm(instance=publicacion)
+    contexto = {
+        "form": form
+    }
+    if request.method == "POST":
+        form = RegistrarCuidadorForm(request.POST, id=id)
+        if form.is_valid():
+            nombre_completo = form.cleaned_data["nombre_completo"]
+            edad = form.cleaned_data["edad"]
+            horario_inicial = form.cleaned_data["horario_inicial"]
+            horario_final = form.cleaned_data["horario_final"]
+            experiencia = form.cleaned_data["experiencia"]
+            contacto = form.cleaned_data["contacto"]
+            publicacion.nombre_completo = nombre_completo
+            publicacion.edad = edad
+            publicacion.horario_inicial = horario_inicial
+            publicacion.horario_final = horario_final
+            publicacion.experiencia = experiencia
+            publicacion.contacto = contacto
+            try:
+                publicacion.save()
+                return render(request, "main/infomsj.html", {
+                    "msj": "Los datos del cuidador/paseador se han modificado exitosamente."
+                })
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else: 
+            return render(request, "cuidadores/modificar.html",{"form": form})
+    return render(request, "cuidadores/modificar.html", contexto)
