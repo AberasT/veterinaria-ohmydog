@@ -59,23 +59,23 @@ def solicitar(request, id):
             nuevoTurno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles)
             try:
                 nuevoTurno.save()
-                mail = SolicitudTurno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles, email=request.user.email)
+                mail = SolicitudTurno(fecha=fecha, perro=perro.nombre, motivo=motivo, detalles=detalles, email=request.user.email)
                 try:
                     mail.enviar()
+                    return render(request, "main/infomsj.html", {
+                        "msj": "El turno está a la espera de confirmación. Cualquier novedad será informada vía email"
+                    })
                 except:
                     return render(request, "main/infomsj.html", {
-                    "msj": "Ha ocurrido un error."
-                })
-                return render(request, "main/infomsj.html", {
-                    "msj": "El turno está a la espera de confirmación. Cualquier novedad será informada vía email"
+                    "msj": "No se pudo enviar el correo."
                 })
             except:
                 return render(request, "main/infomsj.html",{
-                    "msj": "Ha ocurrido un error."
+                    "msj": "No se pudo solicitar el turno."
                 })
         else: 
             return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
+                "msj": "Ha ocurrido un error con el formulario."
             })
     
     return render(request, "turnos/solicitar.html", contexto)
