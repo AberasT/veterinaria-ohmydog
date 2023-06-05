@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.forms import ValidationError
 from main.tests import es_veterinario, es_cliente
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import  AsignarTurnoForm, ElegirPerroForm
@@ -8,10 +8,6 @@ from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
 from usuarios.models import Usuario
-
-def puede_solicitar_turno(turno):
-    turnosPendientes = Turno.objects.filter(perro=turno.perro, hora__isnull=True):
-    
 
 def get_turnos_pendientes(perro):
     turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True)
@@ -32,6 +28,8 @@ def set_opciones_perro(form, user):
     choices = []
     for perro in query: choices.append((perro.id, perro.nombre))
     form.fields["perro"].choices = choices
+
+
 
 # Create your views here.
 @login_required
@@ -67,7 +65,7 @@ def solicitar(request, id):
         perro = None
 
     if request.method == "POST":
-        form = AsignarTurnoForm(request.POST)
+        form = AsignarTurnoForm(request.POST, perro=perro)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
             motivo = form.cleaned_data["motivo"]
@@ -87,13 +85,11 @@ def solicitar(request, id):
                 })
             except:
                 return render(request, "main/infomsj.html",{
-                    "msj": "No se pudo solicitar el turno."
+                    "msj": "No se pudo guardar el turno."
                 })
-        else: 
-            return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error con el formulario."
-            })
-    
+        else:
+            contexto["form"] = form
+            return render(request, "turnos/solicitar.html", contexto)
     return render(request, "turnos/solicitar.html", contexto)
 
 

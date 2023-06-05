@@ -84,3 +84,143 @@ Fecha: 2023-01-01
 Motivo: urgencia
 Perro: Aitor
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-03-01
+Motivo: consulta
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-10
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: vacunacion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: vacunacion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: castracion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: vacunacion
+Perro: Aitor
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email 1@1.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: desparasitacion
+Perro: Aitor
+Detalles: 
