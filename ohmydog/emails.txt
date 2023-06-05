@@ -254,3 +254,13 @@ Fecha: 2023-10-01
 Motivo: urgencia
 Perro: Amadeo
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: consulta
+Perro: Pompona
+Detalles: 

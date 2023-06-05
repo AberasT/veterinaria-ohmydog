@@ -8,6 +8,11 @@
       <li class="list-group-item">Raza: {{ perro.raza }}</li>
       <li class="list-group-item">Color: {{ perro.color }}</li>
       <li class="list-group-item">Sexo: {{ perro.sexo }}</li>
+      {% if perro.castrado %}
+      <li class="list-group-item">Castrado/a: Sí</li>
+      {% else %}
+      <li class="list-group-item">Castrado/a: No</li>
+      {% endif %}
       <li class="list-group-item">Fecha de nacimiento: {{ perro.fecha_nacimiento }}</li>
       <li class="list-group-item">Peso: {{ perro.peso }}</li>
       <li class="list-group-item"><a href="{% url 'perros:modificar' id=perro.id %}"  class="btn btn-secondary">Modificar Perro</a></li>

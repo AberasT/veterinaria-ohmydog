@@ -20,5 +20,5 @@ class Perro(models.Model):
     fecha_nacimiento = models.DateField()
     peso = models.CharField(max_length=5, blank=True, null=True, default="")
     responsable = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="usuarios_perros")
-
-    REQUIRED_FIELDS = ["nombre", "color", "raza", "sexo", "fecha_nacimiento", "peso"]
+    castrado = models.BooleanField(default=False)
+    REQUIRED_FIELDS = ["nombre", "color", "raza","castrado", "sexo", "fecha_nacimiento", "peso"]

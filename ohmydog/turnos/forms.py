@@ -34,7 +34,9 @@ class AsignarTurnoForm(ModelForm):
 
     def clean_motivo(self):
         motivo = self.cleaned_data.get('motivo')
-        if not puede_solicitar_turno(self.perro, motivo):
+        if motivo == "castracion" and self.perro.castrado:
+            raise ValidationError(f"{self.perro.nombre} se encuentra castrado/a acorde a nuestros registros.")
+        elif not puede_solicitar_turno(self.perro, motivo):
             raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {tabla_motivos[motivo]}.")
         return motivo
 
