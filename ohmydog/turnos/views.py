@@ -18,9 +18,12 @@ def get_turnos_pendientes(perro):
         'consulta': 'consulta general',
         'urgencia': 'consulta de urgencia',
         'desparasitacion': 'desparasitación'
-    }        
-    for turno in turnosPendientes: 
-        turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}.")
+    }
+    try:
+        for turno in turnosPendientes:
+            turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}.")
+    except Exception as e:
+        print(e)
     return turnosString
 
 def set_opciones_perro(form, user):
@@ -28,8 +31,6 @@ def set_opciones_perro(form, user):
     choices = []
     for perro in query: choices.append((perro.id, perro.nombre))
     form.fields["perro"].choices = choices
-
-
 
 # Create your views here.
 @login_required
@@ -46,7 +47,6 @@ def elegir_perro(request):
     }
     if request.method == "POST": return redirect("turnos:solicitar", id=request.POST["perro"])
     return render(request, "turnos/elegir_perro.html", contexto)
-
 
 @login_required
 @user_passes_test(es_cliente)

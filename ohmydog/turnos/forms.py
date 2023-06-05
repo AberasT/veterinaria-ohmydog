@@ -4,6 +4,13 @@ from django.forms.widgets import SelectDateWidget, TimeInput
 from datetime import datetime
 
 error_messages = {"required": "Se deben completar todos los campos"}
+tabla_motivos = {
+        'vacunacion': 'vacunación',
+        'castracion': 'castración',
+        'consulta': 'consulta general',
+        'urgencia': 'consulta de urgencia',
+        'desparasitacion': 'desparasitación'
+    }
 
 def puede_solicitar_turno(perro, motivo):
     turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True)
@@ -28,7 +35,7 @@ class AsignarTurnoForm(ModelForm):
     def clean_motivo(self):
         motivo = self.cleaned_data.get('motivo')
         if not puede_solicitar_turno(self.perro, motivo):
-            raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {motivo}.")
+            raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {tabla_motivos[motivo]}.")
         return motivo
 
 class ElegirPerroForm(Form):    

@@ -4,10 +4,11 @@
     {% if turnosPendientes %}
     <h4 class="text-danger">Atención:</h4>
     <h5 class="text-danger-emphasis">Sólo podrá solicitar un turno para {{ perro.nombre }} si no posee actualmente un turno pendiente con el mismo motivo.</h5>
-    <h5>Los turnos pendientes para {{ perro.nombre }} son:</h5>
+    <h5>Los turnos pendientes para {{ perro.nombre }} son:</h5> <br>
     {% for turno in turnosPendientes %}
     <h6>{{ turno }}</h6>
     {% endfor %}
+    <hr>
     {% endif %}
     <br>
     {% for error in form.motivo.errors %}

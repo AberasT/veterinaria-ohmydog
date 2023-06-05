@@ -224,3 +224,33 @@ Fecha: 2023-01-01
 Motivo: desparasitacion
 Perro: Aitor
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado un turno:
+Fecha: 2023-07-01
+Motivo: castracion
+Perro: Amadeo
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado un turno:
+Fecha: 2023-01-01
+Motivo: vacunacion
+Perro: Amadeo
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado un turno:
+Fecha: 2023-10-01
+Motivo: urgencia
+Perro: Amadeo
+Detalles: 
