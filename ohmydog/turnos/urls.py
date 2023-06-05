@@ -4,6 +4,7 @@ from . import views
 app_name = "turnos"
 urlpatterns = [
     path("", views.index, name='index'),
-    path("solicitar/", views.solicitar, name='solicitar'),
+    path("elegir/", views.elegir_perro, name='elegir_perro'),
+    path("solicitar/<int:id>/", views.solicitar, name='solicitar'),
     path("asignar/<int:id>/", views.asignar, name='asignar'),
 ]

@@ -20,7 +20,6 @@ class RegistrarPerroForm(ModelForm):
         self.id = kwargs.pop('id', None)
         super(ModelForm, self).__init__(*args, **kwargs)
 
-
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
         perros_cliente = Perro.objects.filter(responsable = self.cliente)
