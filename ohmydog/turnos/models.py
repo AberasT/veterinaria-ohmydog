@@ -4,7 +4,8 @@ from perros.models import Perro
 # Create your models here.
 class Turno(models.Model):
     MOTIVO_CHOICES = [
-        ('vacunacion', 'Vacunación'),
+        ('vacunacion antirrabica', 'Vacunación Antirrábica'),
+        ('vacunacion general', 'Vacunación General'),
         ('castracion', 'Castración'),
         ('consulta', 'Consulta general'),
         ('urgencia', 'Consulta de urgencia'),
@@ -16,7 +17,7 @@ class Turno(models.Model):
     hora = models.TimeField(null=True, blank=True)
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name="perros_turnos")
     motivo = models.CharField(
-        max_length=20,
+        max_length=25,
         choices=MOTIVO_CHOICES)
     detalles = models.CharField(max_length=50, null=False, blank=True)
     

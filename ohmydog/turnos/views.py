@@ -19,11 +19,8 @@ def get_turnos_pendientes(perro):
         'urgencia': 'consulta de urgencia',
         'desparasitacion': 'desparasitación'
     }
-    try:
-        for turno in turnosPendientes:
-            turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}.")
-    except Exception as e:
-        print(e)
+    for turno in turnosPendientes:
+        turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}.")
     return turnosString
 
 def set_opciones_perro(form, user):

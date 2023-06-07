@@ -1,11 +1,14 @@
-from django.forms import ModelForm, Form, CharField, ChoiceField, ValidationError
+from django.forms import ModelForm, Form, ChoiceField, ValidationError
 from .models import Turno
-from django.forms.widgets import SelectDateWidget, TimeInput
+import datetime
+from atenciones.models import Vacuna
+from django.forms.widgets import SelectDateWidget
 from datetime import datetime
 
 error_messages = {"required": "Se deben completar todos los campos"}
 tabla_motivos = {
-        'vacunacion': 'vacunación',
+        'vacunacion general': 'vacunación general',
+        'vacunacion antirrabica': 'vacunación antirrábica',
         'castracion': 'castración',
         'consulta': 'consulta general',
         'urgencia': 'consulta de urgencia',
@@ -17,6 +20,16 @@ def puede_solicitar_turno(perro, motivo):
     while True:
         if any(turnoPendiente.motivo == motivo for turnoPendiente in turnosPendientes): return False
         else: return True
+
+def puede_solicitar_vacuna(perro, motivo):
+    ultimaVacunaDada = Vacuna.objects.filter(perro=perro, vacuna=motivo).order_by("fecha").first()
+    if ultimaVacunaDada:
+        print(ultimaVacunaDada.fecha)
+        hoy = datetime.now()
+        fechaUltimaVacuna = datetime.date(ultimaVacunaDada.fecha)
+        diff = hoy - fechaUltimaVacuna
+        if diff.days < 120: return False
+    return True
 
 class AsignarTurnoForm(ModelForm):
     class Meta:
@@ -36,10 +49,13 @@ class AsignarTurnoForm(ModelForm):
         motivo = self.cleaned_data.get('motivo')
         if motivo == "castracion" and self.perro.castrado:
             raise ValidationError(f"{self.perro.nombre} se encuentra castrado/a acorde a nuestros registros.")
+        elif motivo == "vacunacion general" or motivo == "vacunacion antirrabica":
+            if not puede_solicitar_vacuna(self.perro, motivo):
+                raise ValidationError(f"{self.perro.nombre} tiene una vacuna registrada del mismo tipo hace menos de 120 días.")
         elif not puede_solicitar_turno(self.perro, motivo):
             raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {tabla_motivos[motivo]}.")
         return motivo
 
-class ElegirPerroForm(Form):    
+class ElegirPerroForm(Form):
     perro = ChoiceField(choices=(("","")))
 
