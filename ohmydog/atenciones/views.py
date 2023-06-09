@@ -21,9 +21,12 @@ def agregar_vacuna(request, id):
                                  dosis=form.cleaned_data["dosis"])
             try:
                 nuevaVacuna.save()
-                return redirect("perros:info", id=id)
+                return render(request, "main/infomsj.html", {
+                    "msj": "La vacuna se agregó exitosamente."
+                })
             except:
-                raise ValidationError("No se pudo guardar la vacuna.")
-        else:
-            raise ValidationError("El formulario no es válido.")
+                return render(request, "main/infomsj", {
+                    "msj": "No se pudo guardar la vacuna."
+                })
+            
     return render(request, "atenciones/agregar_vacuna.html", contexto)

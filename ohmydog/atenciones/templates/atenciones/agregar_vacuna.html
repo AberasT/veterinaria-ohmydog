@@ -3,7 +3,12 @@
 <div class="text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        {% for error in form.nombre.errors %}
+        {% for error in form.fecha.errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {% for error in form.vacuna.errors %}
         <div class="alert alert-danger">
             {{ error }}
         </div>
