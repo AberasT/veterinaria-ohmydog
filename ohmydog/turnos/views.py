@@ -13,7 +13,8 @@ def get_turnos_pendientes(perro):
     turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True)
     turnosString = []
     tabla_motivos = {
-        'vacunacion': 'vacunación',
+        'vacunacion general': 'vacunación general',
+        'vacunacion antirrabica': 'vacunación antirrábica',
         'castracion': 'castración',
         'consulta': 'consulta general',
         'urgencia': 'consulta de urgencia',

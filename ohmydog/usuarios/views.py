@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.db import IntegrityError
 from .forms import RegistrarUsuarioForm
 from .models import Usuario
 from perros.models import Perro

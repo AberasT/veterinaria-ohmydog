@@ -52,7 +52,7 @@ class AsignarTurnoForm(ModelForm):
         elif motivo == "vacunacion general" or motivo == "vacunacion antirrabica":
             if not puede_solicitar_vacuna(self.perro, motivo):
                 raise ValidationError(f"{self.perro.nombre} tiene una vacuna registrada del mismo tipo hace menos de 120 días.")
-        elif not puede_solicitar_turno(self.perro, motivo):
+        if not puede_solicitar_turno(self.perro, motivo):
             raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {tabla_motivos[motivo]}.")
         return motivo
 
