@@ -16,6 +16,11 @@
         {{ error }}
     </div>
     {% endfor %}
+    {% for error in form.fecha.errors %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
     {% if form %}
     <form method="POST" action="">
         {% csrf_token %}
