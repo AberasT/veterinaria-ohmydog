@@ -3,6 +3,8 @@ from .models import Cuidador
 from .forms import RegistrarCuidadorForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
+from correo.SolicitudContacto import SolicitudContacto
+from usuarios.models import Usuario
 from django.db import IntegrityError
 import datetime
 
@@ -88,3 +90,26 @@ def modificar(request, id):
         else: 
             return render(request, "cuidadores/modificar.html",{"form": form})
     return render(request, "cuidadores/modificar.html", contexto)
+
+@login_required
+def solicitar(request, id):
+    contexto = {
+        "cuidadores": Cuidador.objects.all()
+    }
+    cuidador = Cuidador.objects.get(id=id)
+    usuario = request.user
+    cuidador.solicitantes.add(usuario)
+    try:
+        cuidador.save()
+        mail= SolicitudContacto(usuario.email, cuidador.nombre_completo)
+        try:
+            mail.enviar()
+        except:
+            return render(request, "main/infomsj.html", {
+                "msj": "Ha ocurrido un error."
+        })
+        return render(request, "cuidadores/solicitar.html", contexto)
+    except:
+        return render(request, "main/infomsj.html",{
+            "msj": "Ha ocurrido un error."
+        })

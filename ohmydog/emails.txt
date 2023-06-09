@@ -3,7 +3,7 @@ De: ohmydog@mail.com
 Para: 1@1.com
 Asunto: Turno confirmado
 Contenido:
-Se confirmó su turno con los siguientes datos: 
+Se confirmï¿½ su turno con los siguientes datos: 
 Fecha: 2023-06-06
 Hora: 10:00:00
 ------------------------------
@@ -15,7 +15,7 @@ El cliente con email 1@1.com ha solicitado un turno:
 Fecha: 2023-01-01
 Motivo: castracion
 Perro: Pepito
-Detalles: Necesita castración
+Detalles: Necesita castraciï¿½n
 ------------------------------
 De: ohmydog@mail.com
 Para: ohmydog@mail.com
@@ -41,7 +41,7 @@ De: ohmydog@mail.com
 Para: 1@1.com
 Asunto: Turno confirmado
 Contenido:
-Se confirmó su turno con los siguientes datos: 
+Se confirmï¿½ su turno con los siguientes datos: 
 Fecha: 2023-07-01
 Hora: 10:00:00
 ------------------------------
@@ -314,3 +314,84 @@ Fecha: 2023-01-01
 Motivo: vacunacion general
 Perro: Pompona
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Pedro perez------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Lionel Messi------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Alvaro Aberastain------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Julian------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Lionel Messi
