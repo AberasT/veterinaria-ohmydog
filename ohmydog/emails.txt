@@ -1,0 +1,20 @@
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-07-01
+Motivo: vacunacion antirrabica
+Perro: Pompona
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-07-01
+Motivo: consulta
+Perro: Pompona
+Detalles: Un detalle

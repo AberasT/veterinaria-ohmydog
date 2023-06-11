@@ -94,13 +94,11 @@ def solicitar(request, id):
 @login_required
 @user_passes_test(es_veterinario)
 def asignar(request, id):
-    cliente = Usuario.objects.get(id=id)
+    perro = Perro.objects.get(id=id)
     if Turno.objects.filter(perro=perro, hora__isnull=True):
         turno = Turno.objects.filter(perro=perro).last()
         form = AsignarTurnoForm(instance=turno)
-    else:
-        form = AsignarTurnoForm()
-    
+    else: form = AsignarTurnoForm()
     contexto = {
         "form": form
     }
