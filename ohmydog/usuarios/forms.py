@@ -6,7 +6,7 @@ from django.db import IntegrityError
 class RegistrarUsuarioForm(ModelForm):
     class Meta:
         model = Usuario
-        fields = ["email", "dni", "nombre", "apellido", "telefono", "clave"]
+        fields = ["dni", "nombre", "apellido", "telefono", "clave"]
 
     def __init__(self, *args, **kwargs):
         self.id = kwargs.pop('id', None)
