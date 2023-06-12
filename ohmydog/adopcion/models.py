@@ -9,6 +9,26 @@ class PerroAdopcion(models.Model):
         ("hembra", "HEMBRA"),
         ("ns", "NS")
     ]
+    RAZA_CHOICES = [
+        ("mestizo", "MESTIZO"),
+        ("Siberian Husky", "SIBERIAN HUSKY"),
+        ("Beagle", "BEAGLE"),
+        ("Rottweiler", "ROTTWEILER"),
+        ("Bull Terrier", "BULL TERRIER"),
+        ("Bulldog Frances", "BULLDOG FRANCES"),
+        ("Boxer", "BOXER"),
+        ("Dogo Argentino", "DOGO ARGENTINO"),
+        ("Gran Danes", "GRAN DANES"),
+        ("Labrador", "LABRADOR"),
+        ("Galgo", "GALGO"),
+        ("Shiba Inu", "AKITA INU"),
+        ("Golden", "GOLDEN"),
+        ("Dalmata", "DALMATA"),
+        ("Chihuahua", "CHIHUAHUA"),
+        ("San Bernardo", "SAN BERNARDO"),
+        ("Doberman", "DOBERMAN"),
+        ("Pastor Aleman", "PASTOR ALEMAN")
+    ]
     id = models.BigAutoField(primary_key=True, verbose_name="id")
     nombre = models.CharField(max_length=20, blank=False, null=True, default="")
     sexo = models.CharField(
@@ -21,7 +41,7 @@ class PerroAdopcion(models.Model):
     peso = models.CharField(max_length=5, blank=False, null=True, default="")
     contacto = models.CharField(max_length=50, blank=False, null=True, default="")
     altura = models.CharField(max_length=5, blank=False, null=True, default="")
-    raza = models.CharField(max_length=20, blank=False, null=True, default="")
+    raza = models.CharField(max_length=20, choices=RAZA_CHOICES, null=True, default="")
     historial_vacunacion = models.CharField(max_length=500, blank=False, null=True, default="")
     descripcion = models.CharField(max_length=500, blank=False, null=True, default="")
     adoptado = models.BooleanField(default=False)
