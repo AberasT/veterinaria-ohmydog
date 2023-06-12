@@ -1,13 +1,27 @@
 ------------------------------
 De: ohmydog@mail.com
-Para: ohmydog@mail.com
-Asunto: Nueva solicitud de turno
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
 Contenido:
-El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Se confirmï¿½ su turno para Dante para la siguiente fecha: 
 Fecha: 2023-07-01
-Motivo: vacunacion antirrabica
-Perro: Pompona
-Detalles: 
+Hora: None
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@eliminar.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Mili para la siguiente fecha: 
+Fecha: 2023-08-01
+Hora: 15:30:00
+------------------------------
+De: ohmydog@mail.com
+Para: fran17@hotmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Amadeo para la siguiente fecha: 
+Fecha: 2023-07-01
+Hora: 15:00:00
 ------------------------------
 De: ohmydog@mail.com
 Para: ohmydog@mail.com
@@ -17,4 +31,24 @@ El cliente con email pacoedlp@gmail.com ha solicitado un turno:
 Fecha: 2023-07-01
 Motivo: consulta
 Perro: Pompona
-Detalles: Un detalle
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-06-20
+Motivo: desparasitacion
+Perro: Pompona
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-07-08
+Motivo: desparasitacion
+Perro: Dante
+Detalles: 

@@ -1,18 +1,14 @@
 from django.shortcuts import render, redirect
-from django.forms import ValidationError
 from main.tests import es_veterinario, es_cliente
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import  AsignarTurnoForm, ElegirPerroForm
+from .forms import  AsignarTurnoForm, ElegirPerroForm, SolicitarTurnoForm
 from .models import Turno
 from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
 from usuarios.models import Usuario
 
-def get_turnos_pendientes(perro):
-    turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True)
-    turnosString = []
-    tabla_motivos = {
+tabla_motivos = {
         'vacunacion general': 'vacunación general',
         'vacunacion antirrabica': 'vacunación antirrábica',
         'castracion': 'castración',
@@ -20,8 +16,19 @@ def get_turnos_pendientes(perro):
         'urgencia': 'consulta de urgencia',
         'desparasitacion': 'desparasitación'
     }
+
+def get_turnos_pendientes(perro):
+    turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True).order_by("fecha", "hora")
+    turnosString = []
     for turno in turnosPendientes:
         turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}.")
+    return turnosString
+
+def get_turnos_asignados(perro):
+    turnosAsignados = Turno.objects.filter(perro=perro, hora__isnull=False).order_by("fecha", "hora")
+    turnosString = []
+    for turno in turnosAsignados:
+        turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}, hora {turno.hora}.")
     return turnosString
 
 def set_opciones_perro(form, user):
@@ -49,7 +56,7 @@ def elegir_perro(request):
 @login_required
 @user_passes_test(es_cliente)
 def solicitar(request, id):
-    form = AsignarTurnoForm()
+    form = SolicitarTurnoForm()
     contexto = {}
     try:
         perro = Perro.objects.get(id=id)
@@ -63,7 +70,7 @@ def solicitar(request, id):
         perro = None
 
     if request.method == "POST":
-        form = AsignarTurnoForm(request.POST, perro=perro)
+        form = SolicitarTurnoForm(request.POST, perro=perro)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
             motivo = form.cleaned_data["motivo"]
@@ -93,48 +100,60 @@ def solicitar(request, id):
 
 @login_required
 @user_passes_test(es_veterinario)
+def asignar_elegir(request):
+    contexto = {
+        "perros": Perro.objects.order_by("nombre")
+    }
+    return render(request, "turnos/asignar_elegir.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
 def asignar(request, id):
     perro = Perro.objects.get(id=id)
-    if Turno.objects.filter(perro=perro, hora__isnull=True):
-        turno = Turno.objects.filter(perro=perro).last()
+    turnosSolicitados = Turno.objects.filter(perro=perro, hora__isnull=True)
+    turno = None
+    if turnosSolicitados:
+        turno = turnosSolicitados.last()
         form = AsignarTurnoForm(instance=turno)
+        motivoSolicitado = turno.motivo
     else: form = AsignarTurnoForm()
     contexto = {
-        "form": form
+        "form": form,
+        "perro": perro,
+        "motivoSolicitado": tabla_motivos[motivoSolicitado],
+        "turno": turno,
+        "turnosAsignados": get_turnos_asignados(perro)
     }
     if request.method == "POST":
-        form = AsignarTurnoForm(request.POST)
+        if turno is not None: form = AsignarTurnoForm(request.POST, motivo=turno.motivo, perro=perro)
+        else: form = AsignarTurnoForm(request.POST, perro=perro)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
-            perro = form.cleaned_data["perro"]
             motivo = form.cleaned_data["motivo"]
             detalles = form.cleaned_data["detalles"]
             hora = form.cleaned_data["hora"]
-            cliente = Usuario.objects.get(id=id)
-            if not "turno" in locals():
-                turno = Turno(fecha=fecha, perro=perro, motivo=motivo, detalles=detalles)
+            if turno is None:
+                turno = Turno(fecha=fecha, perro=perro, hora=hora, motivo=motivo, detalles=detalles)
             else:
                 turno.fecha = fecha
                 turno.hora = hora
             try:
                 turno.save()
-                mail = AsignacionTurno(fecha=fecha, hora=hora, email=cliente.email)
+                mail = AsignacionTurno(fecha=fecha, hora=hora, perro=perro.nombre, email=perro.responsable.email)
                 try:
                     mail.enviar()
                 except:
                     return render(request, "main/infomsj.html", {
-                    "msj": "Ha ocurrido un error."
+                    "msj": "No se pudo enviar el correo."
                 })
                 return render(request, "main/infomsj.html", {
                     "msj": "El turno fue asignado correctamente."
                 })
             except:
                 return render(request, "main/infomsj.html",{
-                    "msj": "Ha ocurrido un error."
+                    "msj": "No se pudo guardar el turno."
                 })
-        else: 
-            return render(request, "main/infomsj.html",{
-                "msj": "Ha ocurrido un error."
-            })
-    
+        else:
+            contexto["form"] = form
+            return render(request, "turnos/asignar.html", contexto)
     return render(request, "turnos/asignar.html", contexto)
