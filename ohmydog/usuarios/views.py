@@ -67,7 +67,7 @@ def registrar_veterinario(request):
                     "msj": "Ha ocurrido un error."
                 })
         else:
-            return render(request, "usuarios/registrar-cliente.html", {"form": form})
+            return render(request, "usuarios/registrar-veterinario.html", {"form": form})
     return render(request, "usuarios/registrar-veterinario.html", contexto)
 
 @login_required
@@ -95,3 +95,33 @@ def ver_cliente(request, id):
         "perros_cliente": Perro.objects.filter(responsable=cliente)
     }
     return render(request, "usuarios/ver-cliente.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def modificar_cliente(request, id):
+    cliente = Usuario.objects.get(id=id)
+    form = RegistrarUsuarioForm(instance=cliente)
+    contexto = {
+        "form": form,
+        "email": cliente.email
+        }
+    if request.method == "POST":
+        form = RegistrarUsuarioForm(request.POST, id=id)
+        if form.is_valid():
+            cliente.dni = form.cleaned_data["dni"]
+            cliente.nombre = form.cleaned_data["nombre"]
+            cliente.apellido = form.cleaned_data["apellido"]
+            cliente.telefono = form.cleaned_data["telefono"]
+            cliente.clave = form.cleaned_data["clave"]
+            try:
+                cliente.save()
+                return render(request, "main/infomsj.html", {
+                    "msj": "Los cambios se guardaron con exito"
+                })
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else:
+            return render(request, "usuarios/modificar-cliente.html", {"form": form, "email": cliente.email})
+    return render(request, "usuarios/modificar-cliente.html", contexto)

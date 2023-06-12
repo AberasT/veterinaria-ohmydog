@@ -9,8 +9,9 @@
       <li class="list-group-item">Apellido: {{ cliente.apellido }}</li>
       <li class="list-group-item">DNI: {{ cliente.dni }}</li>
       <li class="list-group-item">Teléfono: {{ cliente.telefono }}</li>
+      <li class="list-group-item"><a href="{% url 'usuarios:modificar_cliente' id=cliente.id %}" class="btn btn-secondary">Modificar</a>
+      <a href="{% url 'usuarios:eliminar' id=cliente.id %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a>
       <li class="list-group-item"><a href="{% url 'perros:registrar' id=cliente.id %}" class="btn btn-success">Registrar perro</a></li>
-      <li class="list-group-item"><a href="{% url 'usuarios:eliminar' id=cliente.id %}" onclick="return confirm('Eliminar cliente?');" class="btn btn-danger">Eliminar</a></li>
     </ul>
     <hr>
     <h4>Perros del cliente</h4>
