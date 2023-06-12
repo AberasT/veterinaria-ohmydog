@@ -6,7 +6,7 @@ from django.db import IntegrityError
 class RegistrarUsuarioForm(ModelForm):
     class Meta:
         model = Usuario
-        fields = ["dni", "nombre", "apellido", "telefono", "clave"]
+        fields = ["email", "dni", "nombre", "apellido", "telefono", "clave"]
 
     def __init__(self, *args, **kwargs):
         self.id = kwargs.pop('id', None)
@@ -18,3 +18,8 @@ class RegistrarUsuarioForm(ModelForm):
         if usuarios:
             raise forms.ValidationError("El email ingresado ya se encuentra registrado en el sistema.")
         return email
+    
+class ModificarUsuarioForm(ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ["dni", "nombre", "apellido", "telefono", "clave"]

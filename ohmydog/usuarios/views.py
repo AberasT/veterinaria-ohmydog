@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegistrarUsuarioForm
+from .forms import RegistrarUsuarioForm, ModificarUsuarioForm
 from .models import Usuario
 from perros.models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -100,13 +100,13 @@ def ver_cliente(request, id):
 @user_passes_test(es_veterinario)
 def modificar_cliente(request, id):
     cliente = Usuario.objects.get(id=id)
-    form = RegistrarUsuarioForm(instance=cliente)
+    form = ModificarUsuarioForm(instance=cliente)
     contexto = {
         "form": form,
         "email": cliente.email
         }
     if request.method == "POST":
-        form = RegistrarUsuarioForm(request.POST, id=id)
+        form = ModificarUsuarioForm(request.POST)
         if form.is_valid():
             cliente.dni = form.cleaned_data["dni"]
             cliente.nombre = form.cleaned_data["nombre"]
@@ -116,7 +116,7 @@ def modificar_cliente(request, id):
             try:
                 cliente.save()
                 return render(request, "main/infomsj.html", {
-                    "msj": "Los cambios se guardaron con exito"
+                    "msj": "Los cambios se guardaron con éxito"
                 })
             except:
                 return render(request, "main/infomsj.html",{
