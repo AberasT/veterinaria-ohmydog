@@ -6,6 +6,9 @@
     {% if user.is_authenticated and user.is_staff %}
     <a href="{% url 'cuidadores:registrar' %}" class="btn btn-success">Publicar nuevo cuidador/paseador</a> <br><br>
     {% endif %}
+    {% if solicito %}
+    <h5>El contacto ha sido solicitado, se le informará vía mail cuando tenga la aprobación de un veterinario</h5>
+    {% endif %}
     {% if cuidadores %}
     <h3>Cuidadores/paseadores: </h3>
     {% for cuidador in cuidadores %}
@@ -16,17 +19,21 @@
         <li class="list-group-item">Experiencia: {{ cuidador.experiencia }}</li>
         <li class="list-group-item">Con nosotros desde: {{ cuidador.tiempo_con_veterinaria }}</li>
         {% if user.is_authenticated and not user.is_staff %}
-        {% if user in cuidador.solicitantes.all %}
+        {% if cuidador in cuidadores_solicitados %}
         <li class="list-group-item"><a class="btn btn-secondary disabled" aria-disabled="true">Esperando aprobación</a></li>
+        {% elif cuidador in cuidadores_aprobados %}
+        <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
         {% else %}
         <li class="list-group-item"><a href="{% url 'cuidadores:solicitar' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
         {% endif %}
-        <li class="list-group-item">Calificar</li>
         {% endif %}
         {% if user.is_authenticated and user.is_staff %}
         <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
         <li class="list-group-item"><a href="{% url 'cuidadores:eliminar' id=cuidador.id %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-danger">Eliminar cuidador/paseador</a></li>
         <li class="list-group-item"><a href="{% url 'cuidadores:modificar' id=cuidador.id %}" class="btn btn-secondary">Modificar cuidador/paseador</a></li>
+        {% if cuidador in cuidadores_sin_aprobar %}
+        <li class="list-group-item"><a href="{% url 'cuidadores:listar_solicitudes' id=cuidador.id %}" class="btn btn-primary">Ver solicitudes de contacto</a></li>
+        {% endif %}
         {% endif %}
     </ul>
     <hr>

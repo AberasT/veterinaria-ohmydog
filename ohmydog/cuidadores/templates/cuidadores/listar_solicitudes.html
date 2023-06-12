@@ -1,0 +1,29 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+
+<div class="text-center">
+    <h3>Solicitudes de contacto de {{ cuidador.nombre_completo }} :</h3>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for solicitud in solicitudes %}
+        <tr>
+            <td>{{ solicitud.cliente.nombre }}</td>
+            <td>{{ solicitud.cliente.apellido }}</td>
+            <td>{{ solicitud.cliente.email }}</td>
+          <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-primary">Aceptar</a></td>
+          <td><a href="{% url 'cuidadores:rechazar_solicitud' id=solicitud.id %}" class="btn btn-danger">Rechazar</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}
