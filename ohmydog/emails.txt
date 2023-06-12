@@ -52,3 +52,65 @@ Fecha: 2023-07-08
 Motivo: desparasitacion
 Perro: Dante
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-08-01
+Motivo: consulta
+Perro: Dante
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-08-01
+Hora: 18:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-09-01
+Motivo: vacunacion antirrabica
+Perro: Dante
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-10-01
+Motivo: consulta
+Perro: Dante
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-09-01
+Hora: 08:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-10-01
+Hora: 20:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-06-18
+Hora: 17:00:00

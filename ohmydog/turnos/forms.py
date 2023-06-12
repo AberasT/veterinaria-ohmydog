@@ -31,12 +31,11 @@ def puede_solicitar_vacuna(perro, motivo, fechaSolicitud):
 class SolicitarTurnoForm(ModelForm):
     class Meta:
         model = Turno
-        fields = ["fecha", "hora", "motivo", "detalles"]
+        fields = ["fecha", "motivo", "detalles"]
         HOY = datetime.date.today()
         ANIO = HOY.year
         widgets = {
             'fecha': SelectDateWidget(years=[ANIO], attrs={'type': 'date'}),
-            'hora': TimeInput(attrs={'type': 'time'}),
         }
 
     def __init__(self, *args, **kwargs):

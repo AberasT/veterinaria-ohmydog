@@ -113,14 +113,12 @@ def asignar(request, id):
     turnosSolicitados = Turno.objects.filter(perro=perro, hora__isnull=True)
     turno = None
     if turnosSolicitados:
-        turno = turnosSolicitados.last()
+        turno = turnosSolicitados.first()
         form = AsignarTurnoForm(instance=turno)
-        motivoSolicitado = turno.motivo
     else: form = AsignarTurnoForm()
     contexto = {
         "form": form,
         "perro": perro,
-        "motivoSolicitado": tabla_motivos[motivoSolicitado],
         "turno": turno,
         "turnosAsignados": get_turnos_asignados(perro)
     }
