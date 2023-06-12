@@ -14,10 +14,10 @@ class Turno(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     fecha = models.DateField(blank=False, null=False)
-    hora = models.TimeField(null=True, blank=True)
+    hora = models.TimeField(null=True)
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name="perros_turnos")
     motivo = models.CharField(
         max_length=25,
-        choices=MOTIVO_CHOICES)
+        choices=MOTIVO_CHOICES, blank=True)
     detalles = models.CharField(max_length=50, null=False, blank=True)
     

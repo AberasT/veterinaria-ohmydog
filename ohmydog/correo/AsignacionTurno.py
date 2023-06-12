@@ -1,12 +1,13 @@
 from .Email import Email
 
 class AsignacionTurno(Email):
-    def __init__(self, fecha, hora, email):
+    def __init__(self, fecha, hora, email, perro):
         Email.__init__(self)
         self.fecha_asignacion = fecha
         self.email_asignacion = email
         self.hora_asignacion = hora
         self.asunto = "Turno confirmado"
+        self.perro = perro
         self.para_cliente(email)
         self.de_veterinaria()
 
@@ -14,7 +15,7 @@ class AsignacionTurno(Email):
         return super().__str__()
 
     def enviar(self):
-        email = (self.toStr() + f"Se confirmó su turno con los siguientes datos: \n"
+        email = (self.toStr() + f"Se confirmó su turno para {self.perro} para la siguiente fecha: \n"
         f"Fecha: {self.fecha_asignacion}\n"
         f"Hora: {self.hora_asignacion}\n")
         with open("emails.txt", "a") as archivo:

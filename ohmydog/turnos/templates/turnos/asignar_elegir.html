@@ -1,0 +1,31 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    <h5>Elija al perro para asignar turno:</h5>
+    {% if perros %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email cliente</th>
+            <th scope="col">Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for perro in perros %}
+        <tr>
+          <th scope="row">{{ perro.nombre }}</th>
+          <td>{{ perro.responsable.email }}</td>
+          <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
+          <td><a href="{% url 'turnos:asignar' id=perro.id %}" class="btn btn-primary">Elegir</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+    <h3>No hay perros registrados</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

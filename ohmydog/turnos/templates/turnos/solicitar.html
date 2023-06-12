@@ -22,6 +22,7 @@
     </div>
     {% endfor %}
     {% if form %}
+    <h6>Turno para {{ perro.nombre }}</h6>
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.fecha.label }}
