@@ -12,6 +12,12 @@ class Cuidador(models.Model):
     experiencia = models.CharField(max_length=10, blank=False, null=True, default="")
     tiempo_con_veterinaria = models.DateField(auto_now_add=True)
     contacto = models.CharField(max_length=50, blank=False, null=True, default="")
-    solicitantes = models.ManyToManyField(Usuario)
 
     REQUIRED_FIELDS = ["nombre_completo", "edad", "horario_inicial", "horario_final", "experiencia", "contacto"]
+
+class Solicitud(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="solicitudes")
+    cuidador = models.ForeignKey(Cuidador, on_delete=models.CASCADE, related_name="solicitudes")
+    aprobada = models.BooleanField(default=False)
+

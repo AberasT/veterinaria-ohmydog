@@ -13,6 +13,6 @@ class SolicitudContacto(Email):
         return super().__str__()
 
     def enviar(self):
-        email = (self.toStr() + f"El cliente con email {self.email_solicitud} ha solicitado el contacto del cuidador/paseador {self.nombre_cuidador}")
+        email = (self.toStr() + f"El cliente con email {self.email_solicitud} ha solicitado el contacto del cuidador/paseador {self.nombre_cuidador} \n")
         with open("emails.txt", "a") as archivo:
             archivo.write(email)
