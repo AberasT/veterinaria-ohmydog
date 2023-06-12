@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
 from correo.SolicitudContacto import SolicitudContacto
 from correo.AprobacionContacto import AprobacionContacto
+from correo.RechazoContacto import RechazoContacto
 from usuarios.models import Usuario
 from django.db import IntegrityError
 import datetime
@@ -12,18 +13,19 @@ import datetime
 # Create your views here.
 
 def index(request):
-    solicitudes_usuario = Solicitud.objects.filter(cliente=request.user)
     cuidadores_solicitados = []
     cuidadores_aprobados = []
-    for solicitud in solicitudes_usuario:
-        if solicitud.aprobada:
-            cuidadores_aprobados.append(solicitud.cuidador)
-        else:    
-            cuidadores_solicitados.append(solicitud.cuidador)
-    solicitudes = Solicitud.objects.filter(aprobada=False)
     cuidadores_sin_aprobar = []
-    for solicitud in solicitudes:
-        cuidadores_sin_aprobar.append(solicitud.cuidador)
+    if request.user.id:
+        solicitudes_usuario = Solicitud.objects.filter(cliente=request.user)
+        for solicitud in solicitudes_usuario:
+            if solicitud.aprobada:
+                cuidadores_aprobados.append(solicitud.cuidador)
+            else:    
+                cuidadores_solicitados.append(solicitud.cuidador)
+        solicitudes = Solicitud.objects.filter(aprobada=False)
+        for solicitud in solicitudes:
+            cuidadores_sin_aprobar.append(solicitud.cuidador)
     contexto = {
         "cuidadores": Cuidador.objects.all(),
         "cuidadores_solicitados": cuidadores_solicitados,
@@ -160,11 +162,16 @@ def aceptar_solicitud(request, id):
     solicitud.aprobada = True
     try:
         solicitud.save()
+        cuidador = solicitud.cuidador
+        solicitudes = Solicitud.objects.filter(cuidador=cuidador, aprobada=False)
+        contexto = {
+            "cuidador": cuidador,
+            "solicitudes": solicitudes,
+            "aceptada": True
+        }
         mail = AprobacionContacto(solicitud.cliente.email, solicitud.cuidador.contacto)
         mail.enviar()
-        return render(request, "main/infomsj.html", {
-            "msj": "El contacto del cuidador/paseador fue enviado al cliente."
-        })
+        return render(request, "cuidadores/listar_solicitudes.html", contexto)
     except:
         return render(request, "main/infomsj.html",{
             "msj": "Ha ocurrido un error."
@@ -174,7 +181,15 @@ def aceptar_solicitud(request, id):
 @user_passes_test(es_veterinario)
 def rechazar_solicitud(request, id):
     solicitud = Solicitud.objects.get(id=id)
+    cuidador = solicitud.cuidador
+    mail = RechazoContacto(solicitud.cliente.email)
+    mail.enviar()
     solicitud.delete()
-    return render(request, "main/infomsj.html", {
-        "msj": "La solicitud fue rechazada."
-    })
+    solicitudes = Solicitud.objects.filter(cuidador=cuidador, aprobada=False)
+    contexto = {
+        "cuidador": cuidador,
+        "solicitudes": solicitudes,
+        "rechazada": True
+    }
+    
+    return render(request, "cuidadores/listar_solicitudes.html", contexto)

@@ -3,6 +3,13 @@
 {% block body %}
 
 <div class="text-center">
+    {% if aceptada %}
+    <h5>El contacto del cuidador/paseador fue enviado al cliente.</h5>
+    {% endif %}
+    {% if rechazada %}
+    <h5>La solicitud fue rechazada y el cliente fue notificado.</h5>
+    {% endif %}
+    {% if solicitudes %}
     <h3>Solicitudes de contacto de {{ cuidador.nombre_completo }} :</h3>
     <table class="table">
         <thead>
@@ -24,6 +31,9 @@
         {% endfor %}
         </tbody>
       </table>
+      {% else %}
+      <h3>No hay más solicitudes de contacto pendientes para {{ cuidador.nombre_completo }}</h3>
+      {% endif %}
 </div>
 
 {% endblock %}
