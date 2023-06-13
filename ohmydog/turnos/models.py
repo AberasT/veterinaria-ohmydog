@@ -8,7 +8,6 @@ class Turno(models.Model):
         ('vacunacion general', 'Vacunación General'),
         ('castracion', 'Castración'),
         ('consulta', 'Consulta general'),
-        ('urgencia', 'Consulta de urgencia'),
         ('desparasitacion', 'Desparasitación')
     ]
 

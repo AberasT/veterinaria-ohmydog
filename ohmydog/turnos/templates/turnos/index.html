@@ -6,6 +6,16 @@
     <a href="{% url 'turnos:elegir_perro'  %}" class="btn btn-success">Solicitar Turno</a>
     {% elif user.is_authenticated and user.is_staff%}
     <a href="{% url 'turnos:asignar_elegir'  %}" class="btn btn-success">Asignar Turno</a>
+    <hr>
+    {% if turnos_hoy %}
+    <h3>Turnos de hoy</h3>
+    <br>
+    {% for turno in turnos_hoy %}
+    <h6>{{turno}}</h6>
+    {% endfor %}
+    {% else %}
+    <h3>No hay turnos para hoy</h3>
+    {% endif %}
     {% endif %}
 </div>
 

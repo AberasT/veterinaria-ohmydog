@@ -7,6 +7,7 @@ from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
 from usuarios.models import Usuario
+import datetime
 
 tabla_motivos = {
         'vacunacion general': 'vacunación general',
@@ -31,6 +32,13 @@ def get_turnos_asignados(perro):
         turnosString.append(f"Una {tabla_motivos[turno.motivo]} para el día {turno.fecha}, hora {turno.hora}.")
     return turnosString
 
+def get_turnos_hoy():
+    turnos_hoy = Turno.objects.filter(hora__isnull=False, fecha=datetime.date.today()).order_by("hora")
+    turnosString = []
+    for turno in turnos_hoy:
+        turnosString.append(f"{turno.hora} {tabla_motivos[turno.motivo]} para {turno.perro.nombre} del cliente {turno.perro.responsable.nombre} {turno.perro.responsable.apellido}.")
+    return turnosString
+
 def set_opciones_perro(form, user):
     query = Perro.objects.filter(responsable=user)
     choices = []
@@ -40,7 +48,12 @@ def set_opciones_perro(form, user):
 # Create your views here.
 @login_required
 def index(request):
-    return render(request, "turnos/index.html")
+    turnos = Turno.objects.filter(hora__isnull=False).exclude(fecha=datetime.date.today()).order_by("fecha")
+    contexto = {
+        "turnos": turnos,
+        "turnos_hoy": get_turnos_hoy()
+    }
+    return render(request, "turnos/index.html", contexto)
 
 @login_required
 @user_passes_test(es_cliente)

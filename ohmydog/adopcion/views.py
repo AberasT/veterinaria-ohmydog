@@ -61,8 +61,7 @@ def marcar_adoptado(request, id):
 
 @login_required
 def mis_publicaciones(request):
-    usuario = request.user
-    publicaciones = PerroAdopcion.objects.filter(publicador=usuario)
+    publicaciones = PerroAdopcion.objects.filter(publicador=request.user)
     contexto = {
         "publicaciones": publicaciones
     }

@@ -22,7 +22,7 @@
         {% if cuidador in cuidadores_solicitados %}
         <li class="list-group-item"><a class="btn btn-secondary disabled" aria-disabled="true">Esperando aprobación</a></li>
         {% elif cuidador in cuidadores_aprobados %}
-        <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
+        <li class="list-group-item"><h6>Contacto: {{ cuidador.contacto }}</h6></li>
         {% else %}
         <li class="list-group-item"><a href="{% url 'cuidadores:solicitar' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
         {% endif %}
