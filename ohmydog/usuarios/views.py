@@ -112,7 +112,7 @@ def modificar_cliente(request, id):
             cliente.nombre = form.cleaned_data["nombre"]
             cliente.apellido = form.cleaned_data["apellido"]
             cliente.telefono = form.cleaned_data["telefono"]
-            cliente.clave = form.cleaned_data["clave"]
+            #cliente.clave = form.cleaned_data["clave"]
             try:
                 cliente.save()
                 return render(request, "main/infomsj.html", {

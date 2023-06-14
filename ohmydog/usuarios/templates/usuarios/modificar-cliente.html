@@ -1,8 +1,8 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <h3>Registro de cliente</h3>
-    <p>Ingrese los datos del nuevo cliente:</p>
+    <h3>Modificar datos del cliente</h3>
+    <p>Cambie los datos deseados:</p>
     <form method="POST" action="">
         {% csrf_token %}
         {% for error in form.email.errors %}
@@ -25,9 +25,9 @@
         <br><br>
         {{ form.telefono.label }}
         {{ form.telefono }}
-        <br><br>
+        <!-- <br><br>
         {{ form.clave.label }}
-        {{ form.clave }}
+        {{ form.clave }} -->
         <br><br>
         <input class="btn btn-secondary" type="submit" name="Guardar cambios" value="Guardar cambios">
     </form>

@@ -1,102 +1,34 @@
 ------------------------------
 De: ohmydog@mail.com
-Para: juanpepers@gmail.com
-Asunto: Turno confirmado
-Contenido:
-Se confirmó su turno para Panchito para la siguiente fecha: 
-Fecha: 2023-07-01
-Hora: 08:00:00
-------------------------------
-De: ohmydog@mail.com
-Para: prueba@eliminar.com
-Asunto: Turno confirmado
-Contenido:
-Se confirmó su turno para Mili para la siguiente fecha: 
-Fecha: 2023-07-01
-Hora: 15:00:00
-------------------------------
-De: ohmydog@mail.com
-Para: ohmydog@mail.com
-Asunto: Nueva solicitud de turno
-Contenido:
-El cliente con email fran17@hotmail.com ha solicitado un turno:
-Fecha: 2023-07-01
-Motivo: vacunacion antirrabica
-Perro: Amadeo
-Detalles: Vacuna antirrabica
-------------------------------
-De: ohmydog@mail.com
-Para: fran17@hotmail.com
-Asunto: Turno confirmado
-Contenido:
-Se confirmó su turno para Amadeo para la siguiente fecha: 
-Fecha: 2023-07-01
-Hora: 08:00:00
-------------------------------
-De: ohmydog@mail.com
-Para: fran17@hotmail.com
-Asunto: Turno confirmado
-Contenido:
-Se confirmó su turno para Amadeo para la siguiente fecha: 
-Fecha: 2023-06-13
-Hora: 19:00:00
-------------------------------
-De: ohmydog@mail.com
-Para: ohmydog@mail.com
-Asunto: Nueva solicitud de turno
-Contenido:
-El cliente con email fran17@hotmail.com ha solicitado un turno:
-Fecha: 2023-06-13
-Motivo: castracion
-Perro: Amadeo
-Detalles: 
-------------------------------
-De: ohmydog@mail.com
-Para: fran17@hotmail.com
-Asunto: Turno confirmado
-Contenido:
-Se confirmó su turno para Amadeo para la siguiente fecha: 
-Fecha: 2023-06-17
-Hora: 15:00:00
-------------------------------
-De: ohmydog@mail.com
 Para: ohmydog@mail.com
 Asunto: Nueva solicitud de turno
 Contenido:
 El cliente con email fran17@hotmail.com ha solicitado un turno:
 Fecha: 2023-06-13
 Motivo: desparasitacion
-Perro: pepito
+Perro: Amadeo
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-08-10
+Hora: 15:00:00
 ------------------------------
 De: ohmydog@mail.com
 Para: fran17@hotmail.com
 Asunto: Turno confirmado
 Contenido:
-Se confirmó su turno para pepito para la siguiente fecha: 
-Fecha: 2023-06-16
+Se confirmó su turno para Amadeo para la siguiente fecha: 
+Fecha: 2023-06-13
 Hora: 19:00:00
 ------------------------------
 De: ohmydog@mail.com
-Para: ohmydog@mail.com
-Asunto: Nueva solicitud de contacto con cuidador/paseador
-Contenido:
-El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Pedro perez 
-------------------------------
-De: ohmydog@mail.com
-Para: ohmydog@mail.com
-Asunto: Nueva solicitud de contacto con cuidador/paseador
-Contenido:
-El cliente con email fran17@hotmail.com ha solicitado el contacto del cuidador/paseador Francisco Kesselman 
-------------------------------
-De: ohmydog@mail.com
 Para: fran17@hotmail.com
-Asunto: Contacto del cuidador/paseador solicitado
+Asunto: Turno confirmado
 Contenido:
-Hemos aprobado su solicitud de contacto. El contacto del cuidador/paseador es 221456987
-------------------------------
-De: ohmydog@mail.com
-Para: fran17@hotmail.com
-Asunto: Contacto del cuidador/paseador rechazado
-Contenido:
-Lamentablemente hemos rechazado su solicitud de contacto. Puede realizar otra solicitud para intentarlo nuevamente. 
+Se confirmó su turno para Pepa para la siguiente fecha: 
+Fecha: 2023-06-13
+Hora: 20:00:00

@@ -45,8 +45,8 @@ class SolicitarTurnoForm(ModelForm):
 
     def clean_fecha(self):
         fecha = self.cleaned_data.get('fecha')
-        if fecha <= datetime.date.today():
-            raise ValidationError(f"La fecha elegida debe ser al menos 1 día posterior a la actual.")
+        if fecha < datetime.date.today():
+            raise ValidationError(f"La fecha elegida no puede ser anterior a la actual.")
         return fecha
     
     def clean_motivo(self):
@@ -78,8 +78,8 @@ class AsignarTurnoForm(ModelForm):
 
     def clean_fecha(self):
         fecha = self.cleaned_data.get('fecha')
-        if fecha <= datetime.date.today():
-            raise ValidationError(f"La fecha elegida debe ser al menos 1 día posterior a la actual.")
+        if fecha < datetime.date.today():
+            raise ValidationError(f"La fecha elegida no puede ser anterior a la actual.")
         return fecha
     
     def clean_hora(self):

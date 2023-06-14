@@ -22,4 +22,4 @@ class RegistrarUsuarioForm(ModelForm):
 class ModificarUsuarioForm(ModelForm):
     class Meta:
         model = Usuario
-        fields = ["dni", "nombre", "apellido", "telefono", "clave"]
+        fields = ["dni", "nombre", "apellido", "telefono"]
