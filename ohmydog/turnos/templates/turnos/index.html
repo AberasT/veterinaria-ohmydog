@@ -4,6 +4,7 @@
 <div class="text-center">
     {% if user.is_authenticated and not user.is_staff %}
     <a href="{% url 'turnos:elegir_perro'  %}" class="btn btn-success">Solicitar Turno</a>
+    <a href="{% url 'turnos:mis_turnos'  %}" class="btn btn-success">Mis turnos</a>
     {% elif user.is_authenticated and user.is_staff%}
     <a href="{% url 'turnos:asignar_elegir'  %}" class="btn btn-success">Asignar Turno</a>
     <hr>

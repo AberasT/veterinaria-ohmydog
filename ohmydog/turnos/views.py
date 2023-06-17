@@ -168,3 +168,14 @@ def asignar(request, id):
             contexto["form"] = form
             return render(request, "turnos/asignar.html", contexto)
     return render(request, "turnos/asignar.html", contexto)
+
+@login_required
+@user_passes_test(es_cliente)
+def mis_turnos(request):
+    misTurnos = []
+    for turno in Turno.objects.filter(hora__isnull=False).order_by("fecha","hora"):
+        if turno.perro.responsable == request.user: misTurnos.append(turno)
+    contexto = {
+        "misTurnos": misTurnos
+    }
+    return render(request, "turnos/mis_turnos.html", contexto)
