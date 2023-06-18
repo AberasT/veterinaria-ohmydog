@@ -8,6 +8,8 @@
     {% elif user.is_authenticated and user.is_staff%}
     <a href="{% url 'turnos:asignar_elegir'  %}" class="btn btn-success">Asignar Turno</a>
     <hr>
+    <a href="{% url 'turnos:turnos_fecha'  %}" class="btn btn-success">Consultar turnos por fecha</a>
+    <hr>
     {% if turnos_hoy %}
     <h3>Turnos de hoy</h3>
     <br>

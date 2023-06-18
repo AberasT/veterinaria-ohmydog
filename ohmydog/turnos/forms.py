@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Form, ChoiceField, ValidationError
+from django.forms import ModelForm, Form, ChoiceField, ValidationError, DateField
 from .models import Turno
 import datetime
 from atenciones.models import Vacuna
@@ -90,4 +90,7 @@ class AsignarTurnoForm(ModelForm):
     
 class ElegirPerroForm(Form):
     perro = ChoiceField(choices=(("","")))
+
+class ElegirFechaForm(Form):
+    fecha = DateField(initial=datetime.date.today(), widget=SelectDateWidget(attrs={'type': 'date'}))
 

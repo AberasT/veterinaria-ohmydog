@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from main.tests import es_veterinario, es_cliente
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import  AsignarTurnoForm, ElegirPerroForm, SolicitarTurnoForm
+from .forms import  AsignarTurnoForm, ElegirPerroForm, SolicitarTurnoForm, ElegirFechaForm
 from .models import Turno
 from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
@@ -69,7 +69,7 @@ def elegir_perro(request):
 @login_required
 @user_passes_test(es_cliente)
 def solicitar(request, id):
-    form = SolicitarTurnoForm()
+    form = SolicitarTurnoForm(initial={"fecha":datetime.date.today()})
     contexto = {}
     try:
         perro = Perro.objects.get(id=id)
@@ -179,3 +179,25 @@ def mis_turnos(request):
         "misTurnos": misTurnos
     }
     return render(request, "turnos/mis_turnos.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def turnos_fecha(request):
+    if request.method == "POST":
+        form = ElegirFechaForm(request.POST)
+        if form.is_valid():
+            turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
+            turnosFechaPendientes = Turno.objects.filter(hora__isnull=True, fecha=form.cleaned_data["fecha"])
+        eligioFecha = True
+    else:
+        form = ElegirFechaForm()
+        turnosFechaAsignados = []
+        turnosFechaPendientes = []
+        eligioFecha = False
+    contexto = {
+        "form": form,
+        "turnosFechaAsignados": turnosFechaAsignados,
+        "turnosFechaPendientes": turnosFechaPendientes,
+        "eligioFecha": eligioFecha
+    }
+    return render(request, "turnos/turnos_fecha.html", contexto)

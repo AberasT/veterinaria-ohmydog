@@ -1,0 +1,66 @@
+{% extends "main/layout.html" %}
+{% block body %}
+<div class="text-center">
+    <h3>Seleccione la fecha para consultar los turnos:</h3>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" name="Consultar" value="Consultar">
+    </form> <hr>
+    {% if eligioFecha %}
+        {% if turnosFechaAsignados %}
+        <h4>Turnos asignados</h4>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Hora</th>
+            <th scope="col">Motivo</th>
+            <th scope="col">Perro</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for turno in turnosFechaAsignados %}
+        <tr>
+            <th scope="row">{{ turno.hora }}</th>
+            <td>{{ turno.motivo }}</td>
+            <td>{{ turno.perro.nombre }}</td>
+            <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
+            <td>{{ turno.detalles }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% else %}
+    <h5>No se han encontrado turnos asignados para la fecha seleccionada.</h5>
+        {% endif %}
+    <br><hr>
+    {% if turnosFechaPendientes %}
+    <h4>Turnos pendientes de confirmación</h4>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Motivo</th>
+            <th scope="col">Perro</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for turno in turnosFechaPendientes %}
+        <tr>
+            <td>{{ turno.motivo }}</td>
+            <td>{{ turno.perro.nombre }}</td>
+            <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
+            <td>{{ turno.detalles }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% else %}
+    <h5>No se han encontrado turnos pendientes de confirmación para la fecha seleccionada.</h5>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
