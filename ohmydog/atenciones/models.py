@@ -3,8 +3,18 @@ from perros.models import Perro
 
 # Create your models here.
 class Atencion(models.Model):
+    MOTIVO_CHOICES = [
+        ('vacunación antirrábica', 'Vacunación Antirrábica'),
+        ('vacunación general', 'Vacunación General'),
+        ('castración', 'Castración'),
+        ('consulta', 'Consulta general'),
+        ('desparasitación', 'Desparasitación')
+    ]
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name="perros_atenciones")
     fecha = models.DateField(blank=False, null=False)
+    motivo = models.CharField(
+        max_length=25,
+        choices=MOTIVO_CHOICES, blank=False)
     descripcion = models.CharField(max_length=200, blank=True)
 
 class Vacuna(models.Model):

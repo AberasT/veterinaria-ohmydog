@@ -1,6 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
+    <h5>Agregar atención a {{ perro.nombre }}</h5><br>
     <form method="POST" action="">
         {% csrf_token %}
         {% for error in form.fecha.errors %}
@@ -8,13 +9,13 @@
             {{ error }}
         </div>
         {% endfor %}
-        {% for error in form.vacuna.errors %}
+        {% for error in form.atencion.errors %}
         <div class="alert alert-danger">
             {{ error }}
         </div>
         {% endfor %}
-        {{ form }}
-        <input class="btn btn-secondary" type="submit" name="Guardar Cambios" value="Guardar Cambios">
+        {{ form.as_p }}
+        <input class="btn btn-secondary" type="submit" name="Guardar" value="Guardar">
     </form>
 </div>
 

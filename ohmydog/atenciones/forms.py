@@ -8,3 +8,11 @@ class AgregarVacunaForm(ModelForm):
         widgets = {
             'fecha': SelectDateWidget(attrs={'type': 'date'}),
         }
+
+class AgregarAtencionForm(ModelForm):
+    class Meta:
+        model = Atencion
+        fields = ["fecha", "motivo", "descripcion"]
+        widgets = {
+            'fecha': SelectDateWidget(attrs={'type': 'date'}),
+        }
