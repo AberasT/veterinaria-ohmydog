@@ -1,6 +1,6 @@
-from django.forms import Form, CharField, ChoiceField, ModelForm
+from django.forms import Form, CharField, ChoiceField, ModelForm, EmailField
 from django import forms
-from .models import Cuidador
+from .models import Cuidador, Solicitud
 from django.forms.widgets import TimeInput
 from django import forms
 
@@ -26,3 +26,20 @@ class RegistrarCuidadorForm(ModelForm):
         if cuidadores:
             raise forms.ValidationError("El contacto ingresado ya se encuentra registrado en el sistema con otro cuidador/paseador.")
         return contacto
+    
+class SolicitarContactoForm(Form):
+    email = EmailField(widget=forms.EmailInput, label="Email", required=True, error_messages=error_messages)
+    nombre = CharField(max_length=20, required=True)
+    apellido = CharField(max_length=20, required=True)
+
+    def __init__(self, *args, **kwargs):
+        self.id = kwargs.pop('id', None)
+        super(Form, self).__init__(*args, **kwargs)
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        cuidador = Cuidador.objects.get(id=self.id)
+        solicitudes = Solicitud.objects.filter(email=email, cuidador=cuidador)
+        if solicitudes:
+            raise forms.ValidationError("Ya solicitó el contacto del cuidador con ese email")
+        return email

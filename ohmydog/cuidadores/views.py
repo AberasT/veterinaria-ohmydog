@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cuidador, Solicitud
-from .forms import RegistrarCuidadorForm
+from .forms import RegistrarCuidadorForm, SolicitarContactoForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
 from correo.SolicitudContacto import SolicitudContacto
@@ -114,7 +114,7 @@ def modificar(request, id):
 def solicitar(request, id):
     cuidador = Cuidador.objects.get(id=id)
     cliente = request.user
-    nuevaSolicitud = Solicitud(cliente=cliente, cuidador=cuidador)
+    nuevaSolicitud = Solicitud(cliente=cliente, cuidador=cuidador, nombre=cliente.nombre, apellido=cliente.apellido, email=cliente.email )
     try:
         nuevaSolicitud.save()
         solicitudes_usuario = Solicitud.objects.filter(cliente=request.user)
@@ -169,7 +169,7 @@ def aceptar_solicitud(request, id):
             "solicitudes": solicitudes,
             "aceptada": True
         }
-        mail = AprobacionContacto(solicitud.cliente.email, solicitud.cuidador.contacto)
+        mail = AprobacionContacto(solicitud.email, solicitud.cuidador.contacto)
         mail.enviar()
         return render(request, "cuidadores/listar_solicitudes.html", contexto)
     except:
@@ -182,7 +182,7 @@ def aceptar_solicitud(request, id):
 def rechazar_solicitud(request, id):
     solicitud = Solicitud.objects.get(id=id)
     cuidador = solicitud.cuidador
-    mail = RechazoContacto(solicitud.cliente.email)
+    mail = RechazoContacto(solicitud.email)
     mail.enviar()
     solicitud.delete()
     solicitudes = Solicitud.objects.filter(cuidador=cuidador, aprobada=False)
@@ -193,3 +193,29 @@ def rechazar_solicitud(request, id):
     }
     
     return render(request, "cuidadores/listar_solicitudes.html", contexto)
+
+def solicitar_visitante(request, id):
+    cuidador = Cuidador.objects.get(id=id)
+    form = SolicitarContactoForm()
+    contexto = {
+        "form": form
+    }
+    if request.method == "POST":
+        form = SolicitarContactoForm(request.POST, id=id)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            apellido = form.cleaned_data["apellido"]
+            email = form.cleaned_data["email"]
+            nuevaSolicitud = Solicitud(cuidador=cuidador, nombre=nombre, apellido=apellido, email=email )
+            try:
+                nuevaSolicitud.save()
+                contexto["cuidadores"] = Cuidador.objects.all()
+                contexto["solicito"] = True
+                return render(request, "cuidadores/index.html", contexto)
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else: 
+            return render(request, "cuidadores/solicitar_visitante.html",{"form": form})
+    return render(request, "cuidadores/solicitar_visitante.html", contexto)

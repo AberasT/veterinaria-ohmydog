@@ -17,7 +17,10 @@ class Cuidador(models.Model):
 
 class Solicitud(models.Model):
     id = models.BigAutoField(primary_key=True)
-    cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="solicitudes")
+    cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="solicitudes", blank=True, null=True)
     cuidador = models.ForeignKey(Cuidador, on_delete=models.CASCADE, related_name="solicitudes")
     aprobada = models.BooleanField(default=False)
+    nombre = models.CharField(max_length=20, blank=True, null=True, default="")
+    apellido = models.CharField(max_length=20, blank=True, null=True, default="")
+    email = models.EmailField(null=True)
 

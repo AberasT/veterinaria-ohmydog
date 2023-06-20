@@ -4,10 +4,10 @@
 
 <div class="text-center">
     {% if aceptada %}
-    <h5>El contacto del cuidador/paseador fue enviado al cliente.</h5>
+    <h5>El contacto del cuidador/paseador fue enviado.</h5>
     {% endif %}
     {% if rechazada %}
-    <h5>La solicitud fue rechazada y el cliente fue notificado.</h5>
+    <h5>La solicitud fue rechazada y el solicitante fue notificado.</h5>
     {% endif %}
     {% if solicitudes %}
     <h3>Solicitudes de contacto de {{ cuidador.nombre_completo }} :</h3>
@@ -22,9 +22,9 @@
         <tbody>
         {% for solicitud in solicitudes %}
         <tr>
-            <td>{{ solicitud.cliente.nombre }}</td>
-            <td>{{ solicitud.cliente.apellido }}</td>
-            <td>{{ solicitud.cliente.email }}</td>
+            <td>{{ solicitud.nombre }}</td>
+            <td>{{ solicitud.apellido }}</td>
+            <td>{{ solicitud.email }}</td>
           <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-primary">Aceptar</a></td>
           <td><a href="{% url 'cuidadores:rechazar_solicitud' id=solicitud.id %}" class="btn btn-danger">Rechazar</a></td>
         </tr>

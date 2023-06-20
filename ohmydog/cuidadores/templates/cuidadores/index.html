@@ -26,6 +26,8 @@
         {% else %}
         <li class="list-group-item"><a href="{% url 'cuidadores:solicitar' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
         {% endif %}
+        {% elif not user.is_staff %}
+        <li class="list-group-item"><a href="{% url 'cuidadores:solicitar_visitante' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
         {% endif %}
         {% if user.is_authenticated and user.is_staff %}
         <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
