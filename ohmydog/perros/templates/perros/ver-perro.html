@@ -21,7 +21,48 @@
       <li class="list-group-item"><a href="{% url 'perros:eliminar' id=perro.id %}" onclick="return confirm('Eliminar perro?');" class="btn btn-danger">Eliminar Perro</a></li>
     </ul>
     <hr>
-    
+    {% if atenciones %}
+    <h4>Atenciones</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Motivo</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for atencion in atenciones %}
+        <tr>
+          <th scope="row">{{ atencion.fecha }}</th>
+          <td>{{ atencion.motivo }}</td>
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h5>No hay atenciones registradas</h5>
+    {% endif %}
+    {% if vacunas %}
+    <h4>Vacunaciones</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for vacuna in vacunas %}
+        <tr>
+          <th scope="row">{{ vacuna.fecha }}</th>
+          <td>{{ vacuna.tipo }}</td>
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h5>No hay vacunaciones registradas</h5>
+    {% endif %}
 </div>
 
 {% endblock %}

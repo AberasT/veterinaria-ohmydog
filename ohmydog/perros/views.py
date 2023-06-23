@@ -4,7 +4,7 @@ from .forms import RegistrarPerroForm
 from .models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
-from datetime import datetime
+from atenciones.models import Vacuna, Atencion
 
 # VIEWS
 
@@ -61,8 +61,12 @@ def eliminar(request, id):
 @user_passes_test(es_veterinario)
 def ver_perro(request, id):
     perro = Perro.objects.get(id=id)
+    atenciones = Atencion.objects.filter(perro=perro).order_by("fecha")
+    vacunas = Vacuna.objects.filter(perro=perro).order_by("fecha")
     contexto = {
-        "perro": perro
+        "perro": perro,
+        "atenciones": atenciones,
+        "vacunas": vacunas
     }
     return render(request, "perros/ver-perro.html", contexto)
 
