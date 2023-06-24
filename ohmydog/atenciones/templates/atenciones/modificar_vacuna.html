@@ -1,0 +1,25 @@
+{% extends "main/layout.html" %}
+{% block body %}
+<div class="text-center">
+    <h5>Modificar vacunación</h5><br>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {% for error in form.fecha.errors %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {{ form.fecha.label }}
+        {{ form.fecha }} 
+        <br><br>
+        {{ form.vacuna.label }}
+        {{ form.vacuna }} 
+        <br><br>
+        {{ form.dosis.label }}
+        {{ form.dosis }} 
+        <br><br>
+        <input class="btn btn-primary" type="submit" name="Guardar cambios" value="Guardar cambios">
+    </form>
+</div>
+
+{% endblock %}

@@ -187,7 +187,7 @@ def turnos_fecha(request):
         form = ElegirFechaForm(request.POST)
         if form.is_valid():
             turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
-            turnosFechaPendientes = Turno.objects.filter(hora__isnull=True, fecha=form.cleaned_data["fecha"])
+            turnosFechaPendientes = Turno.objects.filter(hora__isnull=True, fecha=form.cleaned_data["fecha"]).order_by("fecha")
         eligioFecha = True
     else:
         form = ElegirFechaForm()

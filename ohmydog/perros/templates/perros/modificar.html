@@ -1,6 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
+    <h5>Modificar datos</h5>
     <form method="POST" action="">
         {% csrf_token %}
         {% for error in form.nombre.errors %}

@@ -61,8 +61,8 @@ def eliminar(request, id):
 @user_passes_test(es_veterinario)
 def ver_perro(request, id):
     perro = Perro.objects.get(id=id)
-    atenciones = Atencion.objects.filter(perro=perro).order_by("fecha")
-    vacunas = Vacuna.objects.filter(perro=perro).order_by("fecha")
+    atenciones = Atencion.objects.filter(perro=perro).order_by("-fecha")
+    vacunas = Vacuna.objects.filter(perro=perro).order_by("-fecha")
     contexto = {
         "perro": perro,
         "atenciones": atenciones,

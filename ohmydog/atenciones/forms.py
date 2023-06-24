@@ -1,5 +1,6 @@
 from .models import Vacuna, Atencion
-from django.forms import ModelForm, SelectDateWidget
+from django.forms import ModelForm, SelectDateWidget, ValidationError
+import datetime
 
 class AgregarVacunaForm(ModelForm):
     class Meta:
@@ -8,6 +9,12 @@ class AgregarVacunaForm(ModelForm):
         widgets = {
             'fecha': SelectDateWidget(attrs={'type': 'date'}),
         }
+    
+    def clean_fecha(self):
+        fecha = self.cleaned_data.get('fecha')
+        if fecha > datetime.date.today():
+            raise ValidationError(f"La fecha elegida debe ser igual o anterior a la actual.")
+        return fecha
 
 class AgregarAtencionForm(ModelForm):
     class Meta:
@@ -16,3 +23,9 @@ class AgregarAtencionForm(ModelForm):
         widgets = {
             'fecha': SelectDateWidget(attrs={'type': 'date'}),
         }
+    
+    def clean_fecha(self):
+        fecha = self.cleaned_data.get('fecha')
+        if fecha > datetime.date.today():
+            raise ValidationError(f"La fecha elegida debe ser igual o anterior a la actual.")
+        return fecha

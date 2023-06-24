@@ -10,6 +10,7 @@ class Atencion(models.Model):
         ('consulta', 'Consulta general'),
         ('desparasitación', 'Desparasitación')
     ]
+    id = models.AutoField(primary_key=True)
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name="perros_atenciones")
     fecha = models.DateField(blank=False, null=False)
     motivo = models.CharField(
@@ -22,6 +23,8 @@ class Vacuna(models.Model):
         ('vacunacion antirrabica', 'Vacunación Antirrábica'),
         ('vacunacion general', 'Vacunación General')
     ]
+
+    id = models.AutoField(primary_key=True)
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name="perros_vacunas")
     fecha = models.DateField(blank=False, null=False)
     vacuna = models.CharField(choices=VACUNA_CHOICES, max_length=25)

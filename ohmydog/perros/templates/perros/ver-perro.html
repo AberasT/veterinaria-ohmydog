@@ -2,67 +2,120 @@
 {% block body %}
 
 <div class="text-center">
-    <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-      <li class="list-group-item active">Cliente: {{ perro.responsable.nombre }} {{ perro.responsable.apellido }}</li>
-      <li class="list-group-item">Nombre: {{ perro.nombre }}</li>
-      <li class="list-group-item">Raza: {{ perro.raza }}</li>
-      <li class="list-group-item">Color: {{ perro.color }}</li>
-      <li class="list-group-item">Sexo: {{ perro.sexo }}</li>
-      {% if perro.castrado %}
-      <li class="list-group-item">Castrado/a: Sí</li>
-      {% else %}
-      <li class="list-group-item">Castrado/a: No</li>
-      {% endif %}
-      <li class="list-group-item">Fecha de nacimiento: {{ perro.fecha_nacimiento }}</li>
-      <li class="list-group-item">Peso: {{ perro.peso }}</li>
-      <li class="list-group-item"><a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="btn btn-primary">Agregar Vacuna</a></li>
-      <li class="list-group-item"><a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="btn btn-primary">Agregar Atención</a></li>
-      <li class="list-group-item"><a href="{% url 'perros:modificar' id=perro.id %}"  class="btn btn-secondary">Modificar Perro</a></li>
-      <li class="list-group-item"><a href="{% url 'perros:eliminar' id=perro.id %}" onclick="return confirm('Eliminar perro?');" class="btn btn-danger">Eliminar Perro</a></li>
-    </ul>
+  <div class="container text-center">
+    <div class="row align-items-start">
+      <div class="col col-1"></div>
+      <div class="col">
+        <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+          <li class="list-group-item active">Cliente: {{ perro.responsable.nombre }} {{ perro.responsable.apellido }}</li>
+          <li class="list-group-item">Nombre: {{ perro.nombre }}</li>
+          <li class="list-group-item">Raza: {{ perro.raza }}</li>
+          <li class="list-group-item">Color: {{ perro.color }}</li>
+          <li class="list-group-item">Sexo: {{ perro.sexo }}</li>
+          {% if perro.castrado %}
+          <li class="list-group-item">Castrado/a: Sí</li>
+          {% else %}
+          <li class="list-group-item">Castrado/a: No</li>
+          {% endif %}
+          <li class="list-group-item">Fecha de nacimiento: {{ perro.fecha_nacimiento }}</li>
+          <li class="list-group-item">Peso: {{ perro.peso }}</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="container text-center">
+          <div class="row justify-content-md-center">
+            <div class="row gy-2">
+              <div class="col">
+                <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-primary">Agregar Vacuna</a>
+              </div>
+            </div>
+            <div class="row gy-2">
+              <div class="col">
+                <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-primary">Agregar Atención</a>
+              </div>
+            </div>
+            <div class="row gy-2">
+              <div class="col">
+                <a href="{% url 'perros:modificar' id=perro.id %}"  class="row btn btn-secondary">Modificar Perro</a>
+              </div>
+            </div>
+            <div class="row gy-2">
+              <div class="col">
+                <a href="{% url 'perros:eliminar' id=perro.id %}" onclick="return confirm('Eliminar perro?');" class="row btn btn-danger">Eliminar Perro</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <hr>
-    {% if atenciones %}
-    <h4>Atenciones</h4>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Fecha</th>
-          <th scope="col">Motivo</th>
-        </tr>
-      </thead>
-      <tbody>
-    {% for atencion in atenciones %}
-        <tr>
-          <th scope="row">{{ atencion.fecha }}</th>
-          <td>{{ atencion.motivo }}</td>
-        </tr>
-    {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <h5>No hay atenciones registradas</h5>
-    {% endif %}
-    {% if vacunas %}
-    <h4>Vacunaciones</h4>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Fecha</th>
-          <th scope="col">Tipo</th>
-        </tr>
-      </thead>
-      <tbody>
-    {% for vacuna in vacunas %}
-        <tr>
-          <th scope="row">{{ vacuna.fecha }}</th>
-          <td>{{ vacuna.tipo }}</td>
-        </tr>
-    {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <h5>No hay vacunaciones registradas</h5>
-    {% endif %}
+    <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col">
+          {% if atenciones %}
+          <h4>Atenciones</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Motivo</th>
+                <th scope="col">Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+          {% for atencion in atenciones %}
+              <tr>
+                <th scope="row">{{ atencion.fecha }}</th>
+                <td>{{ atencion.motivo }}</td>
+                <td>{{ atencion.descripcion }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn btn-secondary">Modificar</a>
+                    <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn btn-danger">Eliminar</a>
+                  </div>
+                </td>
+              </tr>
+          {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <h5>No hay atenciones registradas</h5>
+          {% endif %}
+        </div>
+        <div class="col">
+          {% if vacunas %}
+          <h4>Vacunaciones</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Dosis</th>
+              </tr>
+            </thead>
+            <tbody>
+          {% for vacuna in vacunas %}
+              <tr>
+                <th scope="row">{{ vacuna.fecha }}</th>
+                <td>{{ vacuna.vacuna }}</td>
+                <td>{{ vacuna.dosis }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-secondary">Modificar</a>
+                    <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn btn-danger">Eliminar</a>
+                  </div>
+                </td>
+              </tr>
+          {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <h5>No hay vacunaciones registradas</h5>
+          {% endif %}
+        </div>
+      </div>
+    </div>
 </div>
 
 {% endblock %}
