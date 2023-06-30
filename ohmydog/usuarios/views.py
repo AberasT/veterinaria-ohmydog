@@ -74,7 +74,8 @@ def registrar_veterinario(request):
 @user_passes_test(es_veterinario)
 def index(request):
     contexto = {
-        "clientes": Usuario.objects.filter(is_active=True, is_staff=False).order_by("apellido")
+        "clientes": Usuario.objects.filter(is_active=True, is_staff=False).order_by("apellido"),
+        "inactivos": Usuario.objects.filter(is_active=False, is_staff=False)
     }
     return render(request, "usuarios/listar.html", contexto)
 
@@ -82,8 +83,12 @@ def index(request):
 @user_passes_test(es_veterinario)
 def eliminar(request, id):
     usuario = Usuario.objects.get(id=id)
-    # cliente.is_active = False BORRADO LÓGICO
-    usuario.delete()
+    usuario.is_active = False
+    usuario.save()
+    perros = Perro.objects.filter(responsable=usuario)
+    for perro in perros:
+        perro.responsable_activo = False
+        perro.save()
     return redirect("usuarios:index")
 
 @login_required
@@ -92,7 +97,7 @@ def ver_cliente(request, id):
     cliente = Usuario.objects.get(id=id)
     contexto = {
         "cliente": cliente,
-        "perros_cliente": Perro.objects.filter(responsable=cliente)
+        "perros_cliente": Perro.objects.filter(responsable=cliente, activo=True)
     }
     return render(request, "usuarios/ver-cliente.html", contexto)
 
@@ -125,3 +130,28 @@ def modificar_cliente(request, id):
         else:
             return render(request, "usuarios/modificar-cliente.html", {"form": form, "email": cliente.email})
     return render(request, "usuarios/modificar-cliente.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def historial_clientes(request):
+    contexto = {
+        "clientes": Usuario.objects.filter(is_active=False, is_staff=False).order_by("apellido")
+    }
+    return render(request, "usuarios/historial-clientes.html", contexto)
+
+
+@login_required
+@user_passes_test(es_veterinario)
+def recuperar_cliente(request, id):
+    cliente = Usuario.objects.get(id=id)
+    cliente.is_active = True
+    cliente.save()
+    perros = Perro.objects.filter(responsable=cliente)
+    for perro in perros:
+        perro.responsable_activo = True
+        perro.save()
+    contexto = {
+        "clientes": Usuario.objects.filter(is_active=False, is_staff=False).order_by("apellido"),
+        "recupero": True
+    }
+    return render(request, "usuarios/historial-clientes.html", contexto)

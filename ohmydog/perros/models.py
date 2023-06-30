@@ -42,4 +42,6 @@ class Perro(models.Model):
     peso = models.CharField(max_length=5, blank=True, null=True, default="")
     responsable = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="usuarios_perros")
     castrado = models.BooleanField(default=False)
+    activo = models.BooleanField(default=True)
+    responsable_activo = models.BooleanField(default=True)
     REQUIRED_FIELDS = ["nombre", "color", "raza","castrado", "sexo", "fecha_nacimiento", "peso"]

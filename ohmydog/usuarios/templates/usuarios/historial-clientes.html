@@ -3,13 +3,11 @@
 
 <div class="text-center">
   <div class="text-center">
-    <a href="{% url 'usuarios:registrar_cliente'  %}" class="btn btn-success">Registrar cliente</a>
-    {% if inactivos %}
-      <a href="{% url 'usuarios:historial_clientes' %}" class="btn btn-primary">Historial de clientes</a></td>
+    {% if recupero %}
+        <h5>El cliente fue recuperado correctamente.</h5>
     {% endif %}
-  </div> <br> <br>
     {% if clientes %}
-    <h3>Listado de clientes registrados</h3>
+    <h3>Historial de clientes eliminados</h3>
   <table class="table">
     <thead>
       <tr>
@@ -28,14 +26,14 @@
       <td>{{ cliente.apellido }}</td>
       <td>{{ cliente.email }}</td>
       <td>{{ cliente.telefono }}</td>
-      <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-primary">Ver cliente</a></td>
+      <td><a href="{% url 'usuarios:recuperar_cliente' id=cliente.id %}" class="btn btn-primary">Recuperar cliente</a></td>
     </tr>
     {% endfor %}
     </tbody>
   </table>
     
   {% else %}
-  <h3>No hay clientes registrados</h3>
+  <h3>No eliminó ningún cliente hasta ahora</h3>
   {% endif %}
 </div>
 

@@ -36,11 +36,12 @@ def get_turnos_hoy():
     turnos_hoy = Turno.objects.filter(hora__isnull=False, fecha=datetime.date.today()).order_by("hora")
     turnosString = []
     for turno in turnos_hoy:
-        turnosString.append(f"{turno.hora} {tabla_motivos[turno.motivo]} para {turno.perro.nombre} del cliente {turno.perro.responsable.nombre} {turno.perro.responsable.apellido}.")
+        if turno.perro.activo and turno.perro.responsable_activo:
+            turnosString.append(f"{turno.hora} {tabla_motivos[turno.motivo]} para {turno.perro.nombre} del cliente {turno.perro.responsable.nombre} {turno.perro.responsable.apellido}.")
     return turnosString
 
 def set_opciones_perro(form, user):
-    query = Perro.objects.filter(responsable=user)
+    query = Perro.objects.filter(responsable=user, activo=True)
     choices = []
     for perro in query: choices.append((perro.id, perro.nombre))
     form.fields["perro"].choices = choices
@@ -115,7 +116,7 @@ def solicitar(request, id):
 @user_passes_test(es_veterinario)
 def asignar_elegir(request):
     contexto = {
-        "perros": Perro.objects.order_by("nombre")
+        "perros": Perro.objects.filter(activo=True, responsable_activo=True).order_by("nombre")
     }
     return render(request, "turnos/asignar_elegir.html", contexto)
 
@@ -174,7 +175,8 @@ def asignar(request, id):
 def mis_turnos(request):
     misTurnos = []
     for turno in Turno.objects.filter(hora__isnull=False).order_by("fecha","hora"):
-        if turno.perro.responsable == request.user: misTurnos.append(turno)
+        if turno.perro.responsable == request.user and turno.perro.activo: 
+            misTurnos.append(turno)
     contexto = {
         "misTurnos": misTurnos
     }

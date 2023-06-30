@@ -20,4 +20,6 @@ class IniciarSesionForm(Form):
         if email and clave: 
             if self.usuario is None:
                 raise forms.ValidationError("Email y/o contraseña incorrecto/a.")
+            elif not self.usuario.is_active:
+                raise forms.ValidationError("El usuario ingresado fue eliminado.")
         return email, clave

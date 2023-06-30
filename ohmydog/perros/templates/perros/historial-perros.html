@@ -1,0 +1,61 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="text-center">
+    {% if recupero %}
+        <h5>El perro fue recuperado correctamente.</h5>
+    {% endif %}
+    {% if perros or perros_responsable %}
+    {% if perros %}
+    <h3>Listado de perros eliminados</h3>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Raza</th>
+            <th scope="col">Color</th>
+            <th scope="col">Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for perro in perros %}
+        <tr>
+          <th scope="row">{{ perro.nombre }}</th>
+          <td>{{ perro.raza }}</td>
+          <td>{{ perro.color }}</td>
+          <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
+          <td><a href="{% url 'perros:recuperar_perro' id=perro.id %}" class="btn btn-primary">Recuperar perro</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    {% if perros_responsable %}
+    <h3>Listado de perros con cliente inactivo</h3>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Raza</th>
+            <th scope="col">Color</th>
+            <th scope="col">Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for perro in perros_responsable %}
+        <tr>
+          <th scope="row">{{ perro.nombre }}</th>
+          <td>{{ perro.raza }}</td>
+          <td>{{ perro.color }}</td>
+          <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    {% else %}
+    <h3>No eliminó ningún perro ni tampoco hay ningún perro con cliente inactivo hasta ahora</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

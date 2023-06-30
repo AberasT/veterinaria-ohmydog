@@ -12,7 +12,9 @@ from atenciones.models import Vacuna, Atencion
 @user_passes_test(es_veterinario)
 def index(request):
     contexto = {
-        "perros": Perro.objects.order_by("nombre")
+        "perros": Perro.objects.filter(activo=True, responsable_activo=True).order_by("nombre"),
+        "inactivos": Perro.objects.filter(activo=False),
+        "inactivos_responsable": Perro.objects.filter(responsable_activo=False)
     }
     return render(request, "perros/listar.html", contexto)
 
@@ -54,7 +56,8 @@ def registrar(request, id):
 @user_passes_test(es_veterinario)
 def eliminar(request, id):
     perro = Perro.objects.get(id=id)
-    perro.delete()
+    perro.activo = False
+    perro.save()
     return redirect("perros:index")
 
 @login_required
@@ -103,4 +106,24 @@ def modificar(request, id):
             return render(request, "perros/modificar.html", {"form": form})
     return render(request, "perros/modificar.html", contexto)
 
+@login_required
+@user_passes_test(es_veterinario)
+def historial_perros(request):
+    contexto = {
+        "perros": Perro.objects.filter(activo=False, responsable_activo=True).order_by("nombre"),
+        "perros_responsable": Perro.objects.filter( responsable_activo=False).order_by("nombre")
+    }
+    return render(request, "perros/historial-perros.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def recuperar_perro(request, id):
+    perro = Perro.objects.get(id=id)
+    perro.activo = True
+    perro.save()
+    contexto = {
+        "perros": Perro.objects.filter(activo=False).order_by("nombre"),
+        "recupero": True,
+    }
+    return render(request, "perros/historial-perros.html", contexto)
 
