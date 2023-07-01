@@ -203,3 +203,30 @@ def turnos_fecha(request):
         "eligioFecha": eligioFecha
     }
     return render(request, "turnos/turnos_fecha.html", contexto)
+
+@login_required
+@user_passes_test(es_veterinario)
+def confirmar_asistencia(request):
+    def fecha_menor_o_igual():
+
+
+    if request.method == "POST":
+        form = ElegirFechaForm(request.POST)
+        if form.is_valid():
+            turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
+            turnosFechaPendientes = Turno.objects.filter(hora__isnull=True, fecha=form.cleaned_data["fecha"]).order_by("fecha")
+        eligioFecha = True
+    else:
+        turnosPasados = Turno.objects.filter(lambda fecha: fecha <= datetime.date.today())
+        form = ElegirFechaForm()
+        turnosFechaAsignados = []
+        turnosFechaPendientes = []
+        eligioFecha = False
+    contexto = {
+        "form": form,
+        "turnosFechaAsignados": turnosFechaAsignados,
+        "turnosFechaPendientes": turnosFechaPendientes,
+        "eligioFecha": eligioFecha
+    }
+    return render(request, "turnos/turnos_fecha.html", contexto)
+
