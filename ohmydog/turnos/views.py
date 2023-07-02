@@ -219,14 +219,18 @@ def turno_asistio(request, id):
                 "vacuna": turnoAsistido.motivo,
                 "dosis": turnoAsistido.detalles
                 })
-        else: form = AgregarAtencionForm(initial={
+            tipo = "vacuna"
+        else: 
+            form = AgregarAtencionForm(initial={
                 "fecha": turnoAsistido.fecha,
                 "perro": turnoAsistido.perro,
                 "motivo": turnoAsistido.motivo,
                 "descripcion": turnoAsistido.detalles
                 })
+            tipo = "atencion"
     contexto = {
         "form": form,
-        "turno": turnoAsistido
+        "turno": turnoAsistido,
+        "tipo": tipo
     }
     return render(request, "turnos/asistencia.html", contexto)
