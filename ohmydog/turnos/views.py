@@ -7,25 +7,25 @@ from .models import Turno
 from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
-from usuarios.models import Usuario
+from atenciones.models import Atencion, Vacuna
 import datetime
 
 def get_turnos_pendientes(perro):
-    turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True).order_by("fecha", "hora")
+    turnosPendientes = Turno.objects.filter(is_active=True, perro=perro, hora__isnull=True).order_by("fecha", "hora")
     turnosString = []
     for turno in turnosPendientes:
         turnosString.append(f"Una {turno.motivo} para el día {turno.fecha}.")
     return turnosString
 
 def get_turnos_asignados(perro):
-    turnosAsignados = Turno.objects.filter(perro=perro, hora__isnull=False).order_by("fecha", "hora")
+    turnosAsignados = Turno.objects.filter(is_active=True, asistido=False, perro=perro, hora__isnull=False).order_by("fecha", "hora")
     turnosString = []
     for turno in turnosAsignados:
         turnosString.append(f"Una {turno.motivo} para el día {turno.fecha}, hora {turno.hora}.")
     return turnosString
 
 def get_turnos_hoy():
-    turnos_hoy = Turno.objects.filter(hora__isnull=False, fecha=datetime.date.today()).order_by("hora")
+    turnos_hoy = Turno.objects.filter(is_active=True, asistido=False, hora__isnull=False, fecha=datetime.date.today()).order_by("hora")
     turnosString = []
     for turno in turnos_hoy:
         if turno.perro.activo and turno.perro.responsable_activo:
@@ -41,9 +41,7 @@ def set_opciones_perro(form, user):
 # Create your views here.
 @login_required
 def index(request):
-    turnos = Turno.objects.filter(hora__isnull=False).exclude(fecha=datetime.date.today()).order_by("fecha")
     contexto = {
-        "turnos": turnos,
         "turnos_hoy": get_turnos_hoy()
     }
     return render(request, "turnos/index.html", contexto)
@@ -116,7 +114,7 @@ def asignar_elegir(request):
 @user_passes_test(es_veterinario)
 def asignar(request, id):
     perro = Perro.objects.get(id=id)
-    turnosSolicitados = Turno.objects.filter(perro=perro, hora__isnull=True)
+    turnosSolicitados = Turno.objects.filter(is_active=True, asistido=False, perro=perro, hora__isnull=True)
     turno = None
     if turnosSolicitados:
         turno = turnosSolicitados.first()
@@ -166,7 +164,7 @@ def asignar(request, id):
 @user_passes_test(es_cliente)
 def mis_turnos(request):
     misTurnos = []
-    for turno in Turno.objects.filter(hora__isnull=False).order_by("fecha","hora"):
+    for turno in Turno.objects.filter(is_active=True, asistido=False, hora__isnull=False).order_by("fecha","hora"):
         if turno.perro.responsable == request.user and turno.perro.activo: 
             misTurnos.append(turno)
     contexto = {
@@ -180,8 +178,8 @@ def turnos_fecha(request):
     if request.method == "POST":
         form = ElegirFechaForm(request.POST)
         if form.is_valid():
-            turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
-            turnosFechaPendientes = Turno.objects.filter(hora__isnull=True, fecha=form.cleaned_data["fecha"]).order_by("fecha")
+            turnosFechaAsignados = Turno.objects.filter(is_active=True, asistido=False, hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
+            turnosFechaPendientes = Turno.objects.filter(is_active=True, hora__isnull=True, asistido=False, fecha=form.cleaned_data["fecha"]).order_by("fecha")
         eligioFecha = True
     else:
         form = ElegirFechaForm()
@@ -199,7 +197,7 @@ def turnos_fecha(request):
 @login_required
 @user_passes_test(es_veterinario)
 def confirmar_asistencia(request):
-    turnosPasados = Turno.objects.filter(fecha__lte=datetime.date.today()).order_by("fecha", "hora")
+    turnosPasados = Turno.objects.filter(is_active=True, asistido=False, fecha__lte=datetime.date.today()).order_by("fecha", "hora")
     contexto = {
         "turnosPasados": turnosPasados
     }
@@ -210,7 +208,45 @@ def confirmar_asistencia(request):
 def turno_asistio(request, id):
     turnoAsistido = Turno.objects.get(id=id)
     if request.method == "POST":
-        pass
+        if turnoAsistido.motivo in ("vacunación general", "vacunación antirrábica"):
+            form = AgregarVacunaForm(request.POST)
+            if form.is_valid():
+                nuevaVacuna = Vacuna(perro=turnoAsistido.perro,
+                                    vacuna=form.cleaned_data["vacuna"],
+                                    fecha=form.cleaned_data["fecha"],
+                                    dosis=form.cleaned_data["dosis"])
+                try:
+                    nuevaVacuna.save()
+                    turnoAsistido.asistido = True
+                    turnoAsistido.save()
+                    return render(request, "main/infomsj.html", {
+                        "msj": "La vacuna se agregó exitosamente."
+                    })
+                except:
+                    return render(request, "main/infomsj", {
+                        "msj": "No se pudo guardar la vacuna."
+                    })
+        else:
+            form = AgregarAtencionForm(request.POST)
+            if form.is_valid():
+                nuevaAtencion = Atencion(perro=turnoAsistido.perro,
+                                    motivo=form.cleaned_data["motivo"],
+                                    fecha=form.cleaned_data["fecha"],
+                                    descripcion=form.cleaned_data["descripcion"])
+                if form.cleaned_data["motivo"] == "castración":
+                    turnoAsistido.perro.castrado = True
+                    turnoAsistido.perro.save()
+                try:
+                    nuevaAtencion.save()
+                    turnoAsistido.asistido = True
+                    turnoAsistido.save()
+                    return render(request, "main/infomsj.html", {
+                        "msj": "La atención se agregó exitosamente."
+                    })
+                except:
+                    return render(request, "main/infomsj", {
+                        "msj": "No se pudo guardar la atención."
+                    })       
     else:
         if turnoAsistido.motivo in ("vacunación general", "vacunación antirrábica"):
             form = AgregarVacunaForm(initial={
@@ -219,7 +255,6 @@ def turno_asistio(request, id):
                 "vacuna": turnoAsistido.motivo,
                 "dosis": turnoAsistido.detalles
                 })
-            tipo = "vacuna"
         else: 
             form = AgregarAtencionForm(initial={
                 "fecha": turnoAsistido.fecha,
@@ -227,15 +262,14 @@ def turno_asistio(request, id):
                 "motivo": turnoAsistido.motivo,
                 "descripcion": turnoAsistido.detalles
                 })
-            tipo = "atencion"
     contexto = {
         "form": form,
         "turno": turnoAsistido,
-        "tipo": tipo
     }
     return render(request, "turnos/asistencia.html", contexto)
 
 def turno_no_asistio(request, id):
     turnoNoAsistido = Turno.objects.get(id=id)
-    turnoNoAsistido.delete()
+    turnoNoAsistido.is_active = False
+    turnoNoAsistido.save()
     return redirect("turnos:confirmar_asistencia")

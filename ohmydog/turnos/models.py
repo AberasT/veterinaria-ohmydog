@@ -19,4 +19,6 @@ class Turno(models.Model):
         max_length=25,
         choices=MOTIVO_CHOICES, blank=True)
     detalles = models.CharField(max_length=50, null=False, blank=True, default="")
+    asistido = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     

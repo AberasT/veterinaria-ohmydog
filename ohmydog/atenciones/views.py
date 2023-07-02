@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import AgregarVacunaForm, AgregarAtencionForm
 from perros.models import Perro
 from .models import Vacuna, Atencion
+from turnos.models import Turno
 import datetime
 from main.tests import es_veterinario
 from django.contrib.auth.decorators import login_required, user_passes_test
