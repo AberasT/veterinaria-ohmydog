@@ -7,6 +7,7 @@ from .models import Turno
 from perros.models import Perro
 from correo.SolicitudTurno import SolicitudTurno
 from correo.AsignacionTurno import AsignacionTurno
+from correo.CancelarMiTurno import CancelarMiTurno
 from atenciones.models import Atencion, Vacuna
 import datetime
 
@@ -268,8 +269,19 @@ def turno_asistio(request, id):
     }
     return render(request, "turnos/asistencia.html", contexto)
 
+@login_required
+@user_passes_test(es_veterinario)
 def turno_no_asistio(request, id):
     turnoNoAsistido = Turno.objects.get(id=id)
     turnoNoAsistido.is_active = False
     turnoNoAsistido.save()
     return redirect("turnos:confirmar_asistencia")
+
+@login_required
+@user_passes_test(es_cliente)
+def mis_turnos_cancelar(request, id):
+    turno = Turno.objects.get(id=id)
+    turno.delete()
+    correo = CancelarMiTurno(turno=turno)
+    correo.enviar()
+    return redirect("turnos:mis_turnos")

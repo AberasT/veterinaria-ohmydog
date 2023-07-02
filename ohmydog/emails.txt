@@ -172,3 +172,36 @@ Fecha: 2023-07-02
 Motivo: consulta
 Perro: Dante
 Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-20
+Motivo: vacunacion general
+Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-20
+Motivo: consulta
+Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-08-10
+Motivo: desparasitacion
+Perro: Dante
