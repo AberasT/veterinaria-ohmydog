@@ -146,3 +146,29 @@ Contenido:
 Se confirmó su turno para Loli para la siguiente fecha: 
 Fecha: 2023-07-02
 Hora: 18:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: josefernandez@hotmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Amadeo para la siguiente fecha: 
+Fecha: 2023-07-02
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-02
+Hora: 19:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-07-02
+Motivo: consulta
+Perro: Dante
+Detalles: 

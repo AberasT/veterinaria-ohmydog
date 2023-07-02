@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegistrarUsuarioForm, ModificarUsuarioForm
 from .models import Usuario
+from turnos.models import Turno
 from perros.models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario, es_superuser
@@ -87,6 +88,10 @@ def eliminar(request, id):
     usuario.save()
     perros = Perro.objects.filter(responsable=usuario)
     for perro in perros:
+        turnosPerro = Turno.objects.filter(is_active=True, asistido=False, perro=perro)
+        for turno in turnosPerro:
+            turno.is_active = False
+            turno.save()
         perro.responsable_activo = False
         perro.save()
     return redirect("usuarios:index")

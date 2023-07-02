@@ -4,8 +4,6 @@ from perros.models import Perro
 # Create your models here.
 class Atencion(models.Model):
     MOTIVO_CHOICES = [
-        ('vacunación antirrábica', 'Vacunación Antirrábica'),
-        ('vacunación general', 'Vacunación General'),
         ('castración', 'Castración'),
         ('consulta', 'Consulta general'),
         ('desparasitación', 'Desparasitación')

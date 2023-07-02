@@ -18,6 +18,7 @@
             <th scope="col">Perro</th>
             <th scope="col">Cliente</th>
             <th scope="col">Detalles</th>
+            <th scope="col">Asistió</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,11 @@
             <td>{{ turno.perro.nombre }}</td>
             <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
             <td>{{ turno.detalles }}</td>
+            {% if turno.asistido %}
+            <td>Sí</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
         </tr>
         {% endfor %}
         </tbody>
