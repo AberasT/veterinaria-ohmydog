@@ -106,3 +106,35 @@ Para: pacolovera29@gmail.com
 Asunto: Contacto del cuidador/paseador rechazado
 Contenido:
 Lamentablemente hemos rechazado su solicitud de contacto. Puede realizar otra solicitud para intentarlo nuevamente. 
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@prueba.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Loli para la siguiente fecha: 
+Fecha: 2023-07-02
+Hora: 16:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@prueba.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Loli para la siguiente fecha: 
+Fecha: 2023-07-02
+Hora: 17:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: josefernandez@hotmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Amadeo para la siguiente fecha: 
+Fecha: 2023-07-02
+Hora: 20:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Pompona para la siguiente fecha: 
+Fecha: 2023-07-02
+Hora: 13:00:00

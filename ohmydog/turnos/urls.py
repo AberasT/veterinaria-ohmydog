@@ -11,4 +11,5 @@ urlpatterns = [
     path("mis_turnos/", views.mis_turnos, name='mis_turnos'),
     path("turnos_fecha/", views.turnos_fecha, name='turnos_fecha'),
     path("confirmar_asistencia/", views.confirmar_asistencia, name='confirmar_asistencia'),
+    path("turno_asistio/<int:id>/", views.turno_asistio, name='turno_asistio'),
 ]

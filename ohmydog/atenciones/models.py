@@ -20,10 +20,9 @@ class Atencion(models.Model):
 
 class Vacuna(models.Model):
     VACUNA_CHOICES = [
-        ('vacunacion antirrabica', 'Vacunación Antirrábica'),
-        ('vacunacion general', 'Vacunación General')
+        ('vacunación antirrábica', 'Vacunación Antirrábica'),
+        ('vacunación general', 'Vacunación General')
     ]
-
     id = models.AutoField(primary_key=True)
     perro = models.ForeignKey(Perro, on_delete=models.CASCADE, related_name="perros_vacunas")
     fecha = models.DateField(blank=False, null=False)
