@@ -234,3 +234,8 @@ def turno_asistio(request, id):
         "tipo": tipo
     }
     return render(request, "turnos/asistencia.html", contexto)
+
+def turno_no_asistio(request, id):
+    turnoNoAsistido = Turno.objects.get(id=id)
+    turnoNoAsistido.delete()
+    return redirect("turnos:confirmar_asistencia")

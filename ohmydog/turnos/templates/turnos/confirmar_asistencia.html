@@ -6,23 +6,26 @@
     <table class="table">
         <thead>
             <tr>
-            <th scope="col"></th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Perro</th>
-            <th scope="col">Motivo</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Detalles</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Perro</th>
+                <th scope="col">Motivo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
         {% for turno in turnosPasados %}
         <tr>
-            <td><a href="{% url 'turnos:turno_asistio' id=turno.id %}" class="btn btn-primary">Asistió</a></td>
             <th scope="row">{{ turno.fecha }}</th>
             <td>{{ turno.perro.nombre }}</td>
             <td>{{ turno.motivo }}</td>
             <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
-            <td>{{ turno.detalles }}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'turnos:turno_asistio' id=turno.id %}" class="btn btn-primary">Asistió</a>
+                    <a href="{% url 'turnos:turno_no_asistio' id=turno.id %}" onclick="return confirm('El turno se eliminará');" class="btn btn-secondary">No asistió</a>
+                </div>
+            </td>
         </tr>
         {% endfor %}
         </tbody>

@@ -12,4 +12,5 @@ urlpatterns = [
     path("turnos_fecha/", views.turnos_fecha, name='turnos_fecha'),
     path("confirmar_asistencia/", views.confirmar_asistencia, name='confirmar_asistencia'),
     path("turno_asistio/<int:id>/", views.turno_asistio, name='turno_asistio'),
+    path("turno_no_asistio/<int:id>/", views.turno_no_asistio, name='turno_no_asistio'),
 ]
