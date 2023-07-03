@@ -26,17 +26,20 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'perros:index' %}">Perros</a>
               </li>
-              {% if request.user.is_superuser %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'usuarios:registrar_veterinario' %}">Registrar veterinario</a>
-              </li>
-              {% endif %}
+                {% if request.user.is_superuser %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'usuarios:registrar_veterinario' %}">Registrar veterinario</a>
+                </li>
+                {% endif %}
               {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'adopcion:index' %}">Adopción</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'cuidadores:index' %}">Cuidadores/Paseadores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'busqueda:index' %}">Perros Perdidos</a>
               </li>
               {% if not request.user.is_authenticated %}
               <a class="btn btn-outline-success" href="{% url 'main:login' %}">Iniciar sesión</a>
