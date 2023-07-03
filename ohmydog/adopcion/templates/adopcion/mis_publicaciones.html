@@ -2,7 +2,8 @@
 {% block body %}
 
 <div class="text-center">
-    {% if publicaciones %}
+    {% if publicaciones %} <br>
+    <h4>Mis publicaciones de perros en adopción</h4> <br>
     <table class="table">
         <thead>
             <tr>
@@ -12,7 +13,7 @@
                 <th scope="col">Edad</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Fecha de Publicacion</th>
-                <th scope="col">Fecha de Adopcion</th>
+                <th scope="col">Fecha de Adopción</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -34,11 +35,9 @@
                     <td>{{ publicacion.fecha_adopcion }} </td>
                 {% endif %}
                 <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
-                {% if user.is_authenticated %}
-                <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
-                {% endif %}
                 {% if not publicacion.adoptado %}
-                <td scope="row"><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado?');">Marcar como Adoptado</a></td>
+                <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                <td scope="row"><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado? Esta acción no podrá deshacerse');">Marcar como Adoptado</a></td>
                 <td scope="row"><a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-secondary">Modificar Publicacion</a></td>
                 {% else %}
                 <td scope="row" style="color:green;">¡Adoptado!</td>

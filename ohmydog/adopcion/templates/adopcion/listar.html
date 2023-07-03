@@ -19,7 +19,7 @@
                 <th scope="col">Edad</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Fecha de Publicacion</th>
-                <th scope="col">Fecha de Adopcion</th>
+                <th scope="col">Fecha de Adopción</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -45,8 +45,10 @@
                 {% elif user.is_authenticated %}
                     <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
                 {% endif %}
-                {% if user.is_authenticated and user.is_staff or publicacion.publicador == user and user.is_authenticated %}
+                {% if user.is_staff or publicacion.publicador == user %}
+                    {% if not publicacion.adoptado %}
                     <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                    {% endif %}
                 {% endif %}
             </tr>
             {% endfor %}
