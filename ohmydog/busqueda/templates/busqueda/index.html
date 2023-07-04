@@ -1,0 +1,64 @@
+{% extends 'main/layout.html' %}
+{% block body %}
+
+<div class="text-center">
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'busqueda:publicar' %}" class="btn btn-success">Publicar Perro Perdido</a>
+        <a href="{% url 'busqueda:mis_publicaciones' %}" class="btn btn-success">Mis Publicaciones</a>
+        <br>
+        <br>
+    {% endif %}
+    {% if publicaciones %}
+        <h3>Listado de perros perdidos:</h3>
+        {% for publicacion in publicaciones %}
+            <div class="container text-center ">
+                <div class="row align-items-start col d-flex justify-content-center">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+                                            <div class="col">
+                                                <li class="list-group-item"><b>Nombre:</b> {{ publicacion.nombre }}</li>
+                                                <li class="list-group-item"><b>Raza:</b> {{ publicacion.raza }}</li>
+                                                <li class="list-group-item"><b>Color:</b> {{ publicacion.color }}</li>
+                                                <li class="list-group-item"><b>Edad:</b> {{ publicacion.edad }}</li>
+                                                <li class="list-group-item"><b>Descripcion:</b> {{ publicacion.descripcion }}</li>
+                                                <li class="list-group-item"><b>Fecha de Publicación:</b> {{ publicacion.fecha_publicacion }}</li>
+                                                {% if publicacion.encontrado %}
+                                                <li class="list-group-item"><b>Fecha de Encuentro:</b> {{ publicacion.fecha_encontrado }}</li>
+                                                {% endif %}
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/media/{{ publicacion.imagen }}" class="img-fluid rounded-start rounded-end" alt="imagen">
+                                {% if publicacion.encontrado %}
+                                    <li class="list-group-item" style="color:green;">¡Encontrado!</li>
+                                {% elif user.is_authenticated %}
+                                    <p style="color:red;">Perdido</p>
+                                {% endif %}
+                            </div>
+                            <div class="row align-items-start col d-flex justify-content-center">
+                                {% if not publicacion.encontrado %}
+                                    {% if user.is_authenticated %}
+                                        <td><a href="{% url 'busqueda:info' id=publicacion.id %}" class="btn btn-secondary" style="max-width: 200px; margin: 5px;">Ver Informacion</a> </td>
+                                    {% endif %}
+                                {% endif %}
+                                {% if user.is_authenticated and user.is_staff or publicacion.publicador == user and user.is_authenticated %}
+                                    <a href="{% url 'busqueda:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger" style="max-width: 200px; margin: 5px">Eliminar publicación</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3>No hay perros perdidos publicados.</h3>
+    {% endif %}
+</div>
+{% endblock %}

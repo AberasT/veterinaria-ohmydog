@@ -10,38 +10,38 @@
     <h5>El contacto ha sido solicitado, se le informará vía mail cuando tenga la aprobación de un veterinario</h5>
     {% endif %}
     {% if cuidadores %}
-    <h3>Cuidadores/paseadores: </h3>
-    {% for cuidador in cuidadores %}
-    <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-        <li class="list-group-item">Nombre completo: {{ cuidador.nombre_completo }}</li>
-        <li class="list-group-item">Edad: {{ cuidador.edad }}</li>
-        <li class="list-group-item">Horarios: {{  cuidador.horario_inicial }} - {{ cuidador.horario_final }}</li>
-        <li class="list-group-item">Experiencia: {{ cuidador.experiencia }}</li>
-        <li class="list-group-item">Con nosotros desde: {{ cuidador.tiempo_con_veterinaria }}</li>
-        {% if user.is_authenticated and not user.is_staff %}
-        {% if cuidador in cuidadores_solicitados %}
-        <li class="list-group-item"><a class="btn btn-secondary disabled" aria-disabled="true">Esperando aprobación</a></li>
-        {% elif cuidador in cuidadores_aprobados %}
-        <li class="list-group-item"><h6>Contacto: {{ cuidador.contacto }}</h6></li>
-        {% else %}
-        <li class="list-group-item"><a href="{% url 'cuidadores:solicitar' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
-        {% endif %}
-        {% elif not user.is_staff %}
-        <li class="list-group-item"><a href="{% url 'cuidadores:solicitar_visitante' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
-        {% endif %}
-        {% if user.is_authenticated and user.is_staff %}
-        <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
-        <li class="list-group-item"><a href="{% url 'cuidadores:eliminar' id=cuidador.id %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-danger">Eliminar cuidador/paseador</a></li>
-        <li class="list-group-item"><a href="{% url 'cuidadores:modificar' id=cuidador.id %}" class="btn btn-secondary">Modificar cuidador/paseador</a></li>
-        {% if cuidador in cuidadores_sin_aprobar %}
-        <li class="list-group-item"><a href="{% url 'cuidadores:listar_solicitudes' id=cuidador.id %}" class="btn btn-primary">Ver solicitudes de contacto</a></li>
-        {% endif %}
-        {% endif %}
-    </ul>
-    <hr>
-    {% endfor %}
+        <h3>Cuidadores/paseadores: </h3>
+        {% for cuidador in cuidadores %}
+            <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+            <li class="list-group-item">Nombre completo: {{ cuidador.nombre_completo }}</li>
+            <li class="list-group-item">Edad: {{ cuidador.edad }}</li>
+            <li class="list-group-item">Horarios: {{  cuidador.horario_inicial }} - {{ cuidador.horario_final }}</li>
+            <li class="list-group-item">Experiencia: {{ cuidador.experiencia }}</li>
+            <li class="list-group-item">Con nosotros desde: {{ cuidador.tiempo_con_veterinaria }}</li>
+            {% if user.is_authenticated and not user.is_staff %}
+                {% if cuidador in cuidadores_solicitados %}
+                    <li class="list-group-item"><a class="btn btn-secondary disabled" aria-disabled="true">Esperando aprobación</a></li>
+                {% elif cuidador in cuidadores_aprobados %}
+                    <li class="list-group-item"><h6>Contacto: {{ cuidador.contacto }}</h6></li>
+                {% else %}
+                    <li class="list-group-item"><a href="{% url 'cuidadores:solicitar' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
+                {% endif %}
+            {% elif not user.is_staff %}
+                <li class="list-group-item"><a href="{% url 'cuidadores:solicitar_visitante' id=cuidador.id %}" class="btn btn-primary">Solicitar contacto</a></li>
+            {% endif %}
+            {% if user.is_authenticated and user.is_staff %}
+                <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
+                <li class="list-group-item"><a href="{% url 'cuidadores:eliminar' id=cuidador.id %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-danger">Eliminar cuidador/paseador</a></li>
+                <li class="list-group-item"><a href="{% url 'cuidadores:modificar' id=cuidador.id %}" class="btn btn-secondary">Modificar cuidador/paseador</a></li>
+                {% if cuidador in cuidadores_sin_aprobar %}
+                    <li class="list-group-item"><a href="{% url 'cuidadores:listar_solicitudes' id=cuidador.id %}" class="btn btn-primary">Ver solicitudes de contacto</a></li>
+                {% endif %}
+            {% endif %}
+            <hr>
+            </ul>  
+        {% endfor %}
     {% else %}
-    <h3>No hay cuidadores/paseadores publicados.</h3>
+        <h3>No hay cuidadores/paseadores publicados.</h3>
     {% endif %}
 </div>
 

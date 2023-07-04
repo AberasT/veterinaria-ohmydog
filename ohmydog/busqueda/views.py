@@ -11,7 +11,7 @@ def listar(request):
     contexto={
         "publicaciones": PerroPerdido.objects.all
     }
-    return render(request, "busqueda/listar.html", contexto)
+    return render(request, "busqueda/index.html", contexto)
 
 @login_required
 def publicar_perro(request):
