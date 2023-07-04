@@ -2,9 +2,7 @@
 
 {% block body %}
 <div class="text-center">
-    <div class="text-left">
-        <a href="{% url 'adopcion:index' %}" class="btn btn-secondary">Volver a Adopción</a></td><br><hr>
-    </div>
+    <a href="{% url 'adopcion:index' %}" class="btn btn-secondary">Volver a Adopción</a></td><br><hr>
     
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
         <li class="list-group-item active">Nombre: {{ perro.nombre }}</li>
