@@ -1,7 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
-
 <div class="text-center">
+  <a href="{% url 'usuarios:index' %}" class="btn-volver btn btn-outline-secondary">Volver a Clientes</a><br><hr>
     {% if not cliente.is_staff %}
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
       <li class="list-group-item active">Email: {{ cliente.email }}</li>
@@ -49,6 +49,6 @@
     {% else %}
     <h3>El DNI no es válido.</h3>
     {% endif %}
-</div>
+</div> <br> <br>
 
 {% endblock %}

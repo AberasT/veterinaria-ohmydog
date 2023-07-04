@@ -1,6 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
+    <a href="{% url 'turnos:index' %}" class="btn-volver btn btn-outline-secondary">Volver a Turnos</a><br><hr>
     <h3>Seleccione la fecha para consultar los turnos:</h3>
     <form method="POST" action="">
         {% csrf_token %}
@@ -26,7 +27,9 @@
         <tr>
             <th scope="row">{{ turno.hora }}</th>
             <td>{{ turno.motivo }}</td>
-            <td>{{ turno.perro.nombre }}</td>
+            <td>
+                <a href="{% url 'perros:info' id=turno.perro.id %}" class="">{{ turno.perro.nombre }}</a>
+            </td>
             <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
             <td>{{ turno.detalles }}</td>
             {% if turno.asistido %}
@@ -57,7 +60,9 @@
         {% for turno in turnosFechaPendientes %}
         <tr>
             <td>{{ turno.motivo }}</td>
-            <td>{{ turno.perro.nombre }}</td>
+            <td>
+                <a href="{% url 'perros:info' id=turno.perro.id %}" class="">{{ turno.perro.nombre }}</a>
+            </td>
             <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
             <td>{{ turno.detalles }}</td>
         </tr>
@@ -68,5 +73,5 @@
     <h5>No se han encontrado turnos pendientes de confirmación para la fecha seleccionada.</h5>
         {% endif %}
     {% endif %}
-</div>
+</div> <br> <br>
 {% endblock %}

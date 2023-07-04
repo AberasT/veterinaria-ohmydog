@@ -1,8 +1,8 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <a href="{% url 'perros:info' id=perro.id %}" class="btn btn-secondary">Volver al perfil</a></td><br><hr>
-    <h5>Modificar atención</h5><br>
+    <a href="{% url 'perros:info' id=perro.id %}" class="btn-volver btn btn-secondary">Volver al perfil</a><br><hr>
+    <p class="display-6">Modificar atención</p><br>
     <form method="POST" action="">
         {% csrf_token %}
         {% for error in form.fecha.errors %}
@@ -21,6 +21,6 @@
         <br><br>
         <input class="btn btn-primary" type="submit" name="Guardar cambios" value="Guardar cambios">
     </form>
-</div>
+</div><br><br>
 
 {% endblock %}

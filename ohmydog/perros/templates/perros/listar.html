@@ -3,9 +3,8 @@
 
 <div class="text-center">
   {% if inactivos or inactivos_responsable %}
-  <a href="{% url 'perros:historial_perros' %}" class="btn btn-primary">Historial de perros</a></td>
+  <a href="{% url 'perros:historial_perros' %}" class="btn btn-secondary">Historial de perros</a><br> <hr>
   {% endif %}
-  <br> <br>
     {% if perros %}
     <table class="table">
         <thead>
@@ -31,6 +30,6 @@
     {% else %}
     <h3>No hay perros registrados</h3>
     {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}

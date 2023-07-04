@@ -5,9 +5,9 @@
   <div class="text-center">
     <a href="{% url 'usuarios:registrar_cliente'  %}" class="btn btn-success">Registrar cliente</a>
     {% if inactivos %}
-      <a href="{% url 'usuarios:historial_clientes' %}" class="btn btn-primary">Historial de clientes</a></td>
+      <a href="{% url 'usuarios:historial_clientes' %}" class="btn btn-secondary">Historial de clientes</a></td>
     {% endif %}
-  </div> <br> <br>
+  </div> <hr>
     {% if clientes %}
     <h3>Listado de clientes registrados</h3>
   <table class="table">
@@ -37,6 +37,6 @@
   {% else %}
   <h3>No hay clientes registrados</h3>
   {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}

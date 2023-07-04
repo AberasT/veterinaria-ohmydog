@@ -4,7 +4,7 @@
 
 <div class="text-center">
     {% if user.is_authenticated and user.is_staff %}
-    <a href="{% url 'cuidadores:registrar' %}" class="btn btn-success">Publicar nuevo cuidador/paseador</a> <br><br>
+    <a href="{% url 'cuidadores:registrar' %}" class="btn btn-success">Publicar nuevo cuidador/paseador</a> <br><hr>
     {% endif %}
     {% if solicito %}
     <h5>El contacto ha sido solicitado, se le informará vía mail cuando tenga la aprobación de un veterinario</h5>

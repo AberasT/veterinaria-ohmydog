@@ -1,6 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
+    <a href="{% url 'turnos:asignar_elegir' %}" class="btn-volver btn btn-outline-secondary">Volver a elegir</a><br><hr>
     {% for error in form.hora.errors %}
     <div class="alert alert-danger">
         {{ error }}
@@ -11,12 +12,7 @@
         {{ error }}
     </div>
     {% endfor %}
-    {% for error in form.motivo.errors %}
-    <div class="alert alert-danger">
-        {{ error }}
-    </div>
-    {% endfor %}
-    <h5>Turno para {{ perro.nombre }}</h5>
+    <p class="display-6">Asignar turno para {{ perro.nombre }}</p> <br>
     {% if motivoSolicitado %}
     <h6>Asignación de turno solicitado previamente</h6>
     <h6>Debe elegir la fecha y la hora</h6>
@@ -52,10 +48,10 @@
     <br><br>
     <h5>{{ perro.nombre }} ya tiene los siguientes turnos asignados:</h5>
     {% for turno in turnosAsignados %}
-    <h6>{{ turno }}</h6>
+    <p class="lead">{{ turno }}</p>
     {% endfor %}
     {% endif %}
-</div>
+</div><br><br>
 
 
 {% endblock %}

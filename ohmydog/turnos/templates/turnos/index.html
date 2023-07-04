@@ -7,9 +7,9 @@
     <a href="{% url 'turnos:mis_turnos'  %}" class="btn btn-success">Mis turnos</a>
     {% elif user.is_authenticated and user.is_staff%}
     <a href="{% url 'turnos:asignar_elegir'  %}" class="btn btn-success">Asignar Turno</a>
-    <br><hr>
+    <br><br>
     <a href="{% url 'turnos:turnos_fecha'  %}" class="btn btn-success">Consultar turnos por fecha</a>
-    <hr>
+    <br><br>
     <a href="{% url 'turnos:confirmar_asistencia'  %}" class="btn btn-success">Confirmar asistencias</a>
     <hr>
     {% if turnos_hoy %}
@@ -22,6 +22,6 @@
     <h5>No hay turnos para hoy</h5>
     {% endif %}
     {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}

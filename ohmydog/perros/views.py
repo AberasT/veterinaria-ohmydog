@@ -25,6 +25,7 @@ def registrar(request, id):
     cliente = Usuario.objects.get(id=id)
     form = RegistrarPerroForm()
     contexto = {
+        "cliente": cliente,
         "form": form
         }
     
@@ -86,6 +87,7 @@ def modificar(request, id):
     cliente = perro.responsable
     form = RegistrarPerroForm(instance=perro)
     contexto = {
+        "perro": perro,
         "form": form
     }
     if request.method == "POST":

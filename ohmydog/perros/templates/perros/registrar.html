@@ -1,6 +1,8 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
+    <a href="{% url 'usuarios:info' id=cliente.id %}" class="btn-volver btn btn-outline-secondary">Volver al cliente</a><br><hr>
+    <p class="display-6">Registro de perro</p><br>
     <form method="POST" action="">
         {% csrf_token %}
         {% for error in form.nombre.errors %}
@@ -8,7 +10,6 @@
                 {{ error }}
             </div>
         {% endfor %}
-        <br><br>
             {{ form.nombre.label }}
             {{ form.nombre }}
         <br><br>
@@ -30,8 +31,8 @@
             {{ form.peso.label }}
             {{ form.peso }}
         <br><br>
-        <input class="btn btn-secondary" type="submit" name="Registrar perro" value="Registrar perro">
+        <input class="btn btn-primary" type="submit" name="Registrar perro" value="Registrar perro">
     </form>
-</div>
+</div><br><br>
 
 {% endblock %}

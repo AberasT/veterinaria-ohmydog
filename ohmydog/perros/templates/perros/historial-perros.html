@@ -2,8 +2,9 @@
 {% block body %}
 
 <div class="text-center">
+  <a href="{% url 'perros:index' %}" class="btn-volver btn btn-outline-secondary">Volver a Perros</a><br><hr>
     {% if recupero %}
-        <h5>El perro fue recuperado correctamente.</h5>
+        <h4>El perro fue recuperado correctamente.</h4>
     {% endif %}
     {% if perros or perros_responsable %}
     {% if perros %}
@@ -54,8 +55,8 @@
       </table>
     {% endif %}
     {% else %}
-    <h3>No eliminó ningún perro ni tampoco hay ningún perro con cliente inactivo hasta ahora</h3>
+    <h5>No eliminó ningún perro ni tampoco hay ningún perro con cliente inactivo hasta ahora</h5>
     {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}
