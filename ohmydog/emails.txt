@@ -205,3 +205,11 @@ El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
 Fecha: 2023-08-10
 Motivo: desparasitacion
 Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: josefernandez@hotmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Amadeo para la siguiente fecha: 
+Fecha: 2023-07-03
+Hora: 16:30:00

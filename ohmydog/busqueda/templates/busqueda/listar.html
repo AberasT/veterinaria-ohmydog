@@ -35,7 +35,9 @@
                     <td>{{ publicacion.color }}</td>
                     <td>{{ publicacion.edad }}</td>
                     <td>{{ publicacion.descripcion }} </td>
-                    <td>{{ publicacion.imagen }} </td>
+                    <td>
+                        <img src="/media/{{ publicacion.imagen }}" class="img-fluid" alt="imagen" style="max-height: 200px;">
+                    </td>
                     <td>{{ publicacion.fecha_publicacion }} </td>
                     {% if publicacion.fecha_encontrado == None %}
                         <td> - </td>
