@@ -2,6 +2,7 @@
 {% block body %}
 
 <div class="text-center">
+    <a href="{% url 'cuidadores:index' %}" class="btn btn-secondary">Volver al Cuidadores/Paseadores</a></td><br><hr>
     {% if aceptada %}
     <h5>El contacto del cuidador/paseador fue enviado.</h5>
     {% endif %}
