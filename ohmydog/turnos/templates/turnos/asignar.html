@@ -1,7 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <a href="{% url 'turnos:asignar_elegir' %}" class="btn-volver btn btn-outline-secondary">Volver a elegir</a><br><hr>
+    <a href="{% url 'turnos:asignar_elegir' %}" class="btn-sm btn btn-outline-secondary">Volver a elegir</a><br><hr>
     {% for error in form.hora.errors %}
     <div class="alert alert-danger">
         {{ error }}
@@ -18,7 +18,7 @@
     <h6>Debe elegir la fecha y la hora</h6>
     <h6>No se guardarán cambios al motivo y/o detalles</h6>
     {% endif %}
-    <form method="POST" action="">
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {% csrf_token %}
         {{ form.fecha.label }}
@@ -41,7 +41,7 @@
         {{ form.detalles }}<br><br>
         {% endif %}
         
-        <input class="btn btn-secondary" type="submit" name="Confirmar" value="Confirmar">
+        <input class="btn omdnaranja btn-light" type="submit" name="Confirmar" value="Confirmar">
     </form>
 
     {% if turnosAsignados %}

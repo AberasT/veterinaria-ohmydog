@@ -1,7 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <a href="{% url 'turnos:elegir_perro' %}" class="btn-volver btn btn-outline-secondary">Volver a elegir</a><br><hr>
+    <a href="{% url 'turnos:elegir_perro' %}" class="btn-sm btn btn-outline-secondary">Volver a elegir</a><br><hr>
     {% if turnosPendientes %}
     <h4 class="text-danger">Atención:</h4>
     <h5 class="text-danger-emphasis">Sólo podrá solicitar un turno para {{ perro.nombre }} si no posee actualmente un turno pendiente con el mismo motivo.</h5>
@@ -24,7 +24,7 @@
     {% endfor %}
     {% if form %}
     <p class="display-6">Turno para {{ perro.nombre }}</p><br>
-    <form method="POST" action="">
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {{ form.fecha.label }}
         {{ form.fecha }}
@@ -38,7 +38,7 @@
         {{ form.detalles }}
         <br>
         <br>
-        <input class="btn btn-secondary" type="submit" name="Solicitar turno" value="Solicitar turno">
+        <input class="btn omdnaranja btn-light" type="submit" name="Solicitar turno" value="Solicitar turno">
     </form>
     {% else %}
     <h3>Debe seleccionar uno de sus perros registrados para solicitar turno</h3>

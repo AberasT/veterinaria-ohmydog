@@ -1,12 +1,12 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <a href="{% url 'turnos:index' %}" class="btn-volver btn btn-outline-secondary">Volver a Turnos</a><br><hr>
+    <a href="{% url 'turnos:index' %}" class="btn-sm btn btn-outline-secondary">Volver a Turnos</a><br><hr>
     <h3>Por favor, elija el perro para solicitar el turno:</h3>
-    <form method="POST" action="">
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {{ form.as_p }}
-        <input class="btn btn-primary" type="submit" name="Continuar" value="Continuar">
+        <input class="btn omdnaranja btn-light" type="submit" name="Continuar" value="Continuar">
     </form>
 </div><br><br>
 

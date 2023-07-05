@@ -1,9 +1,9 @@
 {% extends 'main/layout.html' %}
 {% block body %}
 <div class="text-center">
-    <a href="{% url 'cuidadores:index' %}" class="btn-volver btn btn-secondary">Volver al Cuidadores/Paseadores</a><br><hr>
+    <a href="{% url 'cuidadores:index' %}" class="btn-sm btn btn-outline-secondary">Volver al Cuidadores/Paseadores</a><br><hr>
     <p class="display-6">Modificar publicación de cuidador/paseador</p><br>
-    <form method="POST" action="">
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {% for error in form.contacto.errors %}
         <div class="alert alert-danger">
@@ -29,7 +29,7 @@
         {{ form.contacto.label }}
         {{ form.contacto }}
         <br><br>
-        <input class="btn btn-primary" type="submit" name="Guardar Cambios" value="Guardar Cambios">
+        <input class="btn omdnaranja btn-light" type="submit" name="Guardar Cambios" value="Guardar Cambios">
     </form>
 </div><br><br>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <a href="{% url 'turnos:index' %}" class="btn-volver btn btn-outline-secondary">Volver a Turnos</a><br><hr>
+    <a href="{% url 'turnos:index' %}" class="btn-sm btn btn-outline-secondary">Volver a Turnos</a><br><hr>
     {% if turnosPasados %}
     <h4>Turnos para confirmar asistencia:</h4>
     <table class="table">
