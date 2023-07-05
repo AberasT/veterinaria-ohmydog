@@ -35,11 +35,11 @@
                 {% else %}
                     <td>{{ publicacion.fecha_adopcion }} </td>
                 {% endif %}
-                <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-sm btn-info">Ver Información</a></td>
+                <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-sm btn-info">Ver pnformación</a></td>
                 {% if not publicacion.adoptado %}
                 <td scope="row"><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-sm btn-outline-dark" onclick="return confirm('Marcar perro como adoptado? Esta acción no podrá deshacerse');">Marcar como Adoptado</a></td>
-                <td scope="row"><a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-sm btn-secondary">Modificar Publicación</a></td>
-                <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-sm btn-danger">Eliminar Publicación</a></td>
+                <td scope="row"><a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-sm btn-secondary">Modificar publicación</a></td>
+                <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-sm btn-danger">Eliminar publicación</a></td>
                 {% else %}
                 <td scope="row" style="color:green;">¡Adoptado!</td>
                 {% endif %}
