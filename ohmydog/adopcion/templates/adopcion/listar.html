@@ -9,52 +9,33 @@
     <hr>
     {% endif %}
     {% if publicaciones %}
-    <h3>Listado de perros en adopción</h3><br>
-    <table class="table-custom table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Raza</th>
-                <th scope="col">Color</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Fecha de Publicacion</th>
-                <th scope="col">Fecha de Adopción</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for publicacion in publicaciones %}
-            <tr>
-                <th scope="row">{{ publicacion.nombre }}</th>
-                <td>{{ publicacion.raza }}</td>
-                <td>{{ publicacion.color }}</td>
-                <td>{{ publicacion.edad }}</td>
-                <td>{{ publicacion.descripcion }} </td>
-                <td>{{ publicacion.fecha_publicacion }} </td>
-                {% if publicacion.fecha_adopcion == None %}
-                    <td> - </td>
-                {% else %}
-                    <td>{{ publicacion.fecha_adopcion }} </td>
-                {% endif %}
-                {% if publicacion.adoptado %}
-                    <td style="color:green;">¡Adoptado!</td>
-                {% elif user.is_authenticated %}
-                    <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-sm btn-secondary">Ver información</a></td>
-                {% endif %}
-                {% if user.is_staff or publicacion.publicador == user %}
-                    {% if not publicacion.adoptado %}
-                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn-sm btn btn-danger">Eliminar publicación</a></td>
-                    {% endif %}
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+    <h3>Perros en adopción</h3><br>
+    {% for perro in publicaciones %}
+    <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+        <li class="list-group-item text-white omdazul"><strong>Nombre: {{ perro.nombre }}</strong></li>
+        {% if perro.adoptado %}
+        <li class="list-group-item" style="color:green;"><strong>¡Adoptado!</strong> 😄</li>
+        <li class="list-group-item">Fecha de publicación: {{ perro.fecha_publicacion }}</li>
+        <li class="list-group-item">Fecha de adopción: {{ perro.fecha_adopcion }}</li>
+        {% endif %}
+        <li class="list-group-item">Raza: {{ perro.raza }}</li>
+        <li class="list-group-item">Color: {{ perro.color }}</li>
+        <li class="list-group-item">Edad: {{ perro.edad }}</li>
+        <li class="list-group-item">Descripción: {{ perro.descripcion }}</li>
+        {% if user.is_authenticated and not perro.adoptado %}
+        <li class="list-group-item">
+            <a href="{% url 'adopcion:info' id=perro.id %}" class="btn btn-sm btn-secondary">Ver información</a>
+        </li>
+        {% endif %}
+        {% if user.is_staff or perro.publicador == user %}
+            {% if not perro.adoptado %}
+            <li class="list-group-item">
+                <a href="{% url 'adopcion:eliminar' id=perro.id %}" onclick="return confirm('Eliminar publicación?');" class="btn-sm btn btn-danger">Eliminar publicación</a>
+            </li>
+            {% endif %}
+        {% endif %}
+    </ul><br><br>
+    {% endfor %}    
     {% else %}
     <h3>No hay perros publicados en adopción.</h3>
     {% endif %}
