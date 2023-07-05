@@ -10,7 +10,7 @@
     <h5>El contacto ha sido solicitado, se le informará vía mail cuando tenga la aprobación de un veterinario</h5>
     {% endif %}
     {% if cuidadores %}
-    <h3>Cuidadores/paseadores: </h3>
+    <h3>Cuidadores/paseadores disponibles</h3><br>
     {% for cuidador in cuidadores %}
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
         <li class="list-group-item">Nombre completo: {{ cuidador.nombre_completo }}</li>
@@ -31,8 +31,10 @@
         {% endif %}
         {% if user.is_authenticated and user.is_staff %}
         <li class="list-group-item">Contacto: {{ cuidador.contacto }}</li>
-        <li class="list-group-item"><a href="{% url 'cuidadores:eliminar' id=cuidador.id %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-danger">Eliminar cuidador/paseador</a></li>
-        <li class="list-group-item"><a href="{% url 'cuidadores:modificar' id=cuidador.id %}" class="btn btn-secondary">Modificar cuidador/paseador</a></li>
+        <li class="list-group-item">
+            <a href="{% url 'cuidadores:modificar' id=cuidador.id %}" class="btn btn-sm btn-secondary">Modificar cuidador/paseador</a>
+            <a href="{% url 'cuidadores:eliminar' id=cuidador.id %}" onclick="return confirm('Eliminar Cuidador/Paseador?');" class="btn btn-sm btn-danger">Eliminar cuidador/paseador</a>
+        </li>
         {% if cuidador in cuidadores_sin_aprobar %}
         <li class="list-group-item"><a href="{% url 'cuidadores:listar_solicitudes' id=cuidador.id %}" class="btn btn-info">Ver solicitudes de contacto</a></li>
         {% endif %}

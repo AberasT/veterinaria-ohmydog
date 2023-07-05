@@ -14,10 +14,31 @@
     <hr>
     {% if turnos_hoy %}
     <h3>Turnos de hoy</h3>
+    <table class="table-custom table">
+        <thead>
+            <tr>
+            <th scope="col">Hora</th>
+            <th scope="col">Perro</th>
+            <th scope="col">Motivo</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for turno in turnos_hoy %}
+        <tr>
+            <th scope="row">{{ turno.hora }}</th>
+            <td>
+                <a href="{% url 'perros:info' id=turno.perro.id %}" class="">{{ turno.perro.nombre }}</a>
+            </td>
+            <td>{{ turno.motivo }}</td>
+            <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
+            <td>{{ turno.detalles }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <br>
-    {% for turno in turnos_hoy %}
-    <h6>{{turno}}</h6>
-    {% endfor %}
     {% else %}
     <h5>No hay turnos para hoy</h5>
     {% endif %}

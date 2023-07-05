@@ -24,3 +24,8 @@
 .omdazul {
     background-color: #5fa9be;
 }
+
+.table-custom {
+    max-width: 90vw;
+    margin: 0 auto;
+}
