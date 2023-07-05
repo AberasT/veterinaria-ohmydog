@@ -8,7 +8,7 @@
       <div class="col col-1"></div>
       <div class="col">
         <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-          <li class="list-group-item active">Cliente: {{ perro.responsable.nombre }} {{ perro.responsable.apellido }}</li>
+          <li class="list-group-item omdazul text-white"><strong>Cliente: {{ perro.responsable.nombre }} {{ perro.responsable.apellido }}</strong></li>
           <li class="list-group-item">Nombre: {{ perro.nombre }}</li>
           <li class="list-group-item">Raza: {{ perro.raza }}</li>
           <li class="list-group-item">Color: {{ perro.color }}</li>
@@ -27,12 +27,12 @@
           <div class="row justify-content-md-center">
             <div class="row gy-2">
               <div class="col">
-                <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-primary">Agregar Vacuna</a>
+                <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-info">Agregar Vacuna</a>
               </div>
             </div>
             <div class="row gy-2">
               <div class="col">
-                <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-primary">Agregar Atención</a>
+                <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-info">Agregar Atención</a>
               </div>
             </div>
             <div class="row gy-2">

@@ -26,7 +26,7 @@
       <td>{{ cliente.apellido }}</td>
       <td>{{ cliente.email }}</td>
       <td>{{ cliente.telefono }}</td>
-      <td><a href="{% url 'usuarios:recuperar_cliente' id=cliente.id %}" class="btn btn-primary">Recuperar cliente</a></td>
+      <td><a href="{% url 'usuarios:recuperar_cliente' id=cliente.id %}" class="btn btn-info">Recuperar cliente</a></td>
     </tr>
     {% endfor %}
     </tbody>

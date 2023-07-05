@@ -35,7 +35,7 @@
                 {% else %}
                     <td>{{ publicacion.fecha_adopcion }} </td>
                 {% endif %}
-                <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
+                <td scope="row"><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-info">Ver Informacion</a></td>
                 {% if not publicacion.adoptado %}
                 <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
                 <td scope="row"><a href="{% url 'adopcion:marcar_adoptado' id=publicacion.id %}" class="btn btn-success" onclick="return confirm('Marcar perro como adoptado? Esta acción no podrá deshacerse');">Marcar como Adoptado</a></td>

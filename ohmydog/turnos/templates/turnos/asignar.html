@@ -12,6 +12,11 @@
         {{ error }}
     </div>
     {% endfor %}
+    {% for error in form.motivo.errors %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
     <p class="display-6">Asignar turno para {{ perro.nombre }}</p> <br>
     {% if motivoSolicitado %}
     <h6>Asignación de turno solicitado previamente</h6>

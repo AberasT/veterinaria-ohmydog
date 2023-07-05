@@ -25,7 +25,7 @@
             <td>{{ solicitud.nombre }}</td>
             <td>{{ solicitud.apellido }}</td>
             <td>{{ solicitud.email }}</td>
-          <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-primary">Aceptar</a></td>
+          <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-info">Aceptar</a></td>
           <td><a href="{% url 'cuidadores:rechazar_solicitud' id=solicitud.id %}" class="btn btn-danger">Rechazar</a></td>
         </tr>
         {% endfor %}

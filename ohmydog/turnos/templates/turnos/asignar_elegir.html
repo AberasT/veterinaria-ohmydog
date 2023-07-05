@@ -19,7 +19,7 @@
         <th scope="row">{{ perro.nombre }}</th>
         <td>{{ perro.responsable.email }}</td>
         <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
-        <td><a href="{% url 'turnos:asignar' id=perro.id %}" class="btn btn-primary">Elegir</a></td>
+        <td><a href="{% url 'turnos:asignar' id=perro.id %}" class="btn btn-info">Elegir</a></td>
       </tr>
       {% endfor %}
       </tbody>

@@ -252,3 +252,53 @@ Contenido:
 Se confirmó su turno para Dante para la siguiente fecha: 
 Fecha: 2023-07-04
 Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Pompona para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 16:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 12:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 18:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-05
+Motivo: 
+Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-05
+Motivo: 
+Perro: Pompona

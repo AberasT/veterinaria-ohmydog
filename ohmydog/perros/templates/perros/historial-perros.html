@@ -25,7 +25,7 @@
           <td>{{ perro.raza }}</td>
           <td>{{ perro.color }}</td>
           <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
-          <td><a href="{% url 'perros:recuperar_perro' id=perro.id %}" class="btn btn-primary">Recuperar perro</a></td>
+          <td><a href="{% url 'perros:recuperar_perro' id=perro.id %}" class="btn btn-info">Recuperar perro</a></td>
         </tr>
         {% endfor %}
         </tbody>
