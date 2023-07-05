@@ -72,8 +72,8 @@
                 <td>{{ atencion.descripcion }}</td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn btn-secondary">Modificar</a>
-                    <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn-sm btn btn-secondary">Modificar</a>
+                    <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn-sm btn btn-danger">Eliminar</a>
                   </div>
                 </td>
               </tr>
@@ -103,8 +103,8 @@
                 <td>{{ vacuna.dosis }}</td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-secondary">Modificar</a>
-                    <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-sm btn-secondary">Modificar</a>
+                    <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn-sm btn btn-danger">Eliminar</a>
                   </div>
                 </td>
               </tr>

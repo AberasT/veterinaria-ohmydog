@@ -3,14 +3,14 @@
 
 <div class="text-center">
     {% if user.is_authenticated and not user.is_staff %}
-    <a href="{% url 'turnos:elegir_perro'  %}" class="btn btn-success">Solicitar Turno</a>
-    <a href="{% url 'turnos:mis_turnos'  %}" class="btn btn-success">Mis turnos</a>
+    <a href="{% url 'turnos:elegir_perro'  %}" class="btn btn-outline-dark">Solicitar Turno</a>
+    <a href="{% url 'turnos:mis_turnos'  %}" class="btn btn-outline-dark">Mis turnos</a>
     {% elif user.is_authenticated and user.is_staff%}
-    <a href="{% url 'turnos:asignar_elegir'  %}" class="btn btn-success">Asignar Turno</a>
+    <a href="{% url 'turnos:asignar_elegir'  %}" class="btn btn-outline-dark">Asignar Turno</a>
     <br><br>
-    <a href="{% url 'turnos:turnos_fecha'  %}" class="btn btn-success">Consultar turnos por fecha</a>
+    <a href="{% url 'turnos:turnos_fecha'  %}" class="btn btn-outline-dark">Consultar turnos por fecha</a>
     <br><br>
-    <a href="{% url 'turnos:confirmar_asistencia'  %}" class="btn btn-success">Confirmar asistencias</a>
+    <a href="{% url 'turnos:confirmar_asistencia'  %}" class="btn btn-outline-dark">Confirmar asistencias</a>
     <hr>
     {% if turnos_hoy %}
     <h3>Turnos de hoy</h3>

@@ -3,13 +3,13 @@
 
 <div class="text-center">
     {% if request.user.is_authenticated %}
-    <a href="{% url 'adopcion:publicar' %}" class="btn btn-success">Publicar Perro para Adopción</a>
-    <a href="{% url 'adopcion:mis_publicaciones' %}" class="btn btn-success">Mis Publicaciones</a>
+    <a href="{% url 'adopcion:publicar' %}" class="btn btn-outline-dark">Publicar Perro para Adopción</a>
+    <a href="{% url 'adopcion:mis_publicaciones' %}" class="btn btn-outline-dark">Mis Publicaciones</a>
     <br>
     <hr>
     {% endif %}
     {% if publicaciones %}
-    <h3>Listado de perros en adopción:</h3>
+    <h3>Listado de perros en adopción</h3><br>
     <table class="table">
         <thead>
             <tr>
@@ -43,11 +43,11 @@
                 {% if publicacion.adoptado %}
                     <td style="color:green;">¡Adoptado!</td>
                 {% elif user.is_authenticated %}
-                    <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-secondary">Ver Informacion</a></td>
+                    <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-sm btn-secondary">Ver información</a></td>
                 {% endif %}
                 {% if user.is_staff or publicacion.publicador == user %}
                     {% if not publicacion.adoptado %}
-                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
+                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn-sm btn btn-danger">Eliminar publicación</a></td>
                     {% endif %}
                 {% endif %}
             </tr>
@@ -58,5 +58,5 @@
     {% else %}
     <h3>No hay perros publicados en adopción.</h3>
     {% endif %}
-</div>
+</div><br><br>
 {% endblock %}
