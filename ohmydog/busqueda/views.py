@@ -29,17 +29,23 @@ def publicar_perro(request):
             edad = form.cleaned_data["edad"]
             peso = form.cleaned_data["peso"]
             altura = form.cleaned_data["altura"]
+            es_propio = form.cleaned_data["es_propio"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
             imagen = form.cleaned_data["imagen"]
-            nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo,
+            nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo, es_propio = es_propio,
                                                 edad=edad, peso=peso, altura=altura, contacto=contacto,
                                                 imagen=imagen, descripcion=descripcion, publicador=usuario)
             try:
                 nuevoPerroPerdido.save()
-                return render(request, "main/infomsj.html", {
-                    "msj": "El perro perdido se ha publicado exitosamente. Esperamos que sea encontrado pronto."
-                })
+                if es_propio:
+                    return render(request, "main/infomsj.html", {
+                        "msj": "El perro perdido se ha publicado exitosamente. Esperamos que sea encontrado pronto."
+                    })
+                else:
+                    return render(request, "main/infomsj.html", {
+                        "msj": "El perro perdido se ha publicado exitosamente. Esperamos que su dueño aparezca pronto."
+                    })
             except:
                 return render(request, "main/infomsj.html",{
                     "msj": "Ha ocurrido un error."

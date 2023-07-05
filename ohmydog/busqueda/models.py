@@ -28,7 +28,7 @@ class PerroPerdido(models.Model):
         ("Pastor Aleman", "PASTOR ALEMAN")
     ]
     id = models.BigAutoField(primary_key=True, verbose_name="id")
-    nombre = models.CharField(max_length=20, blank=False, null=True, default="")
+    nombre = models.CharField(max_length=20, blank=True, null=True, default="")
     sexo = models.CharField(
         max_length = 6,
         choices = SEXO_CHOICES
@@ -42,9 +42,10 @@ class PerroPerdido(models.Model):
     raza = models.CharField(max_length=20, choices=RAZA_CHOICES, null=True, default="")
     descripcion = models.CharField(max_length=500, blank=False, null=True, default="")
     imagen = models.ImageField(upload_to='images/')
-    encontrado = models.BooleanField(default=False)
+    perdido = models.BooleanField(default=True)
+    es_propio = models.BooleanField(default=True)
     fecha_publicacion = models.DateField(auto_now_add=True)
     fecha_encontrado = models.DateField(null=True, blank=True)
     publicador = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="publicador_perro_perdido")
 
-    REQUIRED_FIELDS = ["nombre", "color", "raza", "sexo", "edad", "peso", "contacto", "altura", "imagen"]
+    REQUIRED_FIELDS = ["color", "raza", "sexo", "edad", "peso", "contacto", "altura", "imagen"]

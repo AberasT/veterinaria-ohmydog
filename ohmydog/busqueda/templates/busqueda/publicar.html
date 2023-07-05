@@ -1,43 +1,46 @@
-{% extends 'main/layout.html' %}
+{% extends "main/layout.html" %}
 {% block body %}
     <div class="text-center">
         <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
-            {% for error in form.nombre.errors %}
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
             {% endfor %}
-
-            {{ form.nombre.label }}:
+            <br><br>
+            <b>{{ form.nombre.label }}:</b>
             {{ form.nombre }}
             <br><br>
-            {{ form.color.label }}:
+            <b>{{ form.color.label }}:</b>
             {{ form.color }}
             <br><br>
-            {{ form.raza.label }}:
+            <b>{{ form.raza.label }}:</b>
             {{ form.raza }}
             <br><br>
-            {{ form.sexo.label }}:
+            <b>¿Es su perro?:</b> {{ form.es_propio }}
+            <br><br>
+            <b>{{ form.sexo.label }}:</b>
             {{ form.sexo }}
             <br><br>
-            {{ form.edad.label }}:
+            <b>{{ form.edad.label }}:</b>
             {{ form.edad }}
             <br><br>
-            {{ form.peso.label }}:
+            <b>{{ form.peso.label }}:</b>
             {{ form.peso }}
             <br><br>
-            {{ form.altura.label }}:
+            <b>{{ form.altura.label }}:</b>
             {{ form.altura }}
             <br><br>
-            {{ form.contacto.label }}:
+            <b>{{ form.contacto.label }}:</b>
             {{ form.contacto }}
             <br><br>
-            {{ form.descripcion.label }}:
+            <b>{{ form.descripcion.label }}:</b>
             {{ form.descripcion }}
             <br><br>
             <b>{{ form.imagen.label }}</b>
             {{ form.imagen }}
+            <img id="display-img" />
             <br><br>
             <input class="btn btn-secondary" type="submit" name="Publicar Perro" value="Publicar Perro">
         </form>
