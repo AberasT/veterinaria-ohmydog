@@ -9,52 +9,6 @@
     <hr>
     {% endif %}
     {% if publicaciones %}
-<<<<<<< HEAD
-    <h3>Listado de perros en adopción:</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Raza</th>
-                <th scope="col">Color</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Fecha de Publicacion</th>
-                <th scope="col">Fecha de Adopcion</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for publicacion in publicaciones %}
-            <tr>
-                <th scope="row">{{ publicacion.nombre }}</th>
-                <td>{{ publicacion.raza }}</td>
-                <td>{{ publicacion.color }}</td>
-                <td>{{ publicacion.edad }}</td>
-                <td>{{ publicacion.descripcion }} </td>
-                <td>{{ publicacion.fecha_publicacion }} </td>
-                {% if publicacion.fecha_adopcion == None %}
-                    <td> - </td>
-                {% else %}
-                    <td>{{ publicacion.fecha_adopcion }} </td>
-                {% endif %}
-                {% if publicacion.adoptado %}
-                    <td style="color:green;">¡Adoptado!</td>
-                {% elif user.is_authenticated %}
-                    <td><a href="{% url 'adopcion:info' id=publicacion.id %}" class="btn btn-primary">Ver Informacion</a></td>
-                {% endif %}
-                {% if user.is_authenticated and user.is_staff or publicacion.publicador == user and user.is_authenticated %}
-                    <td><a href="{% url 'adopcion:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger">Eliminar publicación</a></td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-=======
     <h3>Perros en adopción</h3><br>
     {% for perro in publicaciones %}
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
@@ -82,7 +36,6 @@
         {% endif %}
     </ul><br><br>
     {% endfor %}    
->>>>>>> 0454dc0b5cdddbead798b9158e8db47e3bb4d53b
     {% else %}
     <h3>No hay perros publicados en adopción.</h3>
     {% endif %}

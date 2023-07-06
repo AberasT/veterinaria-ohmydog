@@ -17,6 +17,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Email</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -25,8 +26,10 @@
             <td>{{ solicitud.nombre }}</td>
             <td>{{ solicitud.apellido }}</td>
             <td>{{ solicitud.email }}</td>
-          <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-info">Aceptar</a></td>
-          <td><a href="{% url 'cuidadores:rechazar_solicitud' id=solicitud.id %}" class="btn btn-danger">Rechazar</a></td>
+          <td>
+            <a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-sm btn-info">Aceptar</a>
+            <a href="{% url 'cuidadores:rechazar_solicitud' id=solicitud.id %}" class="btn btn-sm btn-danger">Rechazar</a>
+          </td>
         </tr>
         {% endfor %}
         </tbody>
