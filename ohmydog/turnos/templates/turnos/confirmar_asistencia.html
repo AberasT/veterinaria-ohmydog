@@ -1,9 +1,10 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <h4>Turnos para confirmar asistencia:</h4>
+    <a href="{% url 'turnos:index' %}" class="btn-sm btn btn-outline-secondary">Volver a Turnos</a><br><hr>
     {% if turnosPasados %}
-    <table class="table">
+    <h4>Turnos para confirmar asistencia:</h4>
+    <table class="table-custom table">
         <thead>
             <tr>
                 <th scope="col">Fecha</th>
@@ -22,7 +23,7 @@
             <td>{{ turno.perro.responsable.apellido }} {{ turno.perro.responsable.nombre }}</td>
             <td>
                 <div class="btn-group" role="group">
-                    <a href="{% url 'turnos:turno_asistio' id=turno.id %}" class="btn btn-primary">Asistió</a>
+                    <a href="{% url 'turnos:turno_asistio' id=turno.id %}" class="btn btn-info">Asistió</a>
                     <a href="{% url 'turnos:turno_no_asistio' id=turno.id %}" onclick="return confirm('El turno se eliminará');" class="btn btn-secondary">No asistió</a>
                 </div>
             </td>
@@ -33,7 +34,7 @@
     {% else %}
     <h5>No hay turnos para confirmar asistencia.</h5>
     {% endif %}
-</div>
+</div><br><br>
 
 
 {% endblock %}

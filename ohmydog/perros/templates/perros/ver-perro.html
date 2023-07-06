@@ -1,13 +1,14 @@
 {% extends "main/layout.html" %}
 {% block body %}
-
 <div class="text-center">
+  <a href="{% url 'usuarios:info' id=perro.responsable.id %}" class="btn-sm btn btn-outline-secondary">Perfil del responsable</a>
+  <a href="{% url 'perros:index' %}" class="btn-sm btn btn-outline-secondary">Listado de Perros</a><br><hr>
   <div class="container text-center">
     <div class="row align-items-start">
       <div class="col col-1"></div>
       <div class="col">
         <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-          <li class="list-group-item active">Cliente: {{ perro.responsable.nombre }} {{ perro.responsable.apellido }}</li>
+          <li class="list-group-item omdazul text-white"><strong>Cliente: {{ perro.responsable.nombre }} {{ perro.responsable.apellido }}</strong></li>
           <li class="list-group-item">Nombre: {{ perro.nombre }}</li>
           <li class="list-group-item">Raza: {{ perro.raza }}</li>
           <li class="list-group-item">Color: {{ perro.color }}</li>
@@ -26,12 +27,12 @@
           <div class="row justify-content-md-center">
             <div class="row gy-2">
               <div class="col">
-                <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-primary">Agregar Vacuna</a>
+                <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-info">Agregar Vacuna</a>
               </div>
             </div>
             <div class="row gy-2">
               <div class="col">
-                <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-primary">Agregar Atención</a>
+                <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-info">Agregar Atención</a>
               </div>
             </div>
             <div class="row gy-2">
@@ -55,7 +56,7 @@
         <div class="col">
           {% if atenciones %}
           <h4>Atenciones</h4>
-          <table class="table">
+          <table class="table-custom table">
             <thead>
               <tr>
                 <th scope="col">Fecha</th>
@@ -71,8 +72,8 @@
                 <td>{{ atencion.descripcion }}</td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn btn-secondary">Modificar</a>
-                    <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn-sm btn btn-secondary">Modificar</a>
+                    <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn-sm btn btn-danger">Eliminar</a>
                   </div>
                 </td>
               </tr>
@@ -86,7 +87,7 @@
         <div class="col">
           {% if vacunas %}
           <h4>Vacunaciones</h4>
-          <table class="table">
+          <table class="table-custom table">
             <thead>
               <tr>
                 <th scope="col">Fecha</th>
@@ -102,8 +103,8 @@
                 <td>{{ vacuna.dosis }}</td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-secondary">Modificar</a>
-                    <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-sm btn-secondary">Modificar</a>
+                    <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn-sm btn btn-danger">Eliminar</a>
                   </div>
                 </td>
               </tr>
@@ -116,6 +117,6 @@
         </div>
       </div>
     </div>
-</div>
+</div><br><br>
 
 {% endblock %}

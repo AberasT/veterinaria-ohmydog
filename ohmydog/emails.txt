@@ -207,9 +207,115 @@ Motivo: desparasitacion
 Perro: Dante
 ------------------------------
 De: ohmydog@mail.com
+<<<<<<< HEAD
 Para: josefernandez@hotmail.com
 Asunto: Turno confirmado
 Contenido:
 Se confirmó su turno para Amadeo para la siguiente fecha: 
 Fecha: 2023-07-03
 Hora: 16:30:00
+=======
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de contacto con cuidador/paseador
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado el contacto del cuidador/paseador Pedro perez 
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@prueba.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Loli para la siguiente fecha: 
+Fecha: 2023-07-04
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-04
+Hora: 16:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Pompona para la siguiente fecha: 
+Fecha: 2023-07-04
+Hora: 20:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-04
+Motivo: desparasitación
+Perro: Pompona
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-04
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Pompona para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 16:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 12:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 18:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-05
+Motivo: 
+Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-05
+Motivo: 
+Perro: Pompona
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-05
+Hora: 16:00:00
+>>>>>>> 0454dc0b5cdddbead798b9158e8db47e3bb4d53b

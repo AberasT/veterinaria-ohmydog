@@ -5,6 +5,7 @@ from .models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario
 from atenciones.models import Vacuna, Atencion
+from turnos.models import Turno
 
 # VIEWS
 
@@ -24,6 +25,7 @@ def registrar(request, id):
     cliente = Usuario.objects.get(id=id)
     form = RegistrarPerroForm()
     contexto = {
+        "cliente": cliente,
         "form": form
         }
     
@@ -58,6 +60,10 @@ def eliminar(request, id):
     perro = Perro.objects.get(id=id)
     perro.activo = False
     perro.save()
+    turnosPerro = Turno.objects.filter(is_active=True, asistido=False, perro=perro)
+    for turno in turnosPerro:
+        turno.is_active = False
+        turno.save()
     return redirect("perros:index")
 
 @login_required
@@ -81,6 +87,7 @@ def modificar(request, id):
     cliente = perro.responsable
     form = RegistrarPerroForm(instance=perro)
     contexto = {
+        "perro": perro,
         "form": form
     }
     if request.method == "POST":

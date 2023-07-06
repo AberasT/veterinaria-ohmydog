@@ -1,9 +1,9 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <h3>Modificar datos del cliente</h3>
-    <p>Cambie los datos deseados:</p>
-    <form method="POST" action="">
+    <a href="{% url 'usuarios:info' id=cliente.id %}" class="btn-sm btn btn-outline-secondary">Volver al cliente</a><br><hr>
+    <p class="display-6">Modificar datos del cliente</p>
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {% for error in form.email.errors %}
         <div class="alert alert-danger">
@@ -11,7 +11,7 @@
         </div>
         {% endfor %}
         <h6>e-mail:
-        {{ email }}
+        {{ cliente.email }}
         </h6>
         <br>
         {{ form.dni.label }}
@@ -25,12 +25,9 @@
         <br><br>
         {{ form.telefono.label }}
         {{ form.telefono }}
-        <!-- <br><br>
-        {{ form.clave.label }}
-        {{ form.clave }} -->
         <br><br>
-        <input class="btn btn-secondary" type="submit" name="Guardar cambios" value="Guardar cambios">
+        <input class="btn omdnaranja btn-light" type="submit" name="Guardar cambios" value="Guardar cambios">
     </form>
-</div>
+</div><br><br>
 
 {% endblock %}

@@ -2,13 +2,14 @@
 {% block body %}
 
 <div class="text-center">
+  <a href="{% url 'perros:index' %}" class="btn-sm btn btn-outline-secondary">Volver a Perros</a><br><hr>
     {% if recupero %}
-        <h5>El perro fue recuperado correctamente.</h5>
+        <h4>El perro fue recuperado correctamente.</h4>
     {% endif %}
     {% if perros or perros_responsable %}
     {% if perros %}
     <h3>Listado de perros eliminados</h3>
-    <table class="table">
+    <table class="table-custom table">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -24,7 +25,7 @@
           <td>{{ perro.raza }}</td>
           <td>{{ perro.color }}</td>
           <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
-          <td><a href="{% url 'perros:recuperar_perro' id=perro.id %}" class="btn btn-primary">Recuperar perro</a></td>
+          <td><a href="{% url 'perros:recuperar_perro' id=perro.id %}" class="btn btn-info">Recuperar perro</a></td>
         </tr>
         {% endfor %}
         </tbody>
@@ -32,7 +33,7 @@
     {% endif %}
     {% if perros_responsable %}
     <h3>Listado de perros con cliente inactivo</h3>
-    <table class="table">
+    <table class="table-custom table">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -54,8 +55,8 @@
       </table>
     {% endif %}
     {% else %}
-    <h3>No eliminó ningún perro ni tampoco hay ningún perro con cliente inactivo hasta ahora</h3>
+    <h5>No eliminó ningún perro ni tampoco hay ningún perro con cliente inactivo hasta ahora</h5>
     {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}

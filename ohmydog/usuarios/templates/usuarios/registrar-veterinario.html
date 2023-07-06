@@ -1,13 +1,13 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <h3>Registro de veterinario</h3>
-    <p>Ingrese los datos del nuevo veterinario:</p>
-    <form method="POST" action="">
+    <a href="{% url 'main:index' %}" class="btn-sm btn btn-outline-secondary">Volver al inicio</a><br><hr>
+    <p class="display-6">Registrar veterinario</p>
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {{ form.as_p }}
-        <input class="btn btn-secondary" type="submit" name="Registrar veterinario" value="Registrar veterinario">
+        <input class="btn omdnaranja btn-light" type="submit" name="Registrar veterinario" value="Registrar veterinario">
     </form>
-</div>
+</div><br><br>
 
 {% endblock %}

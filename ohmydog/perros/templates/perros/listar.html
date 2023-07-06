@@ -3,11 +3,10 @@
 
 <div class="text-center">
   {% if inactivos or inactivos_responsable %}
-  <a href="{% url 'perros:historial_perros' %}" class="btn btn-primary">Historial de perros</a></td>
+  <a href="{% url 'perros:historial_perros' %}" class="btn btn-outline-secondary">Historial de perros</a><br> <hr>
   {% endif %}
-  <br> <br>
     {% if perros %}
-    <table class="table">
+    <table class="table-custom table">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -23,7 +22,7 @@
           <td>{{ perro.raza }}</td>
           <td>{{ perro.color }}</td>
           <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
-          <td><a href="{% url 'perros:info' id=perro.id %}" class="btn btn-primary">Ver perro</a></td>
+          <td><a href="{% url 'perros:info' id=perro.id %}" class="btn btn-sm btn-info">Ver perro</a></td>
         </tr>
         {% endfor %}
         </tbody>
@@ -31,6 +30,6 @@
     {% else %}
     <h3>No hay perros registrados</h3>
     {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}

@@ -25,14 +25,6 @@ def get_turnos_asignados(perro):
         turnosString.append(f"Una {turno.motivo} para el día {turno.fecha}, hora {turno.hora}.")
     return turnosString
 
-def get_turnos_hoy():
-    turnos_hoy = Turno.objects.filter(is_active=True, asistido=False, hora__isnull=False, fecha=datetime.date.today()).order_by("hora")
-    turnosString = []
-    for turno in turnos_hoy:
-        if turno.perro.activo and turno.perro.responsable_activo:
-            turnosString.append(f"{turno.hora} {turno.motivo} para {turno.perro.nombre} del cliente {turno.perro.responsable.nombre} {turno.perro.responsable.apellido}.")
-    return turnosString
-
 def set_opciones_perro(form, user):
     query = Perro.objects.filter(responsable=user, activo=True)
     choices = []
@@ -43,7 +35,7 @@ def set_opciones_perro(form, user):
 @login_required
 def index(request):
     contexto = {
-        "turnos_hoy": get_turnos_hoy()
+        "turnos_hoy": Turno.objects.filter(is_active=True, asistido=False, hora__isnull=False, fecha=datetime.date.today()).order_by("hora")
     }
     return render(request, "turnos/index.html", contexto)
 
@@ -179,7 +171,7 @@ def turnos_fecha(request):
     if request.method == "POST":
         form = ElegirFechaForm(request.POST)
         if form.is_valid():
-            turnosFechaAsignados = Turno.objects.filter(is_active=True, hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
+            turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
             turnosFechaPendientes = Turno.objects.filter(is_active=True, hora__isnull=True, fecha=form.cleaned_data["fecha"]).order_by("fecha")
         eligioFecha = True
     else:

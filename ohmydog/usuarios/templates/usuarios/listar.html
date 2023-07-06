@@ -3,14 +3,14 @@
 
 <div class="text-center">
   <div class="text-center">
-    <a href="{% url 'usuarios:registrar_cliente'  %}" class="btn btn-success">Registrar cliente</a>
+    <a href="{% url 'usuarios:registrar_cliente'  %}" class="btn btn-outline-dark">Registrar cliente</a>
     {% if inactivos %}
-      <a href="{% url 'usuarios:historial_clientes' %}" class="btn btn-primary">Historial de clientes</a></td>
+      <a href="{% url 'usuarios:historial_clientes' %}" class="btn btn-secondary">Historial de clientes</a></td>
     {% endif %}
-  </div> <br> <br>
+  </div> <hr>
     {% if clientes %}
     <h3>Listado de clientes registrados</h3>
-  <table class="table">
+  <table class="table-custom table">
     <thead>
       <tr>
         <th scope="col">DNI</th>
@@ -28,7 +28,7 @@
       <td>{{ cliente.apellido }}</td>
       <td>{{ cliente.email }}</td>
       <td>{{ cliente.telefono }}</td>
-      <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-primary">Ver cliente</a></td>
+      <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-sm btn-info">Ver cliente</a></td>
     </tr>
     {% endfor %}
     </tbody>
@@ -37,6 +37,6 @@
   {% else %}
   <h3>No hay clientes registrados</h3>
   {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}

@@ -1,7 +1,9 @@
 {% extends 'main/layout.html' %}
 {% block body %}
 <div class="text-center">
-    <form method="POST" action="">
+    <a href="{% url 'adopcion:mis_publicaciones' %}" class="btn-sm btn btn-outline-secondary">Volver a Mis publicaciones</a><br><hr>
+    <p class="display-6">Modificar publicación de adopción</p> <br>
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {% for error in form.nombre.errors %}
         <div class="alert alert-danger">
@@ -39,7 +41,7 @@
         {{ form.descripcion.label }}
         {{ form.descripcion }}
         <br><br>
-        <input class="btn btn-secondary" type="submit" name="Modificar publicacion" value="Modificar publicacion">
+        <input class="btn omdnaranja btn-light" type="submit" name="Modificar publicacion" value="Modificar publicacion">
     </form>
-</div>
+</div> <br><br>
 {% endblock %}

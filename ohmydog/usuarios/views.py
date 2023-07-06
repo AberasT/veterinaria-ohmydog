@@ -113,7 +113,7 @@ def modificar_cliente(request, id):
     form = ModificarUsuarioForm(instance=cliente)
     contexto = {
         "form": form,
-        "email": cliente.email
+        "cliente": cliente
         }
     if request.method == "POST":
         form = ModificarUsuarioForm(request.POST)

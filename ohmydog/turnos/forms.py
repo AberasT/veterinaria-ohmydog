@@ -88,6 +88,12 @@ class AsignarTurnoForm(ModelForm):
             raise ValidationError(f"Debe elegir un horario.")
         return hora
     
+    def clean_motivo(self):
+        motivo = self.cleaned_data.get('motivo')
+        if motivo == "":
+            raise ValidationError(f"Debe elegir un motivo.")
+        return motivo
+    
 class ElegirPerroForm(Form):
     perro = ChoiceField(choices=(("","")))
 

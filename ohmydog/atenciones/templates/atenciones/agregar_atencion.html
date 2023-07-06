@@ -1,8 +1,9 @@
 {% extends "main/layout.html" %}
 {% block body %}
 <div class="text-center">
-    <h5>Agregar atención a {{ perro.nombre }}</h5><br>
-    <form method="POST" action="">
+    <a href="{% url 'perros:info' id=perro.id %}" class="btn-sm btn btn-outline-secondary">Volver al perfil</a><br><hr>
+    <p class="display-6">Agregar atención a {{ perro.nombre }}</p><br>
+    <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {% for error in form.fecha.errors %}
         <div class="alert alert-danger">
@@ -15,8 +16,8 @@
         </div>
         {% endfor %}
         {{ form.as_p }}
-        <input class="btn btn-secondary" type="submit" name="Guardar" value="Guardar">
+        <input class="btn omdnaranja btn-light" type="submit" name="Guardar" value="Guardar">
     </form>
-</div>
+</div><br><br>
 
 {% endblock %}

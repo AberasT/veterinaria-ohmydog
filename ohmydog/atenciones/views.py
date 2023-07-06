@@ -79,6 +79,7 @@ def modificar_atencion(request, id):
     form = AgregarAtencionForm(instance=atencion)
     form.fields["motivo"].choices = MOTIVO_CHOICES
     contexto = {
+        "perro": atencion.perro,
         "form": form
     }
     if request.method == "POST":
@@ -110,6 +111,7 @@ def modificar_vacuna(request, id):
     vacuna = Vacuna.objects.get(id=id)
     form = AgregarVacunaForm(instance=vacuna)
     contexto = {
+        "perro": vacuna.perro,
         "form": form
     }
     if request.method == "POST":

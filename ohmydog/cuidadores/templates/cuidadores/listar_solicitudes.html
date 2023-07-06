@@ -1,8 +1,8 @@
 {% extends "main/layout.html" %}
-
 {% block body %}
 
 <div class="text-center">
+    <a href="{% url 'cuidadores:index' %}" class="btn-sm btn btn-outline-secondary">Volver al Cuidadores/Paseadores</a><br><hr>
     {% if aceptada %}
     <h5>El contacto del cuidador/paseador fue enviado.</h5>
     {% endif %}
@@ -11,7 +11,7 @@
     {% endif %}
     {% if solicitudes %}
     <h3>Solicitudes de contacto de {{ cuidador.nombre_completo }} :</h3>
-    <table class="table">
+    <table class="table-custom table">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -25,7 +25,7 @@
             <td>{{ solicitud.nombre }}</td>
             <td>{{ solicitud.apellido }}</td>
             <td>{{ solicitud.email }}</td>
-          <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-primary">Aceptar</a></td>
+          <td><a href="{% url 'cuidadores:aceptar_solicitud' id=solicitud.id %}" class="btn btn-info">Aceptar</a></td>
           <td><a href="{% url 'cuidadores:rechazar_solicitud' id=solicitud.id %}" class="btn btn-danger">Rechazar</a></td>
         </tr>
         {% endfor %}

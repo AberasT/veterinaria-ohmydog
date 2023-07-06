@@ -1,13 +1,12 @@
 {% extends "main/layout.html" %}
-
 {% block body %}
-
 <div class="text-center">
+    <a href="{% url 'turnos:index' %}" class="btn-sm btn btn-outline-secondary">Volver a Turnos</a><br><hr>
     {% if misTurnos %}
     <h3>Mis turnos: </h3><br>
     {% for turno in misTurnos %}
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-        <li class="list-group-item active">{{ turno.fecha }}</li>
+        <li class="list-group-item omdazul text-white"><strong>{{ turno.fecha }}</strong></li>
         <li class="list-group-item">Hora: {{ turno.hora }}</li>
         <li class="list-group-item">Perro: {{ turno.perro.nombre }}</li>
         <li class="list-group-item">Motivo: {{ turno.motivo }}</li>
@@ -20,6 +19,6 @@
     {% else %}
     <h3>No tiene turnos asignados.</h3>
     {% endif %}
-</div>
+</div><br><br>
 
 {% endblock %}
