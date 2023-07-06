@@ -57,14 +57,27 @@ def publicar_perro(request):
 
 @login_required
 def mis_publicaciones(request):
-    return render(request)
+    publicaciones = PerroPerdido.objects.filter(publicador=request.user)
+    contexto = {
+        "publicaciones": publicaciones
+    }
+    return render(request, "busqueda/mis_publicaciones.html", contexto)
 
 @login_required
-def info(request):
+def marcar_encontrado(request, id):
+    perro = PerroPerdido.objects.get(id=id)
+    perro.perdido = False
+    perro.fecha_encontrado = datetime.now().date()
+    perro.save()
+    mis_publicaciones(request)
+    return redirect("busqueda:mis_publicaciones")
+
+@login_required
+def info(request, id):
     contexto = {
         "perro": PerroPerdido.objects.get(id=id)
     }
-    return render(request, contexto)
+    return render(request, "busqueda/info.html", contexto)
 
 @login_required
 def eliminar(request):

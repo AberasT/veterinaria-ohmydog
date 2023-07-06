@@ -1,0 +1,57 @@
+{% extends 'main/layout.html' %}
+
+{% block body %}
+    <div class="row align-items-start col d-flex justify-content-center">
+        <div class="card mb-3" style="max-width: 750px;">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+                                <div class="col">
+                                    {% if perro.nombre == None %}
+                                        <li class="list-group-item active"><b>Nombre:</b> Desconocido </li>
+                                    {% else %}
+                                        <li class="list-group-item active"><b>Nombre:</b> "{{ perro.nombre }}"</li>
+                                    {% endif %}
+                                    <li class="list-group-item"><b>Color:</b> {{ perro.color }}</li>
+                                    <li class="list-group-item"><b>Raza:</b> {{ perro.raza }}</li>
+                                    <li class="list-group-item"><b>Sexo:</b> {{ perro.sexo }}</li>
+                                    <li class="list-group-item"><b>Edad:</b> {{ perro.edad }}</li>
+                                    <li class="list-group-item"><b>Descripcion:</b> {{ perro.descripcion }}</li>
+                                    <li class="list-group-item"><b>Fecha de Publicación:</b> {{ perro.fecha_publicacion }}</li>
+                                    {% if not perro.perdido %}
+                                    <li class="list-group-item"><b>Fecha de Encuentro:</b> {{ perro.fecha_encontrado }}</li>
+                                    {% endif %}
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <b>Información de Contacto:</b> {{ perro.contacto }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="/media/{{ perro.imagen }}" class="img-fluid rounded-start rounded-end" alt="imagen" style="margin-top: 15px; max-height: 75vh;">
+                    <br>
+                    <div class="card d-flex justify-content-center" style="max-width: 75vw;">
+                        <div class="card-body text-center">
+                            {% if perro.perdido %}
+                                {% if perro.es_propio %}
+                                    <h5 style="color:red;">Perdido</h5>
+                                {% else %}
+                                    <h5 style="color:red;">Buscando a su dueño</h5>
+                                {% endif %}
+                            {% else %}
+                                <h5 class="list-group-item" style="color:green;">¡Ya en su hogar!</h5>
+                            {% endif %}
+                        </div>
+                    </div>      
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -39,24 +39,25 @@
                             </div>
                             <div class="col-md-4">
                                 <img src="/media/{{ publicacion.imagen }}" class="img-fluid rounded-start rounded-end" alt="imagen" style="margin-top: 15px;">
-                                {% if publicacion.perdido %}
-                                    {% if publicacion.es_propio %}
-                                        <p style="color:red;">Perdido</p>
-                                    {% else %}
-                                        <p style="color:red;">Buscando a su dueño</p>
-                                    {% endif %}
-                                {% else %}
-                                    {% if publicacion.es_propio %}
-                                        <p class="list-group-item" style="color:green;">¡Encontrado!</p>
-                                    {% else %}
-                                        <p class="list-group-item" style="color:green;">¡Ya en su hogar!</p>
-                                    {% endif %}
-                                {% endif %}
+                                <br>
+                                <div class="card d-flex justify-content-center" style="max-width: 75vw;">
+                                    <div class="card-body text-center">
+                                        {% if publicacion.perdido %}
+                                            {% if publicacion.es_propio %}
+                                                <h5 style="color:red;">Perdido</h5>
+                                            {% else %}
+                                                <h5 style="color:red;">Buscando a su dueño</h5>
+                                            {% endif %}
+                                        {% else %}
+                                            <h6 class="list-group-item" style="color:green;">¡Ya en su hogar!</h6>
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row align-items-start col d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 {% if publicacion.perdido %}
                                     {% if user.is_authenticated %}
-                                        <td><a href="{% url 'busqueda:info' id=publicacion.id %}" class="btn btn-secondary" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Ver Informacion</a> </td>
+                                        <td><a href="{% url 'busqueda:info' id=publicacion.id %}" class="btn btn-primary" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Ver Informacion</a> </td>
                                     {% endif %}
                                 {% endif %}
                                 {% if user.is_authenticated and user.is_staff or publicacion.publicador == user and user.is_authenticated %}
