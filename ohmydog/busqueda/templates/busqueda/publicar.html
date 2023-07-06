@@ -1,14 +1,17 @@
 {% extends "main/layout.html" %}
 {% block body %}
     <div class="text-center">
-        <form method="POST" action="" enctype="multipart/form-data">
+        <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
+        <hr>
+        <p class="display-6">Publicar perro perdido</p><br> 
+        <form class="form-custom" method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {% for error in form.non_field_errors %}
                 <div class="alert alert-danger">
                     {{ error }}
-                </div>
+                </div><br>
             {% endfor %}
-            <br><br>
+            <br>
             <b>{{ form.nombre.label }}:</b>
             {{ form.nombre }}
             <br><br>
@@ -19,7 +22,7 @@
             {{ form.raza }}
             <br><br>
             <b>¿Es su perro?:</b> {{ form.es_propio }}
-            <br><br>
+            <br>
             <b>{{ form.sexo.label }}:</b>
             {{ form.sexo }}
             <br><br>
@@ -35,7 +38,7 @@
             <b>{{ form.contacto.label }}:</b>
             {{ form.contacto }}
             <br><br>
-            <b>{{ form.descripcion.label }}:</b>
+            <b><label for="">Descripción</label></b>
             {{ form.descripcion }}
             <br><br>
             <b>{{ form.imagen.label }}</b>

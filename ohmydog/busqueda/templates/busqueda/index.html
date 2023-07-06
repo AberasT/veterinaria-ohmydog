@@ -3,12 +3,12 @@
 
 <div class="text-center">
     {% if request.user.is_authenticated %}
-        <a href="{% url 'busqueda:publicar' %}" class="btn btn-success">Publicar Perro Perdido</a>
-        <a href="{% url 'busqueda:mis_publicaciones' %}" class="btn btn-success">Mis Publicaciones</a>
+        <a href="{% url 'busqueda:publicar' %}" class="btn btn-outline-dark">Publicar Perro Perdido</a>
+        <a href="{% url 'busqueda:mis_publicaciones' %}" class="btn btn-outline-dark">Mis Publicaciones</a>
         <hr>
     {% endif %}
     {% if publicaciones %}
-        <h3>Listado de perros perdidos:</h3>
+        <h3>Listado de perros perdidos</h3><br>
         {% for publicacion in publicaciones %}
             <div class="container text-center ">
                 <div class="row align-items-start col d-flex justify-content-center">
@@ -57,7 +57,7 @@
                             <div class="d-flex justify-content-center">
                                 {% if publicacion.perdido %}
                                     {% if user.is_authenticated %}
-                                        <td><a href="{% url 'busqueda:info' id=publicacion.id %}" class="btn btn-primary" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Ver Informacion</a> </td>
+                                        <td><a href="{% url 'busqueda:info' id=publicacion.id %}" class="btn omdazul btn-info" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Ver Informacion</a> </td>
                                     {% endif %}
                                 {% endif %}
                                 {% if user.is_authenticated and user.is_staff or publicacion.publicador == user and user.is_authenticated %}
@@ -72,5 +72,5 @@
     {% else %}
         <h3>No hay perros perdidos publicados.</h3>
     {% endif %}
-</div>
+</div><br><br>
 {% endblock %}
