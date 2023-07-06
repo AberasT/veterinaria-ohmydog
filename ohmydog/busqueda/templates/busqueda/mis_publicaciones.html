@@ -2,8 +2,10 @@
 
 {% block body %}
     <div class="text-center">
+        <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
+        <hr>
         {% if publicaciones %}
-            <h3>Listado de perros perdidos:</h3>
+            <h3>Mis publicaciones de perros perdidos</h3><br>
             {% for publicacion in publicaciones %}
             <div class="container text-center ">
                 <div class="row align-items-start col d-flex justify-content-center">
@@ -66,5 +68,5 @@
         {% else %}
             <h3>No has publicado perros perdidos.</h3>
         {% endif %}
-    </div>
+    </div><br><br>
 {% endblock %}
