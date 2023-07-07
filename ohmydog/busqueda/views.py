@@ -32,7 +32,7 @@ def publicar_perro(request):
             es_propio = form.cleaned_data["es_propio"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
-            imagen = form.cleaned_data["imagen"]
+            imagen = request.FILES.get('imagen')
             nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo, es_propio = es_propio,
                                                 edad=edad, peso=peso, altura=altura, contacto=contacto,
                                                 imagen=imagen, descripcion=descripcion, publicador=usuario)
@@ -85,3 +85,51 @@ def eliminar(request):
         "perro": PerroPerdido.objects.get(id=id)
     }
     return render(request, contexto)
+
+@login_required
+def modificar(request, id):
+    usuario = request.user
+    publicacion = PerroPerdido.objects.get(id=id)
+    form = PublicarPerroPerdidoForm(instance = publicacion)
+    contexto = {
+        "form": form,
+        "imagen_cargada": publicacion.imagen
+    }
+    if request.method == "POST":
+        form = PublicarPerroPerdidoForm(request.POST, request.FILES, cliente=usuario, id=id)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            color = form.cleaned_data["color"]
+            raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
+            edad = form.cleaned_data["edad"]
+            peso = form.cleaned_data["peso"]
+            altura = form.cleaned_data["altura"]
+            es_propio = form.cleaned_data["es_propio"]
+            descripcion = form.cleaned_data["descripcion"]
+            contacto = form.cleaned_data["contacto"]
+            imagen = request.FILES.get('imagen_nueva')
+            publicacion.nombre = nombre
+            publicacion.color = color
+            publicacion.raza = raza
+            publicacion.sexo = sexo
+            publicacion.edad = edad
+            publicacion.peso = peso
+            publicacion.altura = altura
+            publicacion.es_propio = es_propio
+            publicacion.descripcion = descripcion
+            publicacion.contacto = contacto
+            if imagen:
+                publicacion.imagen = imagen
+            try:
+                publicacion.save()
+                return render(request, "main/infomsj.html", {
+                    "msj": "Los datos del perro se han modificado exitosamente."
+                })
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else: 
+            return render(request, "busqueda/modificar.html",{"form": form, "imagen_cargada": publicacion.imagen})
+    return render(request, "busqueda/modificar.html", contexto)

@@ -1,15 +1,16 @@
 {% extends "main/layout.html" %}
+
 {% block body %}
     <div class="text-center">
         <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
         <hr>
-        <p class="display-6">Publicar perro perdido</p><br> 
+        <p class="display-6">Modificar perro perdido</p><br>
         <form class="form-custom" method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div><br>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div><br>
             {% endfor %}
             <br>
             <b>{{ form.nombre.label }}:</b>
@@ -41,23 +42,26 @@
             <b><label for="">Descripción</label></b>
             {{ form.descripcion }}
             <br><hr>
-            <b>Imagen:</b>
-            <input type="file" name="imagen" accept="image" class="form-control" id="img-input" required="true">
+            <b>Imagen previamente cargada: </b>
+            <img src="/media/{{ imagen_cargada }}" class="rounded" style="max-width: 15vw; max-height: 35vh; margin-bottom: 10px;" alt="imagen_cargada" style="max-height: 25vh;">
+            <hr> 
+            <b>Nueva imagen: </b>
+            <input type="file" name="imagen_nueva" accept="image" class="form-control" id="img-input">
             <div class="text-center">
-                <img id="display-img" class="rounded" style="max-width: 20vw; margin-top: 10px;"/>
+                <img id="display-img" class="rounded" style="max-width: 15vw; max-height: 35vh; margin-top: 10px;" />
             </div>
             <hr><br>
-            <input class="btn btn-secondary" type="submit" name="Publicar Perro" value="Publicar Perro">
+            <input class="btn btn-secondary" type="submit" name="Confirmar cambios" value="Confirmar cambios">
         </form>
     </div>
-    
+
 <script>
     const imgInput = document.querySelector("#img-input")
     const displayImg = document.querySelector("#display-img")
     imgInput.addEventListener('change',
-    (event)=>{
-    const imgObject = event.target.files[0]
-    displayImg.src = URL.createObjectURL(imgObject)})
+        (event) => {
+            const imgObject = event.target.files[0]
+            displayImg.src = URL.createObjectURL(imgObject)
+        })
 </script>
 {% endblock %}
-

@@ -1,6 +1,7 @@
 from django.forms import ModelForm, forms
 from .models import PerroPerdido
 from django.forms.widgets import RadioSelect
+from django import forms
 
 error_messages = {"required": "Se deben completar todos los campos"}
 
@@ -8,7 +9,7 @@ class PublicarPerroPerdidoForm(ModelForm):
     class Meta:
         model = PerroPerdido
         fields = ["nombre", "color", "raza", "sexo", "es_propio", "edad",
-         "peso", "contacto", "altura", "descripcion", "imagen"]
+         "peso", "contacto", "altura", "descripcion"]
         
         TRUE_FALSE_CHOICES = [
         (True, 'Si'),
@@ -30,9 +31,7 @@ class PublicarPerroPerdidoForm(ModelForm):
         if not es_propio:
             None
         elif not nombre:
-            print("salio que es propio pero no tiene nombre")
             raise forms.ValidationError("Tiene que ingresar el nombre al que responde su perro perdido.")
         elif publicaciones_perdidos_usuario.filter(nombre=nombre).exclude(id = self.id):
-            print("salio que es propio pero que está repetido")
             raise forms.ValidationError(f"{self.cliente.nombre} {self.cliente.apellido} ya tiene publicado ese perro perdido.")
         return self.cleaned_data

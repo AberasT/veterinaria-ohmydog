@@ -57,7 +57,7 @@
                                 <a href="{% url 'busqueda:eliminar' id=publicacion.id %}" onclick="return confirm('Eliminar publicación?');" class="btn btn-danger" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Eliminar publicación</a>
                                 {% if publicacion.perdido %}
                                     <a href="{% url 'busqueda:marcar_encontrado' id=publicacion.id %}" onclick="return confirm('Marcar como encontrado?');" class="btn btn-success" style="max-width: 250px; margin: 5px; padding-bottom: 5px;">Marcar como encontrado</a>
-                                    <a href="{% url 'adopcion:modificar' id=publicacion.id %}" class="btn btn-secondary" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Modificar Publicacion</a>
+                                    <a href="{% url 'busqueda:modificar' id=publicacion.id %}" class="btn btn-secondary" style="max-width: 200px; margin: 5px; padding-bottom: 5px;">Modificar Publicacion</a>
                                 {% endif %}
                             </div>
                         </div>
