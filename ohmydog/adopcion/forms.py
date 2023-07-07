@@ -16,7 +16,8 @@ class PublicarPerroForm(ModelForm):
 
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
-        publicaciones_no_adoptados_usuario = PerroAdopcion.objects.filter(publicador = self.cliente, adoptado=False)
-        if publicaciones_no_adoptados_usuario.filter(nombre=nombre).exclude(id = self.id):
-            raise forms.ValidationError(f"{self.cliente.nombre} {self.cliente.apellido} ya tiene publicado ese perro en adopción.")
+        #publicaciones_no_adoptados_usuario = PerroAdopcion.objects.filter(publicador = self.cliente, adoptado=False)
+        nombresPerrosPublicadosLower = [perro.nombre.lower() for perro in PerroAdopcion.objects.filter(publicador=self.cliente, nombre__isnull = False, adoptado = False).exclude(id = self.id)]
+        if nombre.lower() in nombresPerrosPublicadosLower:
+            raise forms.ValidationError("Ya tienes publicado ese perro en adopción.")
         return nombre

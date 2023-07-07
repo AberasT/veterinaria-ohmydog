@@ -27,8 +27,8 @@ class PublicarPerroPerdidoForm(ModelForm):
     def clean(self):
         nombre = self.cleaned_data.get('nombre')
         es_propio = self.cleaned_data.get('es_propio')
-        nombresPerrosPublicadosLower = [perro.nombre.lower() for perro in PerroPerdido.objects.filter(publicador=self.cliente, nombre__isnull = False).exclude(id = self.id)]
-        publicaciones_perdidos_usuario = PerroPerdido.objects.filter(publicador = self.cliente, perdido=True)
+        nombresPerrosPublicadosLower = [perro.nombre.lower() for perro in PerroPerdido.objects.filter(publicador=self.cliente, nombre__isnull = False, perdido= True).exclude(id = self.id)]
+        #publicaciones_perdidos_usuario = PerroPerdido.objects.filter(publicador = self.cliente, perdido=True)
         if not es_propio:
             None
         elif not nombre:
