@@ -48,5 +48,6 @@ class PerroAdopcion(models.Model):
     fecha_publicacion = models.DateField(auto_now_add=True)
     fecha_adopcion = models.DateField(null=True, blank=True)
     publicador = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="publicador_perro_adopcion")
+    activo = models.BooleanField(default=True)
 
     REQUIRED_FIELDS = ["nombre", "color", "raza", "sexo", "edad", "peso", "altura", "historial_vacunacion"]

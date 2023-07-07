@@ -5,6 +5,8 @@ from turnos.models import Turno
 from perros.models import Perro
 from django.contrib.auth.decorators import login_required, user_passes_test
 from main.tests import es_veterinario, es_superuser
+from busqueda.models import PerroPerdido
+from adopcion.models import PerroAdopcion
 
 # VIEWS
 
@@ -87,6 +89,8 @@ def eliminar(request, id):
     usuario.is_active = False
     usuario.save()
     perros = Perro.objects.filter(responsable=usuario)
+    perros_perdidos = PerroPerdido.objects.filter(publicador = usuario)
+    perros_adopcion = PerroAdopcion.objects.filter(publicador = usuario)
     for perro in perros:
         turnosPerro = Turno.objects.filter(is_active=True, asistido=False, perro=perro)
         for turno in turnosPerro:
@@ -94,6 +98,15 @@ def eliminar(request, id):
             turno.save()
         perro.responsable_activo = False
         perro.save()
+    for perro in perros_perdidos:
+        if perro.perdido:
+            perro.activo = False
+            perro.save()
+    for perro in perros_adopcion:
+        if not perro.adoptado:
+            perro.activo = False
+            perro.save()
+    
     return redirect("usuarios:index")
 
 @login_required

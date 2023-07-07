@@ -45,6 +45,7 @@ class PerroPerdido(models.Model):
     es_propio = models.BooleanField(default=True)
     fecha_publicacion = models.DateField(auto_now_add=True)
     fecha_encontrado = models.DateField(null=True, blank=True)
+    activo = models.BooleanField(default=True)
     publicador = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="publicador_perro_perdido")
 
     REQUIRED_FIELDS = ["color", "raza", "sexo", "edad", "peso", "contacto", "altura", "imagen"]

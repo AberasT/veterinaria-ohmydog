@@ -9,7 +9,7 @@ from datetime import datetime
 #create your views
 def listar(request):
     contexto={
-        "publicaciones": PerroPerdido.objects.order_by("-perdido")
+        "publicaciones": PerroPerdido.objects.filter(activo=True).order_by("-perdido")
     }
     return render(request, "busqueda/index.html", contexto)
 
@@ -54,7 +54,7 @@ def publicar_perro(request):
 
 @login_required
 def mis_publicaciones(request):
-    publicaciones = PerroPerdido.objects.filter(publicador=request.user).order_by("-perdido")
+    publicaciones = PerroPerdido.objects.filter(publicador=request.user, activo=True).order_by("-perdido")
     contexto = {
         "publicaciones": publicaciones
     }
@@ -77,11 +77,11 @@ def info(request, id):
     return render(request, "busqueda/info.html", contexto)
 
 @login_required
-def eliminar(request):
-    contexto = {
-        "perro": PerroPerdido.objects.get(id=id)
-    }
-    return render(request, contexto)
+def eliminar(request, id):
+    perro = PerroPerdido.objects.get(id = id)
+    perro.activo = False
+    perro.save()
+    return redirect("busqueda:index")
 
 @login_required
 def modificar(request, id):
