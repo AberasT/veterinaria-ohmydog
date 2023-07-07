@@ -1,7 +1,7 @@
 {% extends "main/layout.html" %}
 
 {% block body %}
-    <div class="text-center">
+    <div class="text-center" style="margin-bottom: 10px;">
         <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
         <hr>
         <p class="display-6">Modificar perro perdido</p><br>
@@ -43,6 +43,7 @@
             {{ form.descripcion }}
             <br><hr>
             <b>Imagen previamente cargada: </b>
+            <br>
             <img src="/media/{{ imagen_cargada }}" class="rounded" style="max-width: 15vw; max-height: 35vh; margin-bottom: 10px;" alt="imagen_cargada" style="max-height: 25vh;">
             <hr> 
             <b>Nueva imagen: </b>
