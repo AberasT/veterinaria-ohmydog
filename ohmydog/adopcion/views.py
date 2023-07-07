@@ -10,7 +10,7 @@ from datetime import datetime
 
 def index(request):
     contexto={
-        "publicaciones": PerroAdopcion.objects.all
+        "publicaciones": PerroAdopcion.objects.order_by("-adoptado")
     }
     return render(request, "adopcion/listar.html", contexto)
 
@@ -61,7 +61,7 @@ def marcar_adoptado(request, id):
 
 @login_required
 def mis_publicaciones(request):
-    publicaciones = PerroAdopcion.objects.filter(publicador=request.user)
+    publicaciones = PerroAdopcion.objects.filter(publicador=request.user).order_by("-adoptado")
     contexto = {
         "publicaciones": publicaciones
     }

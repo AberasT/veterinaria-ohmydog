@@ -7,10 +7,13 @@
         <form class="form-custom" method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div><br>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
             {% endfor %}
+            <div class="border border-success-subtle rounded-2 text-success-emphasis bg-success-subtle" style="padding: 5px;">
+                Si el perro no es suyo, no es necesario que ingrese un nombre.
+            </div>
             <br>
             <b>{{ form.nombre.label }}:</b>
             {{ form.nombre }}
@@ -28,12 +31,6 @@
             <br><br>
             <b>{{ form.edad.label }}:</b>
             {{ form.edad }}
-            <br><br>
-            <b>{{ form.peso.label }}:</b>
-            {{ form.peso }}
-            <br><br>
-            <b>{{ form.altura.label }}:</b>
-            {{ form.altura }}
             <br><br>
             <b>Telefono: </b>
             {{ form.contacto }}

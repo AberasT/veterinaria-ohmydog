@@ -9,7 +9,7 @@ class PublicarPerroPerdidoForm(ModelForm):
     class Meta:
         model = PerroPerdido
         fields = ["nombre", "color", "raza", "sexo", "es_propio", "edad",
-         "peso", "contacto", "altura", "descripcion"]
+         "contacto", "descripcion"]
         
         TRUE_FALSE_CHOICES = [
         (True, 'Si'),
@@ -27,11 +27,12 @@ class PublicarPerroPerdidoForm(ModelForm):
     def clean(self):
         nombre = self.cleaned_data.get('nombre')
         es_propio = self.cleaned_data.get('es_propio')
+        nombresPerrosPublicadosLower = [perro.nombre.lower() for perro in PerroPerdido.objects.filter(publicador=self.cliente, nombre__isnull = False).exclude(id = self.id)]
         publicaciones_perdidos_usuario = PerroPerdido.objects.filter(publicador = self.cliente, perdido=True)
         if not es_propio:
             None
         elif not nombre:
             raise forms.ValidationError("Tiene que ingresar el nombre al que responde su perro perdido.")
-        elif publicaciones_perdidos_usuario.filter(nombre=nombre).exclude(id = self.id):
-            raise forms.ValidationError(f"{self.cliente.nombre} {self.cliente.apellido} ya tiene publicado ese perro perdido.")
+        elif nombre.lower() in nombresPerrosPublicadosLower:
+            raise forms.ValidationError("Ya tienes publicado ese perro perdido.")
         return self.cleaned_data

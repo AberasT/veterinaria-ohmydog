@@ -8,6 +8,7 @@ class PerroPerdido(models.Model):
         ("ns", "NS")
     ]
     RAZA_CHOICES = [
+        ("Desconocida", "NO SE SABE"),
         ("mestizo", "MESTIZO"),
         ("Siberian Husky", "SIBERIAN HUSKY"),
         ("Beagle", "BEAGLE"),
@@ -35,10 +36,8 @@ class PerroPerdido(models.Model):
     )
 
     color = models.CharField(max_length=20, blank=False, null=True, default="")
-    edad = models.CharField(max_length=20, blank=False, null=True, default="")
-    peso = models.CharField(max_length=5, blank=False, null=True, default="")
+    edad = models.CharField(max_length=20, blank=True, null=True, default="")
     contacto = models.CharField(max_length=50, blank=False, null=True, default="")
-    altura = models.CharField(max_length=5, blank=False, null=True, default="")
     raza = models.CharField(max_length=20, choices=RAZA_CHOICES, null=True, default="")
     descripcion = models.CharField(max_length=500, blank=False, null=True, default="")
     imagen = models.ImageField(upload_to='images/')

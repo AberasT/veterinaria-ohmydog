@@ -9,7 +9,7 @@ from datetime import datetime
 #create your views
 def listar(request):
     contexto={
-        "publicaciones": PerroPerdido.objects.all
+        "publicaciones": PerroPerdido.objects.order_by("-perdido")
     }
     return render(request, "busqueda/index.html", contexto)
 
@@ -27,15 +27,12 @@ def publicar_perro(request):
             raza = form.cleaned_data["raza"]
             sexo = form.cleaned_data["sexo"]
             edad = form.cleaned_data["edad"]
-            peso = form.cleaned_data["peso"]
-            altura = form.cleaned_data["altura"]
             es_propio = form.cleaned_data["es_propio"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
             imagen = request.FILES.get('imagen')
             nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo, es_propio = es_propio,
-                                                edad=edad, peso=peso, altura=altura, contacto=contacto,
-                                                imagen=imagen, descripcion=descripcion, publicador=usuario)
+                                                edad=edad, contacto=contacto, imagen=imagen, descripcion=descripcion, publicador=usuario)
             try:
                 nuevoPerroPerdido.save()
                 if es_propio:
@@ -57,7 +54,7 @@ def publicar_perro(request):
 
 @login_required
 def mis_publicaciones(request):
-    publicaciones = PerroPerdido.objects.filter(publicador=request.user)
+    publicaciones = PerroPerdido.objects.filter(publicador=request.user).order_by("-perdido")
     contexto = {
         "publicaciones": publicaciones
     }
@@ -103,8 +100,6 @@ def modificar(request, id):
             raza = form.cleaned_data["raza"]
             sexo = form.cleaned_data["sexo"]
             edad = form.cleaned_data["edad"]
-            peso = form.cleaned_data["peso"]
-            altura = form.cleaned_data["altura"]
             es_propio = form.cleaned_data["es_propio"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
@@ -114,8 +109,6 @@ def modificar(request, id):
             publicacion.raza = raza
             publicacion.sexo = sexo
             publicacion.edad = edad
-            publicacion.peso = peso
-            publicacion.altura = altura
             publicacion.es_propio = es_propio
             publicacion.descripcion = descripcion
             publicacion.contacto = contacto
