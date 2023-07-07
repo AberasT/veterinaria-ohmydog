@@ -1,24 +1,27 @@
 {% extends 'main/layout.html' %}
 
 {% block body %}
-<div class="text-center">
-    <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
+    <div class="text-center">
+        <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
         <hr>
-</div>
-    <div class="row align-items-start col d-flex justify-content-center">
-        
-        <div class="card mb-3" style="max-width: 750px;">
+    </div>
+    <div class="row align-items-start col d-flex justify-content-center" style="max-width: 100vw;">
+        <div class="card" style="max-width: 750px;">
             <div class="row g-0">
                 <div class="col-md-8">
                     <div class="card-body">
+                        <div class="card-header active" style="background-color: #0d6efd; color: white;">
+                            <div class="list-group-item"><b>Nombre: </b>
+                                {% if perro.nombre == None %}
+                                    Desconocido
+                                {% else %}
+                                    "{{ perro.nombre }}"
+                                {% endif %}
+                            </div>
+                        </div>
                         <div class="card-text">
                             <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
                                 <div class="col">
-                                    {% if perro.nombre == None %}
-                                        <li class="list-group-item active"><b>Nombre:</b> Desconocido </li>
-                                    {% else %}
-                                        <li class="list-group-item active"><b>Nombre:</b> "{{ perro.nombre }}"</li>
-                                    {% endif %}
                                     <li class="list-group-item"><b>Color:</b> {{ perro.color }}</li>
                                     <li class="list-group-item"><b>Raza:</b> {{ perro.raza }}</li>
                                     <li class="list-group-item"><b>Sexo:</b> {{ perro.sexo }}</li>
@@ -30,9 +33,13 @@
                                     {% endif %}
                                     <br>
                                     <div class="card">
-                                        <div class="card-body">
-                                            <b>Información de Contacto:</b> {{ perro.contacto }}
+                                        <div class="card-header" style="background-color: lightblue;">
+                                            <b>Información de Contacto</b>
                                         </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><b>Telefono:</b> {{ perro.contacto }}</li>
+                                            <li class="list-group-item"><b>Correo Electrónico:</b> {{ perro.publicador.email }}</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </ul>
