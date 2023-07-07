@@ -24,7 +24,7 @@
         <li class="list-group-item">Descripción: {{ perro.descripcion }}</li>
         {% if user.is_authenticated and not perro.adoptado %}
         <li class="list-group-item">
-            <a href="{% url 'adopcion:info' id=perro.id %}" class="btn btn-sm btn-secondary">Ver información</a>
+            <a href="{% url 'adopcion:info' id=perro.id %}" class="btn btn-sm btn-info">Ver información</a>
         </li>
         {% endif %}
         {% if user.is_staff or perro.publicador == user %}
