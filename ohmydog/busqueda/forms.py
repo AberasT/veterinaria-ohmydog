@@ -1,6 +1,6 @@
 from django.forms import ModelForm, forms
 from .models import PerroPerdido
-from django.forms.widgets import RadioSelect
+from django.forms.widgets import RadioSelect, ChoiceWidget
 from django import forms
 
 error_messages = {"required": "Se deben completar todos los campos"}
@@ -36,3 +36,44 @@ class PublicarPerroPerdidoForm(ModelForm):
         elif nombre.lower() in nombresPerrosPublicadosLower:
             raise forms.ValidationError("Ya tienes publicado ese perro perdido.")
         return self.cleaned_data
+
+class FiltrarPerroPerdidoForm(forms.Form):
+    fields = ["raza", "sexo", "perdido"]
+    raza = forms.CharField(max_length=20, required = False, widget=ChoiceWidget)
+    sexo = forms.CharField(max_length=20, required = False, widget=ChoiceWidget)
+    perdido = forms.CharField(max_length=20, required = False, widget=ChoiceWidget)
+    SEXO_CHOICES = [
+    ("macho", "MACHO"),
+    ("hembra", "HEMBRA"),
+    ("ns", "NS")
+    ]
+    RAZA_CHOICES = [
+        ("Desconocida", "NO SE SABE"),
+        ("mestizo", "MESTIZO"),
+        ("Siberian Husky", "SIBERIAN HUSKY"),
+        ("Beagle", "BEAGLE"),
+        ("Rottweiler", "ROTTWEILER"),
+        ("Bull Terrier", "BULL TERRIER"),
+        ("Bulldog Frances", "BULLDOG FRANCES"),
+        ("Boxer", "BOXER"),
+        ("Dogo Argentino", "DOGO ARGENTINO"),
+        ("Gran Danes", "GRAN DANES"),
+        ("Labrador", "LABRADOR"),
+        ("Galgo", "GALGO"),
+        ("Shiba Inu", "AKITA INU"),
+        ("Golden", "GOLDEN"),
+        ("Dalmata", "DALMATA"),
+        ("Chihuahua", "CHIHUAHUA"),
+        ("San Bernardo", "SAN BERNARDO"),
+        ("Doberman", "DOBERMAN"),
+        ("Pastor Aleman", "PASTOR ALEMAN")
+    ]
+    TRUE_FALSE_CHOICES = [
+    (True, 'Si'),
+    (False, 'No')
+    ]
+    widgets = {
+        "encontrado": ChoiceWidget(choices=TRUE_FALSE_CHOICES),
+        "raza": ChoiceWidget(choices=RAZA_CHOICES),
+        "sexo": ChoiceWidget(choices=SEXO_CHOICES)
+    }

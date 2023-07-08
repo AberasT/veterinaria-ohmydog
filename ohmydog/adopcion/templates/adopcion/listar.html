@@ -9,6 +9,15 @@
     <hr>
     {% endif %}
     {% if publicaciones %}
+    {% if request.user.is_authenticated %}
+        <div>
+            <a href="{% url 'adopcion:filtrar_listado' filtro=False %}" class="btn btn-outline-dark">Filtrar por perros en adopción</a>
+            <a href="{% url 'adopcion:filtrar_listado' filtro=True%}" class="btn btn-outline-dark">Filtrar por perros adoptados</a>
+            {% if "filtrar" in request.path %}
+                <a href="{% url 'adopcion:index' %}" class="btn btn-outline-dark">Quitar filtro</a>
+            {% endif %}
+        </div>
+    {% endif %}
     <h3>Perros en adopción</h3><br>
     {% for perro in publicaciones %}
     <ul class="list-group" style="max-width: 50vw; margin: 0 auto">

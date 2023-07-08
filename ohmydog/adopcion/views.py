@@ -10,7 +10,7 @@ from datetime import datetime
 
 def index(request):
     contexto={
-        "publicaciones": PerroAdopcion.objects.filter(activo = True).order_by("-adoptado")
+        "publicaciones": PerroAdopcion.objects.filter(activo = True).order_by("adoptado")
     }
     return render(request, "adopcion/listar.html", contexto)
 
@@ -58,10 +58,9 @@ def marcar_adoptado(request, id):
     mis_publicaciones(request)
     return redirect("adopcion:mis_publicaciones")
 
-
 @login_required
 def mis_publicaciones(request):
-    publicaciones = PerroAdopcion.objects.filter(publicador=request.user, activo = True).order_by("-adoptado")
+    publicaciones = PerroAdopcion.objects.filter(publicador=request.user, activo = True).order_by("adoptado")
     contexto = {
         "publicaciones": publicaciones
     }
@@ -79,7 +78,7 @@ def eliminar(request, id):
     publicacion = PerroAdopcion.objects.get(id=id)
     publicacion.activo = False
     publicacion.save()
-    return redirect("adopcion:index")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def modificar(request, id):
@@ -124,3 +123,17 @@ def modificar(request, id):
         else: 
             return render(request, "adopcion/modificar.html",{"form": form})
     return render(request, "adopcion/modificar.html", contexto)
+
+@login_required
+def filtrar_listado(request, filtro):
+    contexto={
+        "publicaciones": PerroAdopcion.objects.filter(adoptado = filtro, activo=True) 
+    }
+    return render(request, "adopcion/listar.html", contexto)
+
+@login_required
+def filtrar_mis_publicaciones(request, filtro):
+    contexto={
+        "publicaciones": PerroAdopcion.objects.filter(adoptado = filtro, activo=True)
+    }
+    return render(request, "adopcion/mis_publicaciones.html", contexto)

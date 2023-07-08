@@ -8,6 +8,13 @@
         <hr>
     {% endif %}
     {% if publicaciones %}
+        <div>
+            <a href="{% url 'busqueda:filtrar_listado' filtro=True %}" class="btn btn-outline-dark">Filtrar por perros perdidos</a>
+            <a href="{% url 'busqueda:filtrar_listado' filtro=False %}" class="btn btn-outline-dark">Filtrar por perros encontrados</a>
+            {% if "filtrar" in request.path %}
+            <a href="{% url 'busqueda:index' %}" class="btn btn-outline-dark">Quitar filtro</a>
+            {% endif %}
+        </div>
         <h3>Listado de perros perdidos</h3><br>
         {% for publicacion in publicaciones %}
             <div class="container text-center ">

@@ -50,7 +50,7 @@ def registrar(request, id):
                     "msj": "Ha ocurrido un error."
                 })
         else: 
-            return render(request, "perros/registrar.html", {"form": form})
+            return render(request, "perros/registrar.html", {"form": form, "cliente": cliente})
     return render(request, "perros/registrar.html", contexto)
 
 

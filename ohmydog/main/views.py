@@ -9,8 +9,7 @@ def usuario_no_autenticado(user):
 
 # VIEWS
 def index(request):
-    return render(request, "main/index.html", {
-    })
+    return render(request, "main/index.html", {})
 
 @user_passes_test(usuario_no_autenticado)
 def login_view(request):

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import PublicarPerroPerdidoForm
+from .forms import PublicarPerroPerdidoForm, FiltrarPerroPerdidoForm
 from .models import PerroPerdido
 from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
@@ -81,7 +81,8 @@ def eliminar(request, id):
     perro = PerroPerdido.objects.get(id = id)
     perro.activo = False
     perro.save()
-    return redirect("busqueda:index")
+    return redirect(request.META.get('HTTP_REFERER')
+)
 
 @login_required
 def modificar(request, id):
@@ -126,3 +127,17 @@ def modificar(request, id):
         else: 
             return render(request, "busqueda/modificar.html",{"form": form, "imagen_cargada": publicacion.imagen})
     return render(request, "busqueda/modificar.html", contexto)
+
+@login_required
+def filtrar(request, filtro):
+    contexto={
+        "publicaciones": PerroPerdido.objects.filter(perdido = filtro, activo=True)
+    }
+    return render(request, "busqueda/index.html", contexto)
+
+@login_required
+def filtrar_mis_publicaciones(request, filtro):
+    contexto={
+        "publicaciones": PerroPerdido.objects.filter(perdido = filtro, activo=True)
+    }
+    return render(request, "busqueda/mis_publicaciones.html", contexto)
