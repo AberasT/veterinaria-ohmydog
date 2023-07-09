@@ -24,28 +24,34 @@
       </div>
       <div class="col">
         <div class="container text-center">
-          <div class="row justify-content-md-center">
-            <div class="row gy-2">
-              <div class="col">
-                <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-info">Agregar Vacuna</a>
+          {% if perro.activo and perro.responsable_activo %}
+            <div class="row justify-content-md-center">
+              <div class="row gy-2">
+                <div class="col">
+                  <a href="{% url 'atenciones:agregar_vacuna' id=perro.id %}"  class="row btn btn-info">Agregar Vacuna</a>
+                </div>
+              </div>
+              <div class="row gy-2">
+                <div class="col">
+                  <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-info">Agregar Atención</a>
+                </div>
+              </div>
+              <div class="row gy-2">
+                <div class="col">
+                  <a href="{% url 'perros:modificar' id=perro.id %}"  class="row btn btn-secondary">Modificar Perro</a>
+                </div>
+              </div>
+              <div class="row gy-2">
+                <div class="col">
+                  <a href="{% url 'perros:eliminar' id=perro.id %}" onclick="return confirm('Eliminar perro?');" class="row btn btn-danger">Eliminar Perro</a>
+                </div>
               </div>
             </div>
-            <div class="row gy-2">
-              <div class="col">
-                <a href="{% url 'atenciones:agregar_atencion' id=perro.id %}"  class="row btn btn-info">Agregar Atención</a>
-              </div>
-            </div>
-            <div class="row gy-2">
-              <div class="col">
-                <a href="{% url 'perros:modificar' id=perro.id %}"  class="row btn btn-secondary">Modificar Perro</a>
-              </div>
-            </div>
-            <div class="row gy-2">
-              <div class="col">
-                <a href="{% url 'perros:eliminar' id=perro.id %}" onclick="return confirm('Eliminar perro?');" class="row btn btn-danger">Eliminar Perro</a>
-              </div>
-            </div>
-          </div>
+            {% else %}
+              <br> 
+                <b class="alert alert-danger">El perro se encuentra inactivo</b>
+              <br>
+            {% endif %}
         </div>
       </div>
     </div>
@@ -71,10 +77,12 @@
                 <td>{{ atencion.motivo }}</td>
                 <td>{{ atencion.descripcion }}</td>
                 <td>
-                  <div class="btn-group" role="group">
-                    <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn-sm btn btn-secondary">Modificar</a>
-                    <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn-sm btn btn-danger">Eliminar</a>
-                  </div>
+                  {% if perro.activo and perro.responsable_activo %}
+                    <div class="btn-group" role="group">
+                      <a href="{% url 'atenciones:modificar_atencion' id=atencion.id %}" class="btn-sm btn btn-secondary">Modificar</a>
+                      <a href="{% url 'atenciones:eliminar_atencion' id=atencion.id %}" onclick="return confirm('Eliminar atención?');" class="btn-sm btn btn-danger">Eliminar</a>
+                    </div>
+                  {% endif %}
                 </td>
               </tr>
           {% endfor %}
@@ -102,10 +110,12 @@
                 <td>{{ vacuna.vacuna }}</td>
                 <td>{{ vacuna.dosis }}</td>
                 <td>
-                  <div class="btn-group" role="group">
-                    <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-sm btn-secondary">Modificar</a>
-                    <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn-sm btn btn-danger">Eliminar</a>
-                  </div>
+                  {% if perro.activo and perro.responsable_activo %}
+                    <div class="btn-group" role="group">
+                      <a href="{% url 'atenciones:modificar_vacuna' id=vacuna.id %}" class="btn btn-sm btn-secondary">Modificar</a>
+                      <a href="{% url 'atenciones:eliminar_vacuna' id=vacuna.id %}" onclick="return confirm('Eliminar vacunación?');" class="btn-sm btn btn-danger">Eliminar</a>
+                    </div>
+                  {% endif %}
                 </td>
               </tr>
           {% endfor %}

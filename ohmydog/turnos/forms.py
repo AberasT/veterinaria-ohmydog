@@ -83,7 +83,7 @@ class AsignarTurnoForm(ModelForm):
     def clean_motivo(self):
         motivo = self.cleaned_data.get('motivo')
         if motivo == "":
-            raise ValidationError(f"Debe elegir un motivo.")
+            raise ValidationError("Debe elegir un motivo.")
         return motivo
     
 class ElegirPerroForm(Form):

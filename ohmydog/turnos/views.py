@@ -112,7 +112,8 @@ def asignar(request, id):
     if turnosSolicitados:
         turno = turnosSolicitados.first()
         form = AsignarTurnoForm(instance=turno)
-    else: form = AsignarTurnoForm(initial={"fecha":datetime.date.today()})
+    else: 
+        form = AsignarTurnoForm(initial={"fecha":datetime.date.today()})
     contexto = {
         "form": form,
         "perro": perro,
@@ -120,8 +121,10 @@ def asignar(request, id):
         "turnosAsignados": get_turnos_asignados(perro)
     }
     if request.method == "POST":
-        if turno is not None: form = AsignarTurnoForm(request.POST, motivo=turno.motivo, perro=perro)
-        else: form = AsignarTurnoForm(request.POST, perro=perro)
+        if turno is not None:
+            form = AsignarTurnoForm(request.POST, motivo=turno.motivo, perro=perro)
+        else:
+            form = AsignarTurnoForm(request.POST, perro=perro)
         if form.is_valid():
             fecha = form.cleaned_data["fecha"]
             motivo = form.cleaned_data["motivo"]

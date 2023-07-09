@@ -4,11 +4,11 @@ from perros.models import Perro
 # Create your models here.
 class Turno(models.Model):
     MOTIVO_CHOICES = [
-        ('vacunación antirrábica', 'Vacunación Antirrábica'),
-        ('vacunación general', 'Vacunación General'),
-        ('castración', 'Castración'),
+        ('vacunacion antirrabica', 'Vacunación Antirrábica'),
+        ('vacunacion general', 'Vacunación General'),
+        ('castracion', 'Castración'),
         ('consulta', 'Consulta general'),
-        ('desparasitación', 'Desparasitación')
+        ('desparasitacion', 'Desparasitación')
     ]
 
     id = models.BigAutoField(primary_key=True)

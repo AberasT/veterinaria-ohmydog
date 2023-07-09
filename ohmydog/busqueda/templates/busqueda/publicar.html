@@ -1,16 +1,19 @@
 {% extends "main/layout.html" %}
 {% block body %}
-    <div class="text-center">
+    <div class="text-center" style="margin-bottom: 10px;">
         <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
         <hr>
         <p class="display-6">Publicar perro perdido</p><br> 
         <form class="form-custom" method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div><br>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
             {% endfor %}
+            <div class="border border-success-subtle rounded-2 text-success-emphasis bg-success-subtle" style="padding: 5px;">
+                Si el perro no es suyo, no es necesario que ingrese un nombre.
+            </div>
             <br>
             <b>{{ form.nombre.label }}:</b>
             {{ form.nombre }}
@@ -29,23 +32,29 @@
             <b>{{ form.edad.label }}:</b>
             {{ form.edad }}
             <br><br>
-            <b>{{ form.peso.label }}:</b>
-            {{ form.peso }}
-            <br><br>
-            <b>{{ form.altura.label }}:</b>
-            {{ form.altura }}
-            <br><br>
-            <b>{{ form.contacto.label }}:</b>
+            <b>Telefono: </b>
             {{ form.contacto }}
             <br><br>
             <b><label for="">Descripción</label></b>
             {{ form.descripcion }}
-            <br><br>
-            <b>{{ form.imagen.label }}</b>
-            {{ form.imagen }}
-            <img id="display-img" />
-            <br><br>
-            <input class="btn btn-secondary" type="submit" name="Publicar Perro" value="Publicar Perro">
+            <br><hr>
+            <b>Imagen:</b>
+            <input type="file" name="imagen" accept="image" class="form-control" id="img-input" required="true">
+            <div class="text-center">
+                <img id="display-img" class="rounded" style="max-width: 20vw; margin-top: 10px;"/>
+            </div>
+            <hr><br>
+            <input class="btn btn-info omdazul" type="submit" name="Publicar Perro" value="Publicar Perro">
         </form>
     </div>
+    
+<script>
+    const imgInput = document.querySelector("#img-input")
+    const displayImg = document.querySelector("#display-img")
+    imgInput.addEventListener('change',
+    (event)=>{
+    const imgObject = event.target.files[0]
+    displayImg.src = URL.createObjectURL(imgObject)})
+</script>
 {% endblock %}
+

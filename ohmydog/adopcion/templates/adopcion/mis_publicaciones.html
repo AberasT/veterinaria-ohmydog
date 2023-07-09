@@ -4,6 +4,13 @@
 <div class="text-center">
     <a href="{% url 'adopcion:index' %}" class="btn-sm btn btn-outline-secondary">Volver a Adopción</a><hr>
     {% if publicaciones %}
+    <div>
+        <a href="{% url 'adopcion:filtrar_mis_publicaciones' filtro=False %}" class="btn btn-outline-dark">Filtrar por perros en adopción</a>
+        <a href="{% url 'adopcion:filtrar_mis_publicaciones' filtro=True%}" class="btn btn-outline-dark">Filtrar por perros adoptados</a>
+        {% if "filtrar" in request.path %}
+        <a href="{% url 'adopcion:mis_publicaciones' %}" class="btn btn-outline-dark">Quitar filtro</a>
+        {% endif %}
+    </div>
     <h4>Mis publicaciones de perros en adopción</h4> <br>
     <table class="table-custom table">
         <thead>

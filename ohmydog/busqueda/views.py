@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import PublicarPerroPerdidoForm
+from .forms import PublicarPerroPerdidoForm, FiltrarPerroPerdidoForm
 from .models import PerroPerdido
 from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
@@ -9,7 +9,7 @@ from datetime import datetime
 #create your views
 def listar(request):
     contexto={
-        "publicaciones": PerroPerdido.objects.all
+        "publicaciones": PerroPerdido.objects.filter(activo=True).order_by("-perdido")
     }
     return render(request, "busqueda/index.html", contexto)
 
@@ -27,15 +27,12 @@ def publicar_perro(request):
             raza = form.cleaned_data["raza"]
             sexo = form.cleaned_data["sexo"]
             edad = form.cleaned_data["edad"]
-            peso = form.cleaned_data["peso"]
-            altura = form.cleaned_data["altura"]
             es_propio = form.cleaned_data["es_propio"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
-            imagen = form.cleaned_data["imagen"]
+            imagen = request.FILES.get('imagen')
             nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo, es_propio = es_propio,
-                                                edad=edad, peso=peso, altura=altura, contacto=contacto,
-                                                imagen=imagen, descripcion=descripcion, publicador=usuario)
+                                                edad=edad, contacto=contacto, imagen=imagen, descripcion=descripcion, publicador=usuario)
             try:
                 nuevoPerroPerdido.save()
                 if es_propio:
@@ -57,7 +54,7 @@ def publicar_perro(request):
 
 @login_required
 def mis_publicaciones(request):
-    publicaciones = PerroPerdido.objects.filter(publicador=request.user)
+    publicaciones = PerroPerdido.objects.filter(publicador=request.user, activo=True).order_by("-perdido")
     contexto = {
         "publicaciones": publicaciones
     }
@@ -80,8 +77,67 @@ def info(request, id):
     return render(request, "busqueda/info.html", contexto)
 
 @login_required
-def eliminar(request):
+def eliminar(request, id):
+    perro = PerroPerdido.objects.get(id = id)
+    perro.activo = False
+    perro.save()
+    return redirect(request.META.get('HTTP_REFERER')
+)
+
+@login_required
+def modificar(request, id):
+    usuario = request.user
+    publicacion = PerroPerdido.objects.get(id=id)
+    form = PublicarPerroPerdidoForm(instance = publicacion)
     contexto = {
-        "perro": PerroPerdido.objects.get(id=id)
+        "form": form,
+        "imagen_cargada": publicacion.imagen
     }
-    return render(request, contexto)
+    if request.method == "POST":
+        form = PublicarPerroPerdidoForm(request.POST, request.FILES, cliente=usuario, id=id)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            color = form.cleaned_data["color"]
+            raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
+            edad = form.cleaned_data["edad"]
+            es_propio = form.cleaned_data["es_propio"]
+            descripcion = form.cleaned_data["descripcion"]
+            contacto = form.cleaned_data["contacto"]
+            imagen = request.FILES.get('imagen_nueva')
+            publicacion.nombre = nombre
+            publicacion.color = color
+            publicacion.raza = raza
+            publicacion.sexo = sexo
+            publicacion.edad = edad
+            publicacion.es_propio = es_propio
+            publicacion.descripcion = descripcion
+            publicacion.contacto = contacto
+            if imagen:
+                publicacion.imagen = imagen
+            try:
+                publicacion.save()
+                return render(request, "main/infomsj.html", {
+                    "msj": "Los datos del perro se han modificado exitosamente."
+                })
+            except:
+                return render(request, "main/infomsj.html",{
+                    "msj": "Ha ocurrido un error."
+                })
+        else: 
+            return render(request, "busqueda/modificar.html",{"form": form, "imagen_cargada": publicacion.imagen})
+    return render(request, "busqueda/modificar.html", contexto)
+
+@login_required
+def filtrar(request, filtro):
+    contexto={
+        "publicaciones": PerroPerdido.objects.filter(perdido = filtro, activo=True)
+    }
+    return render(request, "busqueda/index.html", contexto)
+
+@login_required
+def filtrar_mis_publicaciones(request, filtro):
+    contexto={
+        "publicaciones": PerroPerdido.objects.filter(perdido = filtro, activo=True)
+    }
+    return render(request, "busqueda/mis_publicaciones.html", contexto)

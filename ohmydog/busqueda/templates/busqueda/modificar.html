@@ -1,0 +1,62 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+    <div class="text-center" style="margin-bottom: 10px;">
+        <a href="{% url 'busqueda:index' %}" class="btn btn-sm btn-outline-secondary">Volver a Perros Perdidos</a>
+        <hr>
+        <p class="display-6">Modificar perro perdido</p><br>
+        <form class="form-custom" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div><br>
+            {% endfor %}
+            <br>
+            <b>{{ form.nombre.label }}:</b>
+            {{ form.nombre }}
+            <br><br>
+            <b>{{ form.color.label }}:</b>
+            {{ form.color }}
+            <br><br>
+            <b>{{ form.raza.label }}:</b>
+            {{ form.raza }}
+            <br><br>
+            <b>¿Es su perro?:</b> {{ form.es_propio }}
+            <br>
+            <b>{{ form.sexo.label }}:</b>
+            {{ form.sexo }}
+            <br><br>
+            <b>{{ form.edad.label }}:</b>
+            {{ form.edad }}
+            <br><br>
+            <b>Telefono:</b>
+            {{ form.contacto }}
+            <br><br>
+            <b><label for="">Descripción</label></b>
+            {{ form.descripcion }}
+            <br><hr>
+            <b>Imagen previamente cargada: </b>
+            <br>
+            <img src="/media/{{ imagen_cargada }}" class="rounded" style="max-width: 15vw; max-height: 35vh; margin-bottom: 10px;" alt="imagen_cargada" style="max-height: 25vh;">
+            <hr> 
+            <b>Nueva imagen: </b>
+            <input type="file" name="imagen_nueva" accept="image" class="form-control" id="img-input">
+            <div class="text-center">
+                <img id="display-img" class="rounded" style="max-width: 15vw; max-height: 35vh; margin-top: 10px;" />
+            </div>
+            <hr><br>
+            <input class="btn btn-info omdazul" type="submit" name="Confirmar cambios" value="Confirmar cambios">
+        </form>
+    </div>
+
+<script>
+    const imgInput = document.querySelector("#img-input")
+    const displayImg = document.querySelector("#display-img")
+    imgInput.addEventListener('change',
+        (event) => {
+            const imgObject = event.target.files[0]
+            displayImg.src = URL.createObjectURL(imgObject)
+        })
+</script>
+{% endblock %}
