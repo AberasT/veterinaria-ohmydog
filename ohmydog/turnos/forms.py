@@ -5,14 +5,6 @@ from atenciones.models import Vacuna
 from django.forms.widgets import SelectDateWidget, TimeInput
 
 error_messages = {"required": "Se deben completar todos los campos"}
-tabla_motivos = {
-        'vacunacion general': 'vacunación general',
-        'vacunacion antirrabica': 'vacunación antirrábica',
-        'castracion': 'castración',
-        'consulta': 'consulta general',
-        'urgencia': 'consulta de urgencia',
-        'desparasitacion': 'desparasitación'
-    }
 
 def puede_solicitar_turno(perro, motivo):
     turnosPendientes = Turno.objects.filter(perro=perro, hora__isnull=True)
@@ -51,13 +43,13 @@ class SolicitarTurnoForm(ModelForm):
     
     def clean_motivo(self):
         motivo = self.cleaned_data.get('motivo')
-        if motivo == "castracion" and self.perro.castrado:
+        if motivo == "castración" and self.perro.castrado:
             raise ValidationError(f"{self.perro.nombre} se encuentra castrado/a acorde a nuestros registros.")
-        elif motivo == "vacunacion general" or motivo == "vacunacion antirrabica":
+        elif motivo in ("vacunación general", "vacunación antirrábica"):
             if not puede_solicitar_vacuna(self.perro, motivo, self.cleaned_data.get("fecha")):
                 raise ValidationError(f"{self.perro.nombre} tiene una vacuna registrada del mismo tipo hace menos de 120 días.")
         if not puede_solicitar_turno(self.perro, motivo):
-            raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {tabla_motivos[motivo]}.")
+            raise ValidationError(f"{self.perro.nombre} ya tiene un turno pendiente con el motivo de {motivo}.")
         return motivo
     
 class AsignarTurnoForm(ModelForm):

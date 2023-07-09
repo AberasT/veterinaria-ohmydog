@@ -35,17 +35,10 @@
         <br>
         <br>
         {{ form.motivo.label }}:
-        {% if turno %}
-        {{ turno.motivo }}<br><br>
-        {{ form.detalles.label }}:
-        {{ turno.detalles }} <br><br>
-        {% else %}
         {{ form.motivo }}
         <br><br>
         {{ form.detalles.label }}
-        {{ form.detalles }}<br><br>
-        {% endif %}
-        
+        {{ form.detalles }}<br><br>        
         <input class="btn omdnaranja btn-light" type="submit" name="Confirmar" value="Confirmar">
     </form>
 
