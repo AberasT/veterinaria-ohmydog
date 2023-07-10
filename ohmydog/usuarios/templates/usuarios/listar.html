@@ -8,6 +8,8 @@
       <a href="{% url 'usuarios:historial_clientes' %}" class="btn btn-secondary">Historial de clientes</a></td>
     {% endif %}
   </div> <hr>
+  <!-- <input type="number" id="inputDni" onkeyup="buscarPorDni()" placeholder="Buscar por DNI.."><br><br> -->
+  <input type="text" id="inputApellido" onkeyup="buscarPorApellido()" placeholder="Buscar por apellido.."><br><br>
     {% if clientes %}
     <h3>Listado de clientes registrados</h3>
   <table class="table-custom table">
@@ -22,10 +24,10 @@
     </thead>
     <tbody>
     {% for cliente in clientes %}
-    <tr>
-      <th scope="row">{{ cliente.dni }}</th>
+    <tr class="element">
+      <th class="dni" scope="row">{{ cliente.dni }}</th>
       <td>{{ cliente.nombre }}</td>
-      <td>{{ cliente.apellido }}</td>
+      <td class="apellido">{{ cliente.apellido }}</td>
       <td>{{ cliente.email }}</td>
       <td>{{ cliente.telefono }}</td>
       <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-sm btn-info">Ver cliente</a></td>
@@ -33,10 +35,46 @@
     {% endfor %}
     </tbody>
   </table>
-    
   {% else %}
   <h3>No hay clientes registrados</h3>
   {% endif %}
 </div><br><br>
 
+
+<script>
+
+// function buscarPorDni() {
+//   let input, filter, elements, tr, i, txtValue;
+//   input = document.getElementById('inputDni');
+//   filter = input.value;
+//   elements = document.getElementsByClassName('element');
+//   // Loop through all list items, and hide those who don't match the search query
+//   for (i = 0; i < elements.length; i++) {
+//     dniTabla = elements[i].querySelector(".dni");
+//     txtValue = dniTabla.textContent;
+//     if (txtValue.startsWith(filter)) {
+//       elements[i].style.display = "";
+//     } else {
+//       elements[i].style.display = "none";
+//     }
+//   }
+// }
+
+function buscarPorApellido() {
+  let input, filter, elements, tr, i, txtValue;
+  input = document.getElementById('inputApellido');
+  filter = input.value.toUpperCase();
+  elements = document.getElementsByClassName('element');
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < elements.length; i++) {
+    apellidoTabla = elements[i].querySelector(".apellido");
+    txtValue = apellidoTabla.textContent;
+    if (txtValue.toUpperCase().startsWith(filter)) {
+      elements[i].style.display = "";
+    } else {
+      elements[i].style.display = "none";
+    }
+  }
+}
+</script>
 {% endblock %}

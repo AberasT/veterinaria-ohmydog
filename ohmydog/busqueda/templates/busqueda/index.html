@@ -91,25 +91,4 @@
         {% endif %}
     {% endif %}
 </div><br><br>
-<!-- <script>
-function myFunction() {
-    // Declare variables
-    let input, filter, elements, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    elements = document.getElementsByClassName('card mb-3');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < elements.length; i++) {
-        a = elements[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            elements[i].style.display = "";
-        } else {
-            elements[i].style.display = "none";
-        }
-    }
-}
-
-</script> -->
 {% endblock %}
