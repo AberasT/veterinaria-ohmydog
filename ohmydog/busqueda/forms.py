@@ -66,7 +66,36 @@ class FiltrarPerroPerdidoForm(forms.Form):
         ("Ángel Etcheverry", "Ángel Etcheverry"),
         ("Eduardo Arana", "Eduardo Arana")
     )
-    zona = forms.ChoiceField(choices=ZONA_CHOICES, initial="Sin Filtro")
+    RAZA_CHOICES = [
+        ("Sin filtro", "Sin filtro"),
+        ("Desconocida", "NO SE SABE"),
+        ("mestizo", "MESTIZO"),
+        ("Siberian Husky", "SIBERIAN HUSKY"),
+        ("Beagle", "BEAGLE"),
+        ("Rottweiler", "ROTTWEILER"),
+        ("Bull Terrier", "BULL TERRIER"),
+        ("Bulldog Frances", "BULLDOG FRANCES"),
+        ("Boxer", "BOXER"),
+        ("Dogo Argentino", "DOGO ARGENTINO"),
+        ("Gran Danes", "GRAN DANES"),
+        ("Labrador", "LABRADOR"),
+        ("Galgo", "GALGO"),
+        ("Shiba Inu", "AKITA INU"),
+        ("Golden", "GOLDEN"),
+        ("Dalmata", "DALMATA"),
+        ("Chihuahua", "CHIHUAHUA"),
+        ("San Bernardo", "SAN BERNARDO"),
+        ("Doberman", "DOBERMAN"),
+        ("Pastor Aleman", "PASTOR ALEMAN")
+    ]
+    TRUE_FALSE_CHOICES = [
+        ("Sin filtro", "Sin filtro"),
+        (True, 'Si'),
+        (False, 'No')
+    ]
+    zona = forms.ChoiceField(choices=ZONA_CHOICES, initial="Sin Filtro", required=False)
+    raza = forms.ChoiceField(choices=RAZA_CHOICES, initial="Sin Filtro", required=False)
+    perdido = forms.ChoiceField(choices=TRUE_FALSE_CHOICES, initial="Sin Filtro", required=False)
     # fields = ["raza", "sexo", "perdido"]
     # raza = forms.CharField(max_length=20, required = False, widget=ChoiceWidget)
     # sexo = forms.CharField(max_length=20, required = False, widget=ChoiceWidget)
@@ -75,31 +104,6 @@ class FiltrarPerroPerdidoForm(forms.Form):
     # ("macho", "MACHO"),
     # ("hembra", "HEMBRA"),
     # ("ns", "NS")
-    # ]
-    # RAZA_CHOICES = [
-    #     ("Desconocida", "NO SE SABE"),
-    #     ("mestizo", "MESTIZO"),
-    #     ("Siberian Husky", "SIBERIAN HUSKY"),
-    #     ("Beagle", "BEAGLE"),
-    #     ("Rottweiler", "ROTTWEILER"),
-    #     ("Bull Terrier", "BULL TERRIER"),
-    #     ("Bulldog Frances", "BULLDOG FRANCES"),
-    #     ("Boxer", "BOXER"),
-    #     ("Dogo Argentino", "DOGO ARGENTINO"),
-    #     ("Gran Danes", "GRAN DANES"),
-    #     ("Labrador", "LABRADOR"),
-    #     ("Galgo", "GALGO"),
-    #     ("Shiba Inu", "AKITA INU"),
-    #     ("Golden", "GOLDEN"),
-    #     ("Dalmata", "DALMATA"),
-    #     ("Chihuahua", "CHIHUAHUA"),
-    #     ("San Bernardo", "SAN BERNARDO"),
-    #     ("Doberman", "DOBERMAN"),
-    #     ("Pastor Aleman", "PASTOR ALEMAN")
-    # ]
-    # TRUE_FALSE_CHOICES = [
-    # (True, 'Si'),
-    # (False, 'No')
     # ]
     # widgets = {
     #     "encontrado": ChoiceWidget(choices=TRUE_FALSE_CHOICES),
