@@ -5,11 +5,24 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
 from main.tests import es_veterinario
 from datetime import datetime
+from .forms import FiltrarPerroPerdidoForm
 
 #create your views
 def listar(request):
-    contexto={
-        "publicaciones": PerroPerdido.objects.filter(activo=True).order_by("-perdido")
+    if request.method == "POST":
+        form = FiltrarPerroPerdidoForm(request.POST)
+        if form.is_valid():
+            turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
+            turnosFechaPendientes = Turno.objects.filter(is_active=True, hora__isnull=True, fecha=form.cleaned_data["fecha"]).order_by("fecha")
+        eligioFecha = True
+    else:
+        form = FiltrarPerroPerdidoForm()
+        
+        eligioFecha = False
+    contexto = {
+        "form": form,
+        "publicaciones": PerroPerdido.objects.filter(activo=True).order_by("-perdido"),
+        "eligioFecha": eligioFecha
     }
     return render(request, "busqueda/index.html", contexto)
 

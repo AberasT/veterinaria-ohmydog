@@ -14,6 +14,10 @@
             {% if "filtrar" in request.path %}
             <a href="{% url 'busqueda:index' %}" class="btn btn-outline-dark">Quitar filtro</a>
             {% endif %}
+            <form class="form-custom" method="POST" action="">
+                {{ form }}
+                <input class="btn btn-info omdazul" type="submit" name="Filtrar" value="Filtrar">
+            </form>
         </div>
         <h3>Listado de perros perdidos</h3><br>
         {% for publicacion in publicaciones %}
