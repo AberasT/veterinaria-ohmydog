@@ -37,7 +37,9 @@
                                                         Desconocida
                                                     {% endif %}
                                                 </li>
-                                                <li class="list-group-item"><b>Descripcion:</b> {{ publicacion.descripcion }}</li>
+                                                <li class="list-group-item"><b>Zona:</b> {{ publicacion.zona }}</li>
+                                                <li class="list-group-item"><b>Dirección aproximada:</b> {{ publicacion.direccion }}</li>
+                                                <li class="list-group-item"><b>Descripción:</b> {{ publicacion.descripcion }}</li>
                                                 <li class="list-group-item"><b>Fecha de Publicación:</b> {{publicacion.fecha_publicacion }}</li>
                                                 {% if not publicacion.perdido %}
                                                     <li class="list-group-item"><b>Fecha de Encuentro:</b> {{publicacion.fecha_encontrado }}</li>

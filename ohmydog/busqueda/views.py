@@ -12,17 +12,16 @@ def listar(request):
     if request.method == "POST":
         form = FiltrarPerroPerdidoForm(request.POST)
         if form.is_valid():
-            turnosFechaAsignados = Turno.objects.filter(hora__isnull=False, fecha=form.cleaned_data["fecha"]).order_by("hora")
-            turnosFechaPendientes = Turno.objects.filter(is_active=True, hora__isnull=True, fecha=form.cleaned_data["fecha"]).order_by("fecha")
-        eligioFecha = True
+            publicaciones = PerroPerdido.objects.filter(activo=True, zona=form.cleaned_data["zona"]).order_by("fecha_publicacion")
+        filtro = True
     else:
         form = FiltrarPerroPerdidoForm()
-        
-        eligioFecha = False
+        publicaciones = PerroPerdido.objects.filter(activo=True).order_by("-perdido"),
+        filtro = False
     contexto = {
         "form": form,
-        "publicaciones": PerroPerdido.objects.filter(activo=True).order_by("-perdido"),
-        "eligioFecha": eligioFecha
+        "publicaciones": publicaciones,
+        "filtro": filtro
     }
     return render(request, "busqueda/index.html", contexto)
 
@@ -40,11 +39,13 @@ def publicar_perro(request):
             raza = form.cleaned_data["raza"]
             sexo = form.cleaned_data["sexo"]
             edad = form.cleaned_data["edad"]
+            zona = form.cleaned_data["zona"]
+            direccion = form.cleaned_data["direccion"]
             es_propio = form.cleaned_data["es_propio"]
             descripcion = form.cleaned_data["descripcion"]
             contacto = form.cleaned_data["contacto"]
             imagen = request.FILES.get('imagen')
-            nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo, es_propio = es_propio,
+            nuevoPerroPerdido = PerroPerdido(nombre=nombre, color=color, raza=raza, sexo=sexo, es_propio = es_propio, zona=zona, direccion=direccion,
                                                 edad=edad, contacto=contacto, imagen=imagen, descripcion=descripcion, publicador=usuario)
             try:
                 nuevoPerroPerdido.save()
@@ -109,23 +110,17 @@ def modificar(request, id):
     if request.method == "POST":
         form = PublicarPerroPerdidoForm(request.POST, request.FILES, cliente=usuario, id=id)
         if form.is_valid():
-            nombre = form.cleaned_data["nombre"]
-            color = form.cleaned_data["color"]
-            raza = form.cleaned_data["raza"]
-            sexo = form.cleaned_data["sexo"]
-            edad = form.cleaned_data["edad"]
-            es_propio = form.cleaned_data["es_propio"]
-            descripcion = form.cleaned_data["descripcion"]
-            contacto = form.cleaned_data["contacto"]
             imagen = request.FILES.get('imagen_nueva')
-            publicacion.nombre = nombre
-            publicacion.color = color
-            publicacion.raza = raza
-            publicacion.sexo = sexo
-            publicacion.edad = edad
-            publicacion.es_propio = es_propio
-            publicacion.descripcion = descripcion
-            publicacion.contacto = contacto
+            publicacion.nombre = form.cleaned_data["nombre"]
+            publicacion.color = form.cleaned_data["color"]
+            publicacion.raza = form.cleaned_data["raza"]
+            publicacion.sexo = form.cleaned_data["sexo"]
+            publicacion.edad = form.cleaned_data["edad"]
+            publicacion.zona = form.cleaned_data["zona"]
+            publicacion.direccion = form.cleaned_data["direccion"]
+            publicacion.es_propio = form.cleaned_data["es_propio"]
+            publicacion.descripcion = form.cleaned_data["descripcion"]
+            publicacion.contacto = form.cleaned_data["contacto"]
             if imagen:
                 publicacion.imagen = imagen
             try:

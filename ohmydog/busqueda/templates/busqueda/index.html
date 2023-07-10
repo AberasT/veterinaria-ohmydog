@@ -7,18 +7,13 @@
         <a href="{% url 'busqueda:mis_publicaciones' %}" class="btn btn-outline-dark">Mis Publicaciones</a>
         <hr>
     {% endif %}
+    <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> -->
+    <form class="form-custom" method="POST" action="">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-info omdazul" onkeyup="myFunction()" type="submit" name="Filtrar" value="Filtrar">
+    </form><br>
     {% if publicaciones %}
-        <div>
-            <a href="{% url 'busqueda:filtrar_listado' filtro=True %}" class="btn btn-outline-dark">Filtrar por perros perdidos</a>
-            <a href="{% url 'busqueda:filtrar_listado' filtro=False %}" class="btn btn-outline-dark">Filtrar por perros encontrados</a>
-            {% if "filtrar" in request.path %}
-            <a href="{% url 'busqueda:index' %}" class="btn btn-outline-dark">Quitar filtro</a>
-            {% endif %}
-            <form class="form-custom" method="POST" action="">
-                {{ form }}
-                <input class="btn btn-info omdazul" type="submit" name="Filtrar" value="Filtrar">
-            </form>
-        </div>
         <h3>Listado de perros perdidos</h3><br>
         {% for publicacion in publicaciones %}
             <div class="container text-center ">
@@ -44,7 +39,9 @@
                                                         Desconocida
                                                     {% endif %}
                                                 </li>
-                                                <li class="list-group-item"><b>Descripcion:</b> {{ publicacion.descripcion }}</li>
+                                                <li class="list-group-item"><b>Zona:</b> {{ publicacion.zona }}</li>
+                                                <li class="list-group-item"><b>Dirección aproximada:</b> {{ publicacion.direccion }}</li>
+                                                <li class="list-group-item"><b>Descripción:</b> {{ publicacion.descripcion }}</li>
                                                 <li class="list-group-item"><b>Fecha de Publicación:</b> {{ publicacion.fecha_publicacion }}</li>
                                                 {% if not publicacion.perdido %}
                                                 <li class="list-group-item"><b>Fecha de Encuentro:</b> {{ publicacion.fecha_encontrado }}</li>
@@ -87,7 +84,32 @@
             </div>
         {% endfor %}
     {% else %}
-        <h3>No hay perros perdidos publicados.</h3>
+        {% if filtro %}
+        <h4>No hay perros perdidos publicados en esa zona.</h4>
+        {% else %}
+        <h4>No hay perros perdidos publicados.</h4>
+        {% endif %}
     {% endif %}
 </div><br><br>
+<!-- <script>
+function myFunction() {
+    // Declare variables
+    let input, filter, elements, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    elements = document.getElementsByClassName('card mb-3');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < elements.length; i++) {
+        a = elements[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            elements[i].style.display = "";
+        } else {
+            elements[i].style.display = "none";
+        }
+    }
+}
+
+</script> -->
 {% endblock %}
