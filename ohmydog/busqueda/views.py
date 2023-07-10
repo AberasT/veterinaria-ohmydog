@@ -12,7 +12,8 @@ def listar(request):
     if request.method == "POST":
         form = FiltrarPerroPerdidoForm(request.POST)
         if form.is_valid():
-            publicaciones = PerroPerdido.objects.filter(activo=True, zona=form.cleaned_data["zona"]).order_by("fecha_publicacion")
+            if form.cleaned_data["zona"] == "Sin filtro": publicaciones = PerroPerdido.objects.filter(activo=True).order_by("-perdido")
+            else: publicaciones = PerroPerdido.objects.filter(activo=True, zona=form.cleaned_data["zona"]).order_by("fecha_publicacion")
         filtro = True
     else:
         form = FiltrarPerroPerdidoForm()
