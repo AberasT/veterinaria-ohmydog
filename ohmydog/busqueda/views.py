@@ -17,7 +17,7 @@ def listar(request):
         filtro = True
     else:
         form = FiltrarPerroPerdidoForm()
-        publicaciones = PerroPerdido.objects.filter(activo=True).order_by("-perdido"),
+        publicaciones = PerroPerdido.objects.filter(activo=True).order_by("-perdido")
         filtro = False
     contexto = {
         "form": form,
