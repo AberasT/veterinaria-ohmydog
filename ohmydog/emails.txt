@@ -631,3 +631,19 @@ Contenido:
 Se confirmó su turno para Dante para la siguiente fecha: 
 Fecha: 2023-07-16
 Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 20:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-12
+Hora: 13:00:00
