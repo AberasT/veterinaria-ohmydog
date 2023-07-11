@@ -39,6 +39,13 @@
         <li class="list-group-item"><a href="{% url 'cuidadores:listar_solicitudes' id=cuidador.id %}" class="btn btn-info">Ver solicitudes de contacto</a></li>
         {% endif %}
         {% endif %}
+        <li class="list-group-item ratings">
+            <i class="bi bi-star-fill star"></i>
+            <i class="bi bi-star-fill star"></i>
+            <i class="bi bi-star-fill star"></i>
+            <i class="bi bi-star-fill star"></i>
+            <i class="bi bi-star-fill star"></i>
+        </li>
     </ul>
     <hr>
     {% endfor %}
@@ -46,5 +53,25 @@
         <h3>No hay cuidadores/paseadores publicados.</h3>
     {% endif %}
 </div>
+
+<script>
+    const rating = document.querySelectorAll('.ratings');
+    let estrellas;
+    for (let i=0; i<rating.length; i++){
+        estrellas = rating[i].children;
+        let e = Array.from(estrellas);
+        e.forEach(function(estrella, index){
+            estrella.addEventListener('click', function(index){
+                let ind = e.indexOf(index.currentTarget);
+                for(let k=0; k<=ind; k++){
+                    e[k].classList.add('checked');
+                }
+                for(let k=ind+1; k<5; k++){
+                    e[k].classList.remove('checked');
+                }
+            })
+        })
+    } 
+</script>
 
 {% endblock %}

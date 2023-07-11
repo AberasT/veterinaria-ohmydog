@@ -29,3 +29,13 @@
     max-width: 90vw;
     margin: 0 auto;
 }
+
+.star {
+    color: #ddd;
+    cursor: pointer;
+}
+
+.star:hover, 
+.star.checked {
+    color: gold;
+}
