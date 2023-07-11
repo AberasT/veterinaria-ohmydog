@@ -62,8 +62,7 @@ def eliminar(request, id):
     perro.save()
     turnosPerro = Turno.objects.filter(is_active=True, asistido=False, perro=perro)
     for turno in turnosPerro:
-        turno.is_active = False
-        turno.save()
+        turno.delete()
     return redirect("perros:index")
 
 @login_required

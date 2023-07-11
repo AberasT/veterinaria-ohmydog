@@ -1,5 +1,4 @@
-from django.forms import Form, CharField, ChoiceField, ModelForm, EmailField
-from django import forms
+from django.forms import Form, CharField, ModelForm, EmailField, TextInput
 from .models import Cuidador, Solicitud
 from django.forms.widgets import TimeInput
 from django import forms
@@ -9,12 +8,11 @@ error_messages = {"required": "Se deben completar todos los campos"}
 class RegistrarCuidadorForm(ModelForm):
     class Meta:
         model = Cuidador
-        fields = ["nombre_completo", "edad", "horario_inicial", "horario_final", "experiencia", "contacto"]
-        widgets = {
-            'horario_inicial': TimeInput(attrs={'type': 'time'}),
-            'horario_final' : TimeInput(attrs={'type': 'time'})
-        }
-    
+        fields = ["nombre_completo", "edad", "disponibilidad", "experiencia", "contacto"]
+    widgets ={
+        "disponibilidad": TextInput()
+    }
+
     def __init__(self, *args, **kwargs):
         self.id = kwargs.pop('id', None)
         super(ModelForm, self).__init__(*args, **kwargs)

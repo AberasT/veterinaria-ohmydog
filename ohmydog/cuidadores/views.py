@@ -48,11 +48,10 @@ def registrar(request):
         if form.is_valid():
             nombre_completo = form.cleaned_data["nombre_completo"]
             edad = form.cleaned_data["edad"]
-            horario_inicial = form.cleaned_data["horario_inicial"]
-            horario_final = form.cleaned_data["horario_final"]
+            disponibilidad = form.cleaned_data["disponibilidad"]
             experiencia = form.cleaned_data["experiencia"]
             contacto = form.cleaned_data["contacto"]
-            nuevoCuidador = Cuidador(nombre_completo=nombre_completo, edad=edad, horario_inicial=horario_inicial, horario_final=horario_final, experiencia=experiencia, contacto=contacto)
+            nuevoCuidador = Cuidador(nombre_completo=nombre_completo, edad=edad, disponibilidad=disponibilidad, experiencia=experiencia, contacto=contacto)
             try:
                 nuevoCuidador.save()
                 return render(request, "main/infomsj.html", {
@@ -87,14 +86,12 @@ def modificar(request, id):
         if form.is_valid():
             nombre_completo = form.cleaned_data["nombre_completo"]
             edad = form.cleaned_data["edad"]
-            horario_inicial = form.cleaned_data["horario_inicial"]
-            horario_final = form.cleaned_data["horario_final"]
+            disponibilidad = form.cleaned_data["disponibilidad"]
             experiencia = form.cleaned_data["experiencia"]
             contacto = form.cleaned_data["contacto"]
             publicacion.nombre_completo = nombre_completo
             publicacion.edad = edad
-            publicacion.horario_inicial = horario_inicial
-            publicacion.horario_final = horario_final
+            publicacion.disponibilidad = disponibilidad
             publicacion.experiencia = experiencia
             publicacion.contacto = contacto
             try:

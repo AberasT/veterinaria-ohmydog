@@ -501,3 +501,133 @@ Contenido:
 Se confirmó su turno para Loli para la siguiente fecha: 
 Fecha: 2023-07-11
 Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email prueba@eliminar.com ha solicitado un turno:
+Fecha: 2023-08-10
+Motivo: desparasitación
+Perro: perroEliminar
+Detalles: Tiene parasitos
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email prueba@eliminar.com ha solicitado un turno:
+Fecha: 2023-07-13
+Motivo: consulta
+Perro: perroEliminar
+Detalles: Le duele la panza
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@eliminar.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para perroEliminar para la siguiente fecha: 
+Fecha: 2023-08-10
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@eliminar.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Eliminar para la siguiente fecha: 
+Fecha: 2023-07-13
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email prueba@eliminar.com ha solicitado un turno:
+Fecha: 2023-07-11
+Motivo: vacunación general
+Perro: Eliminar
+Detalles: Se tiene que vacunar
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@eliminar.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Eliminar para la siguiente fecha: 
+Fecha: 2023-07-12
+Hora: 17:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email prueba@eliminar.com ha solicitado un turno:
+Fecha: 2023-07-11
+Motivo: desparasitación
+Perro: Eliminar
+Detalles: Tiene parasitos
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email juanpepers@gmail.com ha solicitado un turno:
+Fecha: 2023-07-11
+Motivo: consulta
+Perro: Pepa
+Detalles: -
+------------------------------
+De: ohmydog@mail.com
+Para: juli@gmail.com
+Asunto: Contacto del cuidador/paseador solicitado
+Contenido:
+Hemos aprobado su solicitud de contacto. El contacto del cuidador/paseador es 1234567
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 20:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 19:09:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-11
+Motivo: desparasitación
+Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Un turno ha sido cancelado
+Contenido:
+El cliente con email pacoedlp@gmail.com ha cancelado el siguiente turno:
+Fecha: 2023-07-11
+Motivo: consulta
+Perro: Dante
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-15
+Hora: 14:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-16
+Hora: 15:00:00

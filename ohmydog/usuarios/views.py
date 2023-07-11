@@ -94,8 +94,7 @@ def eliminar(request, id):
     for perro in perros:
         turnosPerro = Turno.objects.filter(is_active=True, asistido=False, perro=perro)
         for turno in turnosPerro:
-            turno.is_active = False
-            turno.save()
+            turno.delete()
         perro.responsable_activo = False
         perro.save()
     for perro in perros_perdidos:
