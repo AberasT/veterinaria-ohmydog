@@ -8,45 +8,45 @@
     <br>
     <hr>
     {% endif %}
+    <form class="form-custom" method="POST" action="">
+        {% csrf_token %}
+        {{ form }}
+    <input class="btn btn-info omdazul" onkeyup="myFunction()" type="submit" name="Filtrar" value="Filtrar">
+    </form><br>
     {% if publicaciones %}
-    {% if request.user.is_authenticated %}
-        <div>
-            <a href="{% url 'adopcion:filtrar_listado' filtro=False %}" class="btn btn-outline-dark">Filtrar por perros en adopción</a>
-            <a href="{% url 'adopcion:filtrar_listado' filtro=True%}" class="btn btn-outline-dark">Filtrar por perros adoptados</a>
-            {% if "filtrar" in request.path %}
-                <a href="{% url 'adopcion:index' %}" class="btn btn-outline-dark">Quitar filtro</a>
+        <h3>Perros en adopción</h3><br>
+        {% for perro in publicaciones %}
+        <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
+            <li class="list-group-item text-white omdazul"><strong>Nombre: {{ perro.nombre }}</strong></li>
+            {% if perro.adoptado %}
+            <li class="list-group-item" style="color:green;"><strong>¡Adoptado!</strong> 😄</li>
+            <li class="list-group-item">Fecha de publicación: {{ perro.fecha_publicacion }}</li>
+            <li class="list-group-item">Fecha de adopción: {{ perro.fecha_adopcion }}</li>
             {% endif %}
-        </div>
-    {% endif %}
-    <h3>Perros en adopción</h3><br>
-    {% for perro in publicaciones %}
-    <ul class="list-group" style="max-width: 50vw; margin: 0 auto">
-        <li class="list-group-item text-white omdazul"><strong>Nombre: {{ perro.nombre }}</strong></li>
-        {% if perro.adoptado %}
-        <li class="list-group-item" style="color:green;"><strong>¡Adoptado!</strong> 😄</li>
-        <li class="list-group-item">Fecha de publicación: {{ perro.fecha_publicacion }}</li>
-        <li class="list-group-item">Fecha de adopción: {{ perro.fecha_adopcion }}</li>
-        {% endif %}
-        <li class="list-group-item">Raza: {{ perro.raza }}</li>
-        <li class="list-group-item">Color: {{ perro.color }}</li>
-        <li class="list-group-item">Edad: {{ perro.edad }}</li>
-        <li class="list-group-item">Descripción: {{ perro.descripcion }}</li>
-        {% if user.is_authenticated and not perro.adoptado %}
-        <li class="list-group-item">
-            <a href="{% url 'adopcion:info' id=perro.id %}" class="btn btn-sm btn-info">Ver información</a>
-        </li>
-        {% endif %}
-        {% if user.is_staff or perro.publicador == user %}
-            {% if not perro.adoptado %}
+            <li class="list-group-item">Raza: {{ perro.raza }}</li>
+            <li class="list-group-item">Color: {{ perro.color }}</li>
+            <li class="list-group-item">Edad: {{ perro.edad }}</li>
+            <li class="list-group-item">Descripción: {{ perro.descripcion }}</li>
+            {% if user.is_authenticated and not perro.adoptado %}
             <li class="list-group-item">
-                <a href="{% url 'adopcion:eliminar' id=perro.id %}" onclick="return confirm('Eliminar publicación?');" class="btn-sm btn btn-danger">Eliminar publicación</a>
+                <a href="{% url 'adopcion:info' id=perro.id %}" class="btn btn-sm btn-info">Ver información</a>
             </li>
             {% endif %}
-        {% endif %}
-    </ul><br><br>
-    {% endfor %}    
+            {% if user.is_staff or perro.publicador == user %}
+                {% if not perro.adoptado %}
+                <li class="list-group-item">
+                    <a href="{% url 'adopcion:eliminar' id=perro.id %}" onclick="return confirm('Eliminar publicación?');" class="btn-sm btn btn-danger">Eliminar publicación</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        </ul><br><br>
+        {% endfor %}    
     {% else %}
-    <h3>No hay perros publicados en adopción.</h3>
+        {% if filtro %}
+            <h4>No hay perros perdidos publicados con esas caracteristicas.</h4>
+        {% else %}
+            <h4>No hay perros perdidos publicados.</h4>
+        {% endif %}
     {% endif %}
 </div><br><br>
 {% endblock %}

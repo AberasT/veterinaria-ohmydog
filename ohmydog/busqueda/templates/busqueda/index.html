@@ -11,7 +11,7 @@
     <form class="form-custom" method="POST" action="">
         {% csrf_token %}
         {{ form }}
-        <input class="btn btn-info omdazul" onkeyup="myFunction()" type="submit" name="Filtrar" value="Filtrar">
+    <input class="btn btn-info omdazul" onkeyup="myFunction()" type="submit" name="Filtrar" value="Filtrar">
     </form><br>
     {% if publicaciones %}
         <h3>Listado de perros perdidos</h3><br>
@@ -85,9 +85,9 @@
         {% endfor %}
     {% else %}
         {% if filtro %}
-        <h4>No hay perros perdidos publicados con esas caracteristicas.</h4>
+            <h4>No hay perros perdidos publicados con esas caracteristicas.</h4>
         {% else %}
-        <h4>No hay perros perdidos publicados.</h4>
+            h4>No hay perros perdidos publicados.</h4>
         {% endif %}
     {% endif %}
 </div><br><br>

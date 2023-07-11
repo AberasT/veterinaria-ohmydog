@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import PublicarPerroForm
+from .forms import PublicarPerroForm, FiltrarPerroAdopcionForm
 from .models import PerroAdopcion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from usuarios.models import Usuario
@@ -9,8 +9,29 @@ from datetime import datetime
 # Create your views here.
 
 def index(request):
-    contexto={
-        "publicaciones": PerroAdopcion.objects.filter(activo = True).order_by("adoptado")
+    if request.method == "POST":
+        form = FiltrarPerroAdopcionForm(request.POST)
+        if form.is_valid():
+            publicaciones = PerroAdopcion.objects.filter(activo = True)
+            raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
+            adoptado = form.cleaned_data["adoptado"]
+            if raza != "Sin filtro":
+                publicaciones = publicaciones.filter(raza = raza)
+            if sexo != "Sin filtro":
+                publicaciones = publicaciones.filter(sexo = sexo)
+            if adoptado != "Sin filtro":
+                publicaciones = publicaciones.filter(adoptado = adoptado)
+            publicaciones = publicaciones.order_by("adoptado", "fecha_publicacion")
+        filtro = True
+    else:
+        form = FiltrarPerroAdopcionForm()
+        publicaciones = PerroAdopcion.objects.filter(activo=True).order_by("adoptado")
+        filtro = False
+    contexto = {
+        "form": form,
+        "publicaciones": publicaciones,
+        "filtro": filtro
     }
     return render(request, "adopcion/listar.html", contexto)
 

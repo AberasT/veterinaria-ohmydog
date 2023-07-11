@@ -21,7 +21,6 @@ class PerroAdopcion(models.Model):
         ("Gran Danes", "GRAN DANES"),
         ("Labrador", "LABRADOR"),
         ("Galgo", "GALGO"),
-        ("Shiba Inu", "SHIBA INU"),
         ("Akita Inu", "AKITA INU"),
         ("Golden", "GOLDEN"),
         ("Dalmata", "DALMATA"),

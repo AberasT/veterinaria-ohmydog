@@ -1,6 +1,6 @@
 from django.forms import ModelForm, forms
 from .models import PerroPerdido
-from django.forms.widgets import RadioSelect, ChoiceWidget
+from django.forms.widgets import RadioSelect
 from django import forms
 
 error_messages = {"required": "Se deben completar todos los campos"}
@@ -94,8 +94,15 @@ class FiltrarPerroPerdidoForm(forms.Form):
         (True, 'Si'),
         (False, 'No')
     ]
+    SEXO_CHOICES = [
+        ("Sin filtro", "Sin filtro"),
+        ("macho", "MACHO"),
+        ("hembra", "HEMBRA"),
+        ("ns", "NS")
+    ]
     zona = forms.ChoiceField(choices=ZONA_CHOICES, initial="Sin Filtro", required=False)
     raza = forms.ChoiceField(choices=RAZA_CHOICES, initial="Sin Filtro", required=False)
+    sexo = forms.ChoiceField(choices=SEXO_CHOICES, initial="Sin Filtro", required=False)
     perdido = forms.ChoiceField(choices=TRUE_FALSE_CHOICES, initial="Sin Filtro", required=False)
     # fields = ["raza", "sexo", "perdido"]
     # raza = forms.CharField(max_length=20, required = False, widget=ChoiceWidget)

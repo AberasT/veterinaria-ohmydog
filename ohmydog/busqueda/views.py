@@ -15,11 +15,14 @@ def listar(request):
             publicaciones = PerroPerdido.objects.filter(activo = True)
             zona = form.cleaned_data["zona"]
             raza = form.cleaned_data["raza"]
+            sexo = form.cleaned_data["sexo"]
             perdido = form.cleaned_data["perdido"]
             if zona != "Sin filtro":
                 publicaciones = publicaciones.filter(zona = zona)
             if raza != "Sin filtro":
                 publicaciones = publicaciones.filter(raza = raza)
+            if sexo != "Sin filtro":
+                publicaciones = publicaciones.filter(sexo = sexo)
             if perdido != "Sin filtro":
                 publicaciones = publicaciones.filter(perdido = perdido)
             publicaciones = publicaciones.order_by("-perdido", "fecha_publicacion")
