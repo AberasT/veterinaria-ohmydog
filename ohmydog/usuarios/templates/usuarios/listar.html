@@ -9,34 +9,35 @@
     {% endif %}
   </div> <hr>
   <!-- <input type="number" id="inputDni" onkeyup="buscarPorDni()" placeholder="Buscar por DNI.."><br><br> -->
-  <input type="text" id="inputApellido" onkeyup="buscarPorApellido()" placeholder="Buscar por apellido.."><br><br>
-    {% if clientes %}
+  {% if clientes %}
     <h3>Listado de clientes registrados</h3>
-  <table class="table-custom table">
-    <thead>
-      <tr>
-        <th scope="col">DNI</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Email</th>
-        <th scope="col">Teléfono</th>
+    <br>
+    <input type="text" id="inputApellido" onkeyup="buscarPorApellido()" placeholder="Buscar por apellido.."><br><br>
+    <table class="table-custom table">
+      <thead>
+        <tr>
+          <th scope="col">DNI</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for cliente in clientes %}
+      <tr class="element">
+        <th class="dni" scope="row">{{ cliente.dni }}</th>
+        <td>{{ cliente.nombre }}</td>
+        <td class="apellido">{{ cliente.apellido }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.telefono }}</td>
+        <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-sm btn-info">Ver cliente</a></td>
       </tr>
-    </thead>
-    <tbody>
-    {% for cliente in clientes %}
-    <tr class="element">
-      <th class="dni" scope="row">{{ cliente.dni }}</th>
-      <td>{{ cliente.nombre }}</td>
-      <td class="apellido">{{ cliente.apellido }}</td>
-      <td>{{ cliente.email }}</td>
-      <td>{{ cliente.telefono }}</td>
-      <td><a href="{% url 'usuarios:info' id=cliente.id %}" class="btn btn-sm btn-info">Ver cliente</a></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-  <h3>No hay clientes registrados</h3>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <h3>No hay clientes registrados</h3>
   {% endif %}
 </div><br><br>
 

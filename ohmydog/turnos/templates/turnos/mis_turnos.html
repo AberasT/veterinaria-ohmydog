@@ -13,8 +13,9 @@
         {% if turno.detalles %}
         <li class="list-group-item">Detalles: {{ turno.detalles }}</li>
         {% endif %}
-        <li class="list-group-item"><a href="{% url 'turnos:mis_turnos_cancelar' id=turno.id %}" onclick="return confirm('Cancelar el turno?');" class="btn btn-danger">Cancelar turno</a></li>
+        <li class="list-group-item"><a href="{% url 'turnos:mis_turnos_cancelar' id=turno.id %}" onclick="return confirm('Cancelar el turno?');" class="btn btn-danger btn-sm">Cancelar turno</a></li>
     </ul>
+    <br>
     {% endfor %}
     {% else %}
     <h3>No tiene turnos asignados.</h3>

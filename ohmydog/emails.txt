@@ -459,3 +459,45 @@ Motivo: castracion
 Perro: Neron
 Detalles: Se tiene que castrar
 >>>>>>> 03f8a18f6cb6a52cfbdccaf32035d92eb84ae73e
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email pacoedlp@gmail.com ha solicitado un turno:
+Fecha: 2023-07-11
+Motivo: desparasitación
+Perro: Dante
+Detalles: 
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 15:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Pompona para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 16:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: pacoedlp@gmail.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Dante para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 17:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@prueba.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Loli para la siguiente fecha: 
+Fecha: 2023-07-11
+Hora: 15:00:00
