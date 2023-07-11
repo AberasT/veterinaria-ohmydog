@@ -5,6 +5,7 @@
   {% if inactivos or inactivos_responsable %}
   <a href="{% url 'perros:historial_perros' %}" class="btn btn-outline-secondary">Historial de perros</a><br> <hr>
   {% endif %}
+  <input type="text" id="inputNombre" onkeyup="buscarPorNombre()" placeholder="Buscar por nombre.."><br><br>
     {% if perros %}
     <h3>Listado de perros registrados</h3><br>
     <table class="table-custom table">
@@ -18,8 +19,8 @@
         </thead>
         <tbody>
         {% for perro in perros %}
-        <tr>
-          <th scope="row">{{ perro.nombre }}</th>
+        <tr class="element">
+          <th class="nombre"  scope="row">{{ perro.nombre }}</th>
           <td>{{ perro.raza }}</td>
           <td>{{ perro.color }}</td>
           <td>{{ perro.responsable.apellido }} {{ perro.responsable.nombre }}</td>
@@ -33,4 +34,24 @@
     {% endif %}
 </div><br><br>
 
+
+<script>
+
+  function buscarPorNombre() {
+    let input, filter, elements, tr, i, txtValue;
+    input = document.getElementById('inputNombre');
+    filter = input.value.toUpperCase();
+    elements = document.getElementsByClassName('element');
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < elements.length; i++) {
+      apellidoTabla = elements[i].querySelector(".nombre");
+      txtValue = apellidoTabla.textContent;
+      if (txtValue.toUpperCase().startsWith(filter)) {
+        elements[i].style.display = "";
+      } else {
+        elements[i].style.display = "none";
+      }
+    }
+  }
+  </script>
 {% endblock %}
