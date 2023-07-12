@@ -102,8 +102,8 @@ def modificar_atencion(request, id):
                     "msj": "Ha ocurrido un error."
                 })
         else: 
-            return render(request, "atenciones/modificar_atencion.html", {"form": form})
-    return render(request, "atenciones/modificar_atencion.html", contexto)
+            return render(request, "atenciones/modificar_atencion.html", {"perro": atencion.perro, "form": form})
+    return render(request, "atenciones/modificar_atencion.html", {"perro": atencion.perro, "form": form })
 
 @login_required
 @user_passes_test(es_veterinario)
@@ -130,8 +130,8 @@ def modificar_vacuna(request, id):
                     "msj": "Ha ocurrido un error."
                 })
         else: 
-            return render(request, "atenciones/modificar_vacuna.html", {"form": form})
-    return render(request, "atenciones/modificar_vacuna.html", contexto)
+            return render(request, "atenciones/modificar_vacuna.html", {"perro": vacuna.perro, "form": form})
+    return render(request, "atenciones/modificar_vacuna.html", { "perro": vacuna.perro, "form": form })
 
 @login_required
 @user_passes_test(es_veterinario)
