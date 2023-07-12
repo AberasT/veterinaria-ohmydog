@@ -647,3 +647,21 @@ Contenido:
 Se confirmó su turno para Dante para la siguiente fecha: 
 Fecha: 2023-07-12
 Hora: 13:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email prueba@eliminar.com ha solicitado un turno:
+Fecha: 2023-07-12
+Motivo: consulta
+Perro: Eliminar
+Detalles: Chequeo
+------------------------------
+De: ohmydog@mail.com
+Para: prueba@eliminar.com
+Asunto: Turno confirmado
+Contenido:
+Se confirmó su turno para Eliminar para la siguiente fecha: 
+Fecha: 2023-07-12
+Hora: 11:00:00
