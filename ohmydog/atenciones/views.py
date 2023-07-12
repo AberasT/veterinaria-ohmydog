@@ -39,7 +39,7 @@ def agregar_vacuna(request, id):
                 return render(request, "main/infomsj", {
                     "msj": "No se pudo guardar la vacuna."
                 })       
-    return render(request, "atenciones/agregar_atencion.html", contexto)
+    return render(request, "atenciones/agregar_atencion.html", { "form": form, "perro": Perro.objects.get(id=id) })
 
 @login_required
 @user_passes_test(es_veterinario)
@@ -70,7 +70,7 @@ def agregar_atencion(request, id):
                 return render(request, "main/infomsj", {
                     "msj": "No se pudo guardar la atención."
                 })       
-    return render(request, "atenciones/agregar_atencion.html", contexto)
+    return render(request, "atenciones/agregar_atencion.html", { "perro": perro, "form": form })
 
 @login_required
 @user_passes_test(es_veterinario)
