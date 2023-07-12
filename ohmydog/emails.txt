@@ -665,3 +665,13 @@ Contenido:
 Se confirmó su turno para Eliminar para la siguiente fecha: 
 Fecha: 2023-07-12
 Hora: 11:00:00
+------------------------------
+De: ohmydog@mail.com
+Para: ohmydog@mail.com
+Asunto: Nueva solicitud de turno
+Contenido:
+El cliente con email prueba@eliminar.com ha solicitado un turno:
+Fecha: 2023-07-14
+Motivo: consulta
+Perro: Eliminar
+Detalles: chequeo
